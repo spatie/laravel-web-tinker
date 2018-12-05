@@ -1,0 +1,58 @@
+{
+    "name": "spatie/web-tinker",
+    "description": "Tinker in your browser",
+    "keywords": [
+        "spatie",
+        "web-tinker"
+    ],
+    "homepage": "https://github.com/spatie/web-tinker",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Freek Van der Herten",
+            "email": "freek@spatie.be",
+            "homepage": "https://spatie.be",
+            "role": "Developer"
+        },
+        {
+            "name": "Marcel Pociot",
+            "email": "marcel@beyondco.de",
+            "homepage": "https://beyondco.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^5.7",
+        "laravel/tinker": "^1.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.7",
+        "phpunit/phpunit": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spatie\\WebTinker\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Spatie\\WebTinker\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Spatie\\WebTinker\\WebTinkerServiceProvider"
+            ]
+        }
+    }
+}
