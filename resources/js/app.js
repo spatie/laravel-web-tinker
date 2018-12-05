@@ -10,5 +10,5 @@ if (token) {
 Vue.component('tinker', require('./components/Tinker.vue'));
 
 new Vue({
-    el: '#web-tinker'
-})
+    el: '#web-tinker',
+});
