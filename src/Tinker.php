@@ -1,0 +1,70 @@
+<?php
+
+namespace Spatie\WebTinker;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Collection;
+use Laravel\Tinker\ClassAliasAutoloader;
+use Psy\Configuration;
+use Psy\Shell;
+use Symfony\Component\Console\Output\BufferedOutput;
+
+class Tinker
+{
+    /** @var \Spatie\WebTinker\BufferedOutput */
+    protected $output;
+
+    /** @var \Spatie\WebTinker\Shell */
+    protected $shell;
+
+    public function __construct()
+    {
+        $this->output = new BufferedOutput();
+
+        $this->shell = $this->createShell($this->output);
+    }
+
+    public function execute(string $phpCode): string
+    {
+        $this->shell->addInput($phpCode);
+
+        $closure = new ExecutionLoopClosure($this->shell);
+
+        $closure->execute();
+
+        return $this->cleanOutput($this->output->fetch());
+    }
+
+    protected function createShell(BufferedOutput $output): Shell
+    {
+        $config = new Configuration([
+            'updateCheck' => 'never'
+        ]);
+
+        $config->getPresenter()->addCasters([
+            Collection::class => 'Laravel\Tinker\TinkerCaster::castCollection',
+            Model::class => 'Laravel\Tinker\TinkerCaster::castModel',
+            Application::class => 'Laravel\Tinker\TinkerCaster::castApplication'
+        ]);
+
+        $shell = new Shell($config);
+
+        $shell->setOutput($output);
+
+        $composerClassMap = base_path('vendor/composer/autoload_classmap.php');
+
+        if (file_exists($composerClassMap)) {
+            ClassAliasAutoloader::register($shell, $composerClassMap);
+        }
+
+        return $shell;
+    }
+
+    protected function cleanOutput(string $output): string
+    {
+        $output = preg_replace('/<aside>(.*)?<\/aside>(.*)Exit:  Ctrl\+D/ms', '$2', $output);
+
+        return trim($output);
+    }
+}
