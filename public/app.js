@@ -13263,6 +13263,20 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./resources/css/app-dark.css":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/css/app.css":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13285,7 +13299,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('tinker', __webpack_requir
 
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#web-tinker'
-
 });
 
 /***/ }),
@@ -13341,7 +13354,9 @@ module.exports = Component.exports
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__("./resources/js/app.js");
+__webpack_require__("./resources/js/app.js");
+__webpack_require__("./resources/css/app.css");
+module.exports = __webpack_require__("./resources/css/app-dark.css");
 
 
 /***/ })

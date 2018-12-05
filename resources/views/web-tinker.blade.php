@@ -20,7 +20,7 @@
 Here comes the tinker
 
 <div id="web-tinker" v-cloak>
-    Vue loaded!
+    <tinker></tinker>
 </div>
 
 

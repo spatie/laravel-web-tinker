@@ -13,10 +13,10 @@ mix
     })
     .setPublicPath('public')
     .js('resources/js/app.js', 'public')
-    .copy('resources/css/app.css', 'public')
-    .copy('resources/css/app-dark.css', 'public')
+    .postCss('resources/css/app.css', 'public')
+    .postCss('resources/css/app-dark.css', 'public')
     .version()
-    .copy('public', '../web-tinker-test/public/vendor/web-tinker')
+    .copy('public', '../web-tinker-app/public/vendor/web-tinker')
     .webpackConfig({
         resolve: {
             symlinks: false,
