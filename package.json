@@ -19,6 +19,6 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "monaco-editor": "^0.15.6"
+        "vue-codemirror": "^4.0.6"
     }
 }
