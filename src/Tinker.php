@@ -7,6 +7,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use Laravel\Tinker\ClassAliasAutoloader;
 use Psy\Configuration;
+use Psy\ExecutionLoopClosure;
 use Psy\Shell;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -17,6 +18,11 @@ class Tinker
 
     /** @var \Spatie\WebTinker\Shell */
     protected $shell;
+
+    public static function output(string $phpCode): string
+    {
+        return(new static())->execute($phpCode);
+    }
 
     public function __construct()
     {
