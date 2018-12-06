@@ -13,15 +13,15 @@ use Symfony\Component\Console\Output\BufferedOutput;
 
 class Tinker
 {
-    /** @var \Spatie\WebTinker\BufferedOutput */
+    /** @var \Symfony\Component\Console\Output\BufferedOutput */
     protected $output;
 
-    /** @var \Spatie\WebTinker\Shell */
+    /** @var \Psy\Shell */
     protected $shell;
 
     public static function execute(string $phpCode): string
     {
-        return(new static())->execute($phpCode);
+        return(new static())->run($phpCode);
     }
 
     public function __construct()
@@ -72,5 +72,22 @@ class Tinker
         $output = preg_replace('/<aside>(.*)?<\/aside>(.*)Exit:  Ctrl\+D/ms', '$2', $output);
 
         return trim($output);
+    }
+
+    protected function getCasters()
+    {
+        $casters = [
+            'Illuminate\Support\Collection' => 'Laravel\Tinker\TinkerCaster::castCollection',
+        ];
+
+        if (class_exists('Illuminate\Database\Eloquent\Model')) {
+            $casters['Illuminate\Database\Eloquent\Model'] = 'Laravel\Tinker\TinkerCaster::castModel';
+        }
+
+        if (class_exists('Illuminate\Foundation\Application')) {
+            $casters['Illuminate\Foundation\Application'] = 'Laravel\Tinker\TinkerCaster::castApplication';
+        }
+
+        return $casters;
     }
 }
