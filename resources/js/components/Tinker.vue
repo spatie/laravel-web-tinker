@@ -2,7 +2,7 @@
     <div>
         <h1>Web Tinker</h1>
 
-        <div>Press Cmd+Enter / Ctrl+Enter to execute the script.</div>
+        <div>Press Cmd+Enter or Ctrl+Enter to execute the code.</div>
 
         <tinker-input v-model="this.input" v-on:executed="onExecuted"></tinker-input>
 
