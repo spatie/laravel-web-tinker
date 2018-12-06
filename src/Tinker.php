@@ -19,7 +19,7 @@ class Tinker
     /** @var \Spatie\WebTinker\Shell */
     protected $shell;
 
-    public static function output(string $phpCode): string
+    public static function execute(string $phpCode): string
     {
         return(new static())->execute($phpCode);
     }
@@ -31,7 +31,7 @@ class Tinker
         $this->shell = $this->createShell($this->output);
     }
 
-    public function execute(string $phpCode): string
+    public function run(string $phpCode): string
     {
         $this->shell->addInput($phpCode);
 
