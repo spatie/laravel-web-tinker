@@ -1761,10 +1761,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             theme: 'dracula',
             extraKeys: {
                 'Cmd-Enter': function CmdEnter(cm) {
-                    _this.sendCode();
+                    _this.executeCode();
                 },
                 'Ctrl-Enter': function CtrlEnter(cm) {
-                    _this.sendCode();
+                    _this.executeCode();
                 }
             }
         };
@@ -1788,7 +1788,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
-        sendCode: function sendCode() {
+        executeCode: function sendCode() {
             var _this2 = this;
 
             __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post(window.location, {

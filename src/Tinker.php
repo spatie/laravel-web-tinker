@@ -45,7 +45,7 @@ class Tinker
     protected function createShell(BufferedOutput $output): Shell
     {
         $config = new Configuration([
-            'updateCheck' => 'never'
+            'updateCheck' => 'never',
         ]);
 
         $config->getPresenter()->addCasters([

@@ -9,20 +9,7 @@
 <script>
     import CodeMirror from 'codemirror';
     import axios from 'axios';
-
-    import 'codemirror/mode/markdown/markdown';
-    import 'codemirror/mode/javascript/javascript';
     import 'codemirror/mode/php/php';
-    import 'codemirror/mode/ruby/ruby';
-    import 'codemirror/mode/shell/shell';
-    import 'codemirror/mode/sass/sass';
-    import 'codemirror/mode/yaml/yaml';
-    import 'codemirror/mode/yaml-frontmatter/yaml-frontmatter';
-    import 'codemirror/mode/nginx/nginx';
-    import 'codemirror/mode/xml/xml';
-    import 'codemirror/mode/vue/vue';
-    import 'codemirror/mode/dockerfile/dockerfile';
-    import 'codemirror/keymap/vim';
 
     export default {
         data: () => ({
@@ -39,16 +26,13 @@
                 mode: 'text/x-php',
                 theme: 'dracula',
                 extraKeys: {
-                    'Cmd-Enter': cm => {
-                        this.sendCode();
-                    },
-                    'Ctrl-Enter': cm => {
-                        this.sendCode();
-                    },
+                    'Cmd-Enter': () => { this.executeCode(); },
+                    'Ctrl-Enter': () => { this.executeCode(); },
                 },
             };
 
             this.codemirror = CodeMirror.fromTextArea(this.$refs.theTextarea, config);
+
             this.codemirror.on('change', editor => {
                 localStorage.setItem('tinker-tool', editor.getValue());
             });
@@ -66,7 +50,7 @@
         },
 
         methods: {
-            sendCode() {
+            executeCode() {
                 axios
                     .post(window.location, {
                         code: this.codemirror.getValue(),
