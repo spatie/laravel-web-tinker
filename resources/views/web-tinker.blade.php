@@ -17,12 +17,9 @@
 </head>
 <body>
 
-Here comes the tinker
-
 <div id="web-tinker" v-cloak>
     <tinker></tinker>
 </div>
-
 
 <script src="{{asset(mix('app.js', 'vendor/web-tinker'))}}"></script>
 </body>

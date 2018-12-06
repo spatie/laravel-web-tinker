@@ -1,8 +1,6 @@
 <template>
     <div>
-         <pre>
-             <code class="language-bash" ref="outputCode" v-text="value"></code>
-         </pre>
+        <pre><code class="language-bash" ref="outputCode" v-text="value"></code></pre>
     </div>
 </template>
 
@@ -13,7 +11,7 @@
     export default {
         watch: {
             value: function () {
-                Prism.highlightElement(this.$refs.outputCode);
+                this.applyOutputStyles();
             }
         },
 
@@ -21,6 +19,7 @@
 
         methods: {
             applyOutputStyles() {
+                console.log('called applyOutputStyles');
                 Prism.highlightElement(this.$refs.outputCode);
             },
         }
