@@ -5,6 +5,7 @@ namespace Spatie\WebTinker;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Spatie\WebTinker\Console\InstallCommand;
 use Spatie\WebTinker\Http\Controllers\WebTinkerController;
 use Spatie\WebTinker\Http\Middleware\Authorize;
 
@@ -20,6 +21,10 @@ class WebTinkerServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../resources/views' => base_path('resources/views/vendor/web-tinker'),
             ], 'views');
+
+            $this->publishes([
+                __DIR__.'/../public' => public_path('vendor/web-tinker'),
+            ], 'web-tinker-assets');
         }
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'web-tinker');
@@ -32,6 +37,8 @@ class WebTinkerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/web-tinker.php', 'web-tinker');
+
+        $this->commands(InstallCommand::class);
     }
 
     protected function registerRoutes()
