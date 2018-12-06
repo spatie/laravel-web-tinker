@@ -1695,10 +1695,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -1708,7 +1704,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             value: '',
-            codemirror: null
+            codeEditor: null
         };
     },
 
@@ -1732,21 +1728,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         };
 
-        this.codemirror = __WEBPACK_IMPORTED_MODULE_0_codemirror___default.a.fromTextArea(this.$refs.theTextarea, config);
+        this.codeEditor = __WEBPACK_IMPORTED_MODULE_0_codemirror___default.a.fromTextArea(this.$refs.codeEditor, config);
 
-        this.codemirror.on('change', function (editor) {
+        this.codeEditor.on('change', function (editor) {
             localStorage.setItem('tinker-tool', editor.getValue());
         });
 
         var value = localStorage.getItem('tinker-tool');
-        if (typeof value === 'string') {
-            this.codemirror.setValue(value);
-        }
 
-        var previousOutput = localStorage.getItem('web-tinker');
-        if (typeof previousOutput === 'string') {
-            this.output = previousOutput;
-            this.applyOutputStyles();
+        if (typeof value === 'string') {
+            this.codeEditor.setValue(value);
         }
     },
 
@@ -1756,7 +1747,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post(window.location, {
-                code: this.codemirror.getValue()
+                code: this.codeEditor.getValue()
             }).then(function (_ref) {
                 var data = _ref.data;
 
@@ -15037,7 +15028,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.CodeMirror-code {\n    font-size: 16px;\n}\n#output {\n    margin: 0;\n    min-height: 300px;\n}\n\n/**\n     * atom-dark theme for `prism.js`\n     * Based on Atom's `atom-dark` theme: https://github.com/atom/atom-dark-syntax\n     * @author Joe Gibson (@gibsjose)\n     */\ncode[class*='language-'],\npre[class*='language-'] {\n    color: #c5c8c6;\n    text-shadow: 0 1px rgba(0, 0, 0, 0.3);\n    font-family: Inconsolata, Monaco, Consolas, 'Courier New', Courier, monospace;\n    direction: ltr;\n    text-align: left;\n    white-space: pre;\n    word-spacing: normal;\n    word-break: normal;\n    line-height: 1.5;\n\n    -moz-tab-size: 4;\n    -o-tab-size: 4;\n    tab-size: 4;\n\n    -webkit-hyphens: none;\n    -ms-hyphens: none;\n    hyphens: none;\n}\n\n/* Code blocks */\npre[class*='language-'] {\n    padding: 1em;\n    margin: 0.5em 0;\n    overflow: auto;\n    border-radius: 0.3em;\n}\n:not(pre) > code[class*='language-'],\npre[class*='language-'] {\n    background: #1d1f21;\n}\n\n/* Inline code */\n:not(pre) > code[class*='language-'] {\n    padding: 0.1em;\n    border-radius: 0.3em;\n}\n.token.comment,\n.token.prolog,\n.token.doctype,\n.token.cdata {\n    color: #7c7c7c;\n}\n.token.punctuation {\n    color: #c5c8c6;\n}\n.namespace {\n    opacity: 0.7;\n}\n.token.property,\n.token.keyword,\n.token.tag {\n    color: #96cbfe;\n}\n.token.class-name {\n    color: #ffffb6;\n    text-decoration: underline;\n}\n.token.boolean,\n.token.constant {\n    color: #99cc99;\n}\n.token.symbol,\n.token.deleted {\n    color: #f92672;\n}\n.token.number {\n    color: #ff73fd;\n}\n.token.selector,\n.token.attr-name,\n.token.string,\n.token.char,\n.token.builtin,\n.token.inserted {\n    color: #a8ff60;\n}\n.token.variable {\n    color: #c6c5fe;\n}\n.token.operator {\n    color: #ededed;\n}\n.token.entity {\n    color: #ffffb6;\n    /* text-decoration: underline; */\n}\n.token.url {\n    color: #96cbfe;\n}\n.language-css .token.string,\n.style .token.string {\n    color: #87c38a;\n}\n.token.atrule,\n.token.attr-value {\n    color: #f9ee98;\n}\n.token.function {\n    color: #dad085;\n}\n.token.regex {\n    color: #e9c062;\n}\n.token.important {\n    color: #fd971f;\n}\n.token.important,\n.token.bold {\n    font-weight: bold;\n}\n.token.italic {\n    font-style: italic;\n}\n.token.entity {\n    cursor: help;\n}\n", ""]);
+exports.push([module.i, "\n.CodeMirror-code {\n    font-size: 16px;\n}\n#output {\n    margin: 0;\n    min-height: 300px;\n}\n\n/**\n             * atom-dark theme for `prism.js`\n             * Based on Atom's `atom-dark` theme: https://github.com/atom/atom-dark-syntax\n             * @author Joe Gibson (@gibsjose)\n             */\ncode[class*='language-'],\npre[class*='language-'] {\n    color: #c5c8c6;\n    text-shadow: 0 1px rgba(0, 0, 0, 0.3);\n    font-family: Inconsolata, Monaco, Consolas, 'Courier New', Courier, monospace;\n    direction: ltr;\n    text-align: left;\n    white-space: pre;\n    word-spacing: normal;\n    word-break: normal;\n    line-height: 1.5;\n\n    -moz-tab-size: 4;\n    -o-tab-size: 4;\n    tab-size: 4;\n\n    -webkit-hyphens: none;\n    -ms-hyphens: none;\n    hyphens: none;\n}\n\n/* Code blocks */\npre[class*='language-'] {\n    padding: 1em;\n    margin: 0.5em 0;\n    overflow: auto;\n    border-radius: 0.3em;\n}\n:not(pre) > code[class*='language-'],\npre[class*='language-'] {\n    background: #1d1f21;\n}\n\n/* Inline code */\n:not(pre) > code[class*='language-'] {\n    padding: 0.1em;\n    border-radius: 0.3em;\n}\n.token.comment,\n.token.prolog,\n.token.doctype,\n.token.cdata {\n    color: #7c7c7c;\n}\n.token.punctuation {\n    color: #c5c8c6;\n}\n.namespace {\n    opacity: 0.7;\n}\n.token.property,\n.token.keyword,\n.token.tag {\n    color: #96cbfe;\n}\n.token.class-name {\n    color: #ffffb6;\n    text-decoration: underline;\n}\n.token.boolean,\n.token.constant {\n    color: #99cc99;\n}\n.token.symbol,\n.token.deleted {\n    color: #f92672;\n}\n.token.number {\n    color: #ff73fd;\n}\n.token.selector,\n.token.attr-name,\n.token.string,\n.token.char,\n.token.builtin,\n.token.inserted {\n    color: #a8ff60;\n}\n.token.variable {\n    color: #c6c5fe;\n}\n.token.operator {\n    color: #ededed;\n}\n.token.entity {\n    color: #ffffb6;\n    /* text-decoration: underline; */\n}\n.token.url {\n    color: #96cbfe;\n}\n.language-css .token.string,\n.style .token.string {\n    color: #87c38a;\n}\n.token.atrule,\n.token.attr-value {\n    color: #f9ee98;\n}\n.token.function {\n    color: #dad085;\n}\n.token.regex {\n    color: #e9c062;\n}\n.token.important {\n    color: #fd971f;\n}\n.token.important,\n.token.bold {\n    font-weight: bold;\n}\n.token.italic {\n    font-style: italic;\n}\n.token.entity {\n    cursor: help;\n}\n", ""]);
 
 // exports
 
@@ -16399,13 +16390,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "w-full" }, [
-    _c(
-      "div",
-      { staticClass: "form-input form-input-bordered px-0 overflow-hidden" },
-      [_c("textarea", { ref: "theTextarea" })]
-    )
-  ])
+  return _c("div", [_c("textarea", { ref: "codeEditor" })])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -16431,9 +16416,7 @@ var render = function() {
     [
       _c("h1", [_vm._v("Web Tinker")]),
       _vm._v(" "),
-      _c("div", [
-        _vm._v("Press Cmd+Enter / Ctrl+Enter to execute the script.")
-      ]),
+      _c("div", [_vm._v("Press Cmd+Enter or Ctrl+Enter to execute the code.")]),
       _vm._v(" "),
       _c("tinker-input", {
         on: { executed: _vm.onExecuted },

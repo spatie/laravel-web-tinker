@@ -25,7 +25,7 @@
         "prettier": "^1.15.3"
     },
     "dependencies": {
-        "codemirror": "^5.42.0",
+        "codeEditor": "^5.42.0",
         "prismjs": "^1.15.0"
     }
 }

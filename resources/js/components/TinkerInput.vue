@@ -1,9 +1,5 @@
 <template>
-    <div class="w-full">
-        <div class="form-input form-input-bordered px-0 overflow-hidden">
-            <textarea ref="theTextarea" />
-        </div>
-    </div>
+    <div><textarea ref="codeEditor" /></div>
 </template>
 
 <script>
@@ -14,7 +10,7 @@ import 'codemirror/mode/php/php';
 export default {
     data: () => ({
         value: '',
-        codemirror: null,
+        codeEditor: null,
     }),
 
     mounted() {
@@ -35,21 +31,16 @@ export default {
             },
         };
 
-        this.codemirror = CodeMirror.fromTextArea(this.$refs.theTextarea, config);
+        this.codeEditor = CodeMirror.fromTextArea(this.$refs.codeEditor, config);
 
-        this.codemirror.on('change', editor => {
+        this.codeEditor.on('change', editor => {
             localStorage.setItem('tinker-tool', editor.getValue());
         });
 
         let value = localStorage.getItem('tinker-tool');
-        if (typeof value === 'string') {
-            this.codemirror.setValue(value);
-        }
 
-        let previousOutput = localStorage.getItem('web-tinker');
-        if (typeof previousOutput === 'string') {
-            this.output = previousOutput;
-            this.applyOutputStyles();
+        if (typeof value === 'string') {
+            this.codeEditor.setValue(value);
         }
     },
 
@@ -57,7 +48,7 @@ export default {
         executeCode() {
             axios
                 .post(window.location, {
-                    code: this.codemirror.getValue(),
+                    code: this.codeEditor.getValue(),
                 })
                 .then(({ data }) => {
                     this.$emit('executed', data);
@@ -81,10 +72,10 @@ export default {
 }
 
 /**
-         * atom-dark theme for `prism.js`
-         * Based on Atom's `atom-dark` theme: https://github.com/atom/atom-dark-syntax
-         * @author Joe Gibson (@gibsjose)
-         */
+             * atom-dark theme for `prism.js`
+             * Based on Atom's `atom-dark` theme: https://github.com/atom/atom-dark-syntax
+             * @author Joe Gibson (@gibsjose)
+             */
 
 code[class*='language-'],
 pre[class*='language-'] {
