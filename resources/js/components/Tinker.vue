@@ -11,24 +11,24 @@
 </template>
 
 <script>
-    import TinkerInput from './TinkerInput';
-    import TinkerOutput from './TinkerOutput';
+import TinkerInput from './TinkerInput';
+import TinkerOutput from './TinkerOutput';
 
-    export default {
-        components: {
-            TinkerInput,
-            TinkerOutput,
+export default {
+    components: {
+        TinkerInput,
+        TinkerOutput,
+    },
+
+    data: () => ({
+        input: '',
+        output: '',
+    }),
+
+    methods: {
+        onExecuted(output) {
+            this.output = output;
         },
-
-        data: () => ({
-            input: '',
-            output: '',
-        }),
-
-        methods: {
-            onExecuted(output) {
-                this.output = output;
-            }
-        },
-    };
+    },
+};
 </script>

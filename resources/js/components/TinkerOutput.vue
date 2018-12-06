@@ -5,25 +5,25 @@
 </template>
 
 <script>
-    import Prism from 'prismjs/components/prism-core';
-    import 'prismjs/components/prism-bash';
+import Prism from 'prismjs/components/prism-core';
+import 'prismjs/components/prism-bash';
 
-    export default {
-        watch: {
-            value: function () {
-                this.applyOutputStyles();
-            }
+export default {
+    watch: {
+        value: function() {
+            this.applyOutputStyles();
         },
+    },
 
-        props: ['value'],
+    props: ['value'],
 
-        methods: {
-            applyOutputStyles() {
-                console.log('called applyOutputStyles');
-                Prism.highlightElement(this.$refs.outputCode);
-            },
-        }
-    }
+    methods: {
+        applyOutputStyles() {
+            console.log('called applyOutputStyles');
+            Prism.highlightElement(this.$refs.outputCode);
+        },
+    },
+};
 </script>
 
-<style src="prismjs/themes/prism.css"/>
+<style src="prismjs/themes/prism.css" />
