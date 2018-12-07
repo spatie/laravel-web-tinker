@@ -62,5 +62,4 @@ export default {
 };
 </script>
 
-<style src="codemirror/lib/codemirror.css" />
-<style src="codemirror/theme/idea.css" />
+<style src="codemirror/lib/codemirror.css" /> <style src="codemirror/theme/idea.css" />
