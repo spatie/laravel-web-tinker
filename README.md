@@ -11,7 +11,7 @@ This package will add a route to your application where you can tinker to your h
 
 ![Screenshot of web tinker](TODO: add screenshot)
 
-## A word to the wise 🧙‍♂️
+## 🚨 A word to the wise 🚨
 
 This package can run arbritary code. Unless you know what you are doing, you should never use this in a production environment.
 
