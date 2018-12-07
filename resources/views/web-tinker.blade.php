@@ -15,7 +15,7 @@
         <link href='{{asset(mix('app.css', 'vendor/web-tinker'))}}' rel='stylesheet' type='text/css'>
     @endif
 </head>
-<body>
+<body class="m-4">
 
 <div id="web-tinker" v-cloak>
     <tinker></tinker>
