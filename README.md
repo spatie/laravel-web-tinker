@@ -1,12 +1,19 @@
-# Very short description of the package
+# Artisan Tinker in your browser
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/web-tinker.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
 [![Build Status](https://img.shields.io/travis/spatie/web-tinker/master.svg?style=flat-square)](https://travis-ci.org/spatie/:package_name)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/web-tinker.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/:package_name)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/web-tinker.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
 
+Artisan's tinker command is a great way to tinker with your application in the terminal. Unfortunately running a few lines of code, making edits, and copy/pasting code can be bothersome. Wouldn't it be great to tinker in the browser?
 
-This is where your description should go. Try and limit it to a paragraph or two.
+This package will add a route to your application where you can tinker to your heart's content.
+
+![Screenshot of web tinker](TODO: add screenshot)
+
+## A word to the wise 🧙‍♂️
+
+This package can run arbritary code. Unless you know what you are doing, you should never use this in a production environment.
 
 ## Installation
 
@@ -16,12 +23,67 @@ You can install the package via composer:
 composer require spatie/web-tinker
 ```
 
+Next, you must publish the assets from this package by running this command.
+
+```bash
+php artisan web-tinker:install
+```
+
+Optionally, you can publish the config file of the package.
+
+```bash
+php artisan vendor:publish --provider="Spatie\WebTinker\WebTinkerServiceProvider" --tag="config"
+```
+
+This is the content that will be published to `config/web-tinker.php`
+
+```php
+return [
+    
+    /*
+     * The web tinker page will be available on this path.
+     */
+    'path' => '/tinker',
+
+    /*
+     * If light hurts you eyes, set this to true.
+     */
+    'dark_theme' => false,
+
+
+    /*
+     * By default this package will only run in local development.
+     * Do not change this, unless you know what your are doing.
+     */
+    'enabled' => env('APP_ENV') === 'local',
+];
+```
+
 ## Usage
 
-``` php
-$skeleton = new Spatie\Skeleton();
-echo $skeleton->echoPhrase('Hello, Spatie!');
+By default this package will only run in a local environment.
+
+Visit `/tinker` in your local environment of you app to view the tinker page.
+
+
+## Authorization
+
+Should you want to run this in another environment (we do not recommend this), there are two steps you must perform.
+
+1. You must register a `viewWebTinker` ability. A good place to do this is in the `AuthServiceProvider` that ships with Laravel.
+
+```php
+public function boot()
+{
+    $this->registerPolicies();
+
+    Gate::define('viewWebTinker', function ($user = null) {
+        // return true if access to web tinker is allowed
+    });
+}
 ```
+
+2. You must set the `enabled` config variable in `web-tinker` to `true`.
 
 ### Testing
 

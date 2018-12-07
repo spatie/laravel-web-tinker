@@ -11,6 +11,5 @@ class TestCase extends OrchestraTest
     {
         return [WebTinkerServiceProvider::class];
     }
-
-
 }
+
