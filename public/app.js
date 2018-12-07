@@ -1755,9 +1755,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         executeCode: function executeCode() {
             var _this2 = this;
 
-            __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post(window.location, {
-                code: this.codeEditor.getValue()
-            }).then(function (_ref) {
+            var code = this.codeEditor.getValue().trim();
+
+            if (code === '') {
+                alert('You must type some code to execute.');
+
+                return;
+            }
+
+            __WEBPACK_IMPORTED_MODULE_1_axios___default.a.post(window.location, { code: code }).then(function (_ref) {
                 var data = _ref.data;
 
                 _this2.$emit('executed', data);

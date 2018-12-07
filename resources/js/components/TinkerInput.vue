@@ -46,18 +46,21 @@ export default {
 
     methods: {
         executeCode() {
-            axios
-                .post(window.location, {
-                    code: this.codeEditor.getValue(),
-                })
-                .then(({ data }) => {
-                    this.$emit('executed', data);
-                });
+            let code = this.codeEditor.getValue().trim();
+
+            if (code === '') {
+                alert('You must type some code to execute.');
+
+                return;
+            }
+
+            axios.post(window.location, { code }).then(({ data }) => {
+                this.$emit('executed', data);
+            });
         },
     },
 };
 </script>
 
-<style src="codemirror/lib/codemirror.css" />
-<style src="codemirror/theme/dracula.css" />
+<style src="codemirror/lib/codemirror.css" /> <style src="codemirror/theme/dracula.css" />
 <style src="prismjs/themes/prism.css" />
