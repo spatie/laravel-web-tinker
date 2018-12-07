@@ -1660,9 +1660,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -14983,7 +14980,7 @@ exports.push([module.i, "/* BASICS */\n.CodeMirror {\n  /* Set height, width, bo
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/codemirror/theme/dracula.css":
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/codemirror/theme/idea.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
@@ -14991,22 +14988,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "/*\n\n    Name:       dracula\n    Author:     Michael Kaminsky (http://github.com/mkaminsky11)\n\n    Original dracula color scheme by Zeno Rocha (https://github.com/zenorocha/dracula-theme)\n\n*/\n.cm-s-dracula.CodeMirror, .cm-s-dracula .CodeMirror-gutters {\n  background-color: #282a36 !important;\n  color: #f8f8f2 !important;\n  border: none;\n}\n.cm-s-dracula .CodeMirror-gutters { color: #282a36;\n}\n.cm-s-dracula .CodeMirror-cursor { border-left: solid thin #f8f8f0;\n}\n.cm-s-dracula .CodeMirror-linenumber { color: #6D8A88;\n}\n.cm-s-dracula .CodeMirror-selected { background: rgba(255, 255, 255, 0.10);\n}\n.cm-s-dracula .CodeMirror-line::selection, .cm-s-dracula .CodeMirror-line > span::selection, .cm-s-dracula .CodeMirror-line > span > span::selection { background: rgba(255, 255, 255, 0.10);\n}\n.cm-s-dracula .CodeMirror-line::-moz-selection, .cm-s-dracula .CodeMirror-line > span::-moz-selection, .cm-s-dracula .CodeMirror-line > span > span::-moz-selection { background: rgba(255, 255, 255, 0.10);\n}\n.cm-s-dracula span.cm-comment { color: #6272a4;\n}\n.cm-s-dracula span.cm-string, .cm-s-dracula span.cm-string-2 { color: #f1fa8c;\n}\n.cm-s-dracula span.cm-number { color: #bd93f9;\n}\n.cm-s-dracula span.cm-variable { color: #50fa7b;\n}\n.cm-s-dracula span.cm-variable-2 { color: white;\n}\n.cm-s-dracula span.cm-def { color: #50fa7b;\n}\n.cm-s-dracula span.cm-operator { color: #ff79c6;\n}\n.cm-s-dracula span.cm-keyword { color: #ff79c6;\n}\n.cm-s-dracula span.cm-atom { color: #bd93f9;\n}\n.cm-s-dracula span.cm-meta { color: #f8f8f2;\n}\n.cm-s-dracula span.cm-tag { color: #ff79c6;\n}\n.cm-s-dracula span.cm-attribute { color: #50fa7b;\n}\n.cm-s-dracula span.cm-qualifier { color: #50fa7b;\n}\n.cm-s-dracula span.cm-property { color: #66d9ef;\n}\n.cm-s-dracula span.cm-builtin { color: #50fa7b;\n}\n.cm-s-dracula span.cm-variable-3, .cm-s-dracula span.cm-type { color: #ffb86c;\n}\n.cm-s-dracula .CodeMirror-activeline-background { background: rgba(255,255,255,0.1);\n}\n.cm-s-dracula .CodeMirror-matchingbracket { text-decoration: underline; color: white !important;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/prismjs/themes/prism.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "/**\n * prism.js default theme for JavaScript, CSS and HTML\n * Based on dabblet (http://dabblet.com)\n * @author Lea Verou\n */\ncode[class*=\"language-\"],\npre[class*=\"language-\"] {\n\tcolor: black;\n\tbackground: none;\n\ttext-shadow: 0 1px white;\n\tfont-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;\n\ttext-align: left;\n\twhite-space: pre;\n\tword-spacing: normal;\n\tword-break: normal;\n\tword-wrap: normal;\n\tline-height: 1.5;\n\n\t-moz-tab-size: 4;\n\t-o-tab-size: 4;\n\ttab-size: 4;\n\n\t-webkit-hyphens: none;\n\t-moz-hyphens: none;\n\t-ms-hyphens: none;\n\thyphens: none;\n}\npre[class*=\"language-\"]::-moz-selection, pre[class*=\"language-\"] ::-moz-selection,\ncode[class*=\"language-\"]::-moz-selection, code[class*=\"language-\"] ::-moz-selection {\n\ttext-shadow: none;\n\tbackground: #b3d4fc;\n}\npre[class*=\"language-\"]::selection, pre[class*=\"language-\"] ::selection,\ncode[class*=\"language-\"]::selection, code[class*=\"language-\"] ::selection {\n\ttext-shadow: none;\n\tbackground: #b3d4fc;\n}\n@media print {\ncode[class*=\"language-\"],\n\tpre[class*=\"language-\"] {\n\t\ttext-shadow: none;\n}\n}\n\n/* Code blocks */\npre[class*=\"language-\"] {\n\tpadding: 1em;\n\tmargin: .5em 0;\n\toverflow: auto;\n}\n:not(pre) > code[class*=\"language-\"],\npre[class*=\"language-\"] {\n\tbackground: #f5f2f0;\n}\n\n/* Inline code */\n:not(pre) > code[class*=\"language-\"] {\n\tpadding: .1em;\n\tborder-radius: .3em;\n\twhite-space: normal;\n}\n.token.comment,\n.token.prolog,\n.token.doctype,\n.token.cdata {\n\tcolor: slategray;\n}\n.token.punctuation {\n\tcolor: #999;\n}\n.namespace {\n\topacity: .7;\n}\n.token.property,\n.token.tag,\n.token.boolean,\n.token.number,\n.token.constant,\n.token.symbol,\n.token.deleted {\n\tcolor: #905;\n}\n.token.selector,\n.token.attr-name,\n.token.string,\n.token.char,\n.token.builtin,\n.token.inserted {\n\tcolor: #690;\n}\n.token.operator,\n.token.entity,\n.token.url,\n.language-css .token.string,\n.style .token.string {\n\tcolor: #9a6e3a;\n\tbackground: hsla(0, 0%, 100%, .5);\n}\n.token.atrule,\n.token.attr-value,\n.token.keyword {\n\tcolor: #07a;\n}\n.token.function,\n.token.class-name {\n\tcolor: #DD4A68;\n}\n.token.regex,\n.token.important,\n.token.variable {\n\tcolor: #e90;\n}\n.token.important,\n.token.bold {\n\tfont-weight: bold;\n}\n.token.italic {\n\tfont-style: italic;\n}\n.token.entity {\n\tcursor: help;\n}\n", ""]);
+exports.push([module.i, "/**\n    Name:       IDEA default theme\n    From IntelliJ IDEA by JetBrains\n */\n.cm-s-idea span.cm-meta { color: #808000;\n}\n.cm-s-idea span.cm-number { color: #0000FF;\n}\n.cm-s-idea span.cm-keyword { line-height: 1em; font-weight: bold; color: #000080;\n}\n.cm-s-idea span.cm-atom { font-weight: bold; color: #000080;\n}\n.cm-s-idea span.cm-def { color: #000000;\n}\n.cm-s-idea span.cm-variable { color: black;\n}\n.cm-s-idea span.cm-variable-2 { color: black;\n}\n.cm-s-idea span.cm-variable-3, .cm-s-idea span.cm-type { color: black;\n}\n.cm-s-idea span.cm-property { color: black;\n}\n.cm-s-idea span.cm-operator { color: black;\n}\n.cm-s-idea span.cm-comment { color: #808080;\n}\n.cm-s-idea span.cm-string { color: #008000;\n}\n.cm-s-idea span.cm-string-2 { color: #008000;\n}\n.cm-s-idea span.cm-qualifier { color: #555;\n}\n.cm-s-idea span.cm-error { color: #FF0000;\n}\n.cm-s-idea span.cm-attribute { color: #0000FF;\n}\n.cm-s-idea span.cm-tag { color: #000080;\n}\n.cm-s-idea span.cm-link { color: #0000FF;\n}\n.cm-s-idea .CodeMirror-activeline-background { background: #FFFAE3;\n}\n.cm-s-idea span.cm-builtin { color: #30a;\n}\n.cm-s-idea span.cm-bracket { color: #cc7;\n}\n.cm-s-idea  { font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;\n}\n.cm-s-idea .CodeMirror-matchingbracket { outline:1px solid grey; color:black !important;\n}\n.CodeMirror-hints.idea {\n  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;\n  color: #616569;\n  background-color: #ebf3fd !important;\n}\n.CodeMirror-hints.idea .CodeMirror-hint-active {\n  background-color: #a2b8c9 !important;\n  color: #5c6065 !important;\n}", ""]);
 
 // exports
 
@@ -15810,50 +15792,23 @@ if(false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/codemirror/theme/dracula.css":
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/codemirror/theme/idea.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/codemirror/theme/dracula.css");
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/codemirror/theme/idea.css");
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("86ea4388", content, false, {});
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("9de24254", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./dracula.css", function() {
-     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./dracula.css");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/prismjs/themes/prism.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/prismjs/themes/prism.css");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("9adf8cda", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./prism.css", function() {
-     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./prism.css");
+   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./idea.css", function() {
+     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./idea.css");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -27217,8 +27172,7 @@ var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/codemirror/lib/codemirror.css")
-  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/codemirror/theme/dracula.css")
-  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/prismjs/themes/prism.css")
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5dab2550\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/codemirror/theme/idea.css")
 }
 var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
 /* script */

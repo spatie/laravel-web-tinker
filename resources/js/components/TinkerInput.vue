@@ -62,5 +62,5 @@ export default {
 };
 </script>
 
-<style src="codemirror/lib/codemirror.css" /> <style src="codemirror/theme/dracula.css" />
-<style src="prismjs/themes/prism.css" />
+<style src="codemirror/lib/codemirror.css" />
+<style src="codemirror/theme/idea.css" />
