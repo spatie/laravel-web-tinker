@@ -20,7 +20,7 @@ This package can run arbritary code. Unless you know what you are doing, you sho
 You can install the package via composer:
 
 ```bash
-composer require spatie/web-tinker
+composer require spatie/laravel-web-tinker
 ```
 
 Next, you must publish the assets from this package by running this command.

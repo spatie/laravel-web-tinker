@@ -1,5 +1,5 @@
 {
-    "name": "spatie/web-tinker",
+    "name": "spatie/laravel-web-tinker",
     "description": "Artisan Tinker in your browser",
     "keywords": [
         "spatie",
@@ -9,7 +9,7 @@
         "debug",
         "development"
     ],
-    "homepage": "https://github.com/spatie/web-tinker",
+    "homepage": "https://github.com/spatie/laravel-web-tinker",
     "license": "MIT",
     "authors": [
         {
