@@ -13,14 +13,14 @@ This package will add a route to your application where you can tinker to your h
 
 ## 🚨 A word to the wise 🚨
 
-This package can run arbritary code. Unless you know what you are doing, you should never use this in a production environment.
+This package can run arbritary code. Unless you know what you are doing, you should never install or use this in a production environment, or any environment where you handle real world data.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require spatie/laravel-web-tinker
+composer require spatie/laravel-web-tinker --dev
 ```
 
 Next, you must publish the assets from this package by running this command.
