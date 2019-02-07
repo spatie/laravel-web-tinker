@@ -1,5 +1,5 @@
 <template>
-    <div><textarea ref="codeEditor" /></div>
+    <div class="input"><textarea ref="codeEditor" /></div>
 </template>
 
 <script>

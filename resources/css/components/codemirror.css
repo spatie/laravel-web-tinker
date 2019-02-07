@@ -1,0 +1,16 @@
+html .CodeMirror {
+    height: 100%;
+}
+
+html .CodeMirror-gutters {
+    @apply bg-gutter;
+    @apply border-r-2 border-line;
+}
+
+html .CodeMirror-linenumber {
+    @apply text-dimmed;
+}
+
+html .CodeMirror pre {
+    @apply font-code;
+}

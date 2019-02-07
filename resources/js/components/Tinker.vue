@@ -1,18 +1,11 @@
 <template>
-    <div>
-        <h1>Web Tinker</h1>
+    <div class="layout">
+        <tinker-input
+            v-model="this.input"
+            v-on:executed="onExecuted"
+        ></tinker-input>
 
-        <div>Press Cmd+Enter or Ctrl+Enter to execute the code.</div>
-
-        <div class="flex">
-            <tinker-input
-                v-model="this.input"
-                v-on:executed="onExecuted"
-                class="flex-none w-1/2 px-4"
-            ></tinker-input>
-
-            <tinker-output :value="this.output" class="flex-none w-1/2"></tinker-output>
-        </div>
+        <tinker-output :value="this.output"></tinker-output>
     </div>
 </template>
 

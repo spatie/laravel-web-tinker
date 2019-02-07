@@ -1,0 +1,7 @@
+.output {
+    @apply bg-gutter;
+    @apply text-dimmed;
+    @apply p-4;
+    @apply overflow-scroll;
+    grid-area: output;
+}

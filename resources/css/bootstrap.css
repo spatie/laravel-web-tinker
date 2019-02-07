@@ -1,28 +1,68 @@
+@tailwind preflight;
+
+:root {
+    --color-text: #000;
+    --color-dimmed: #a09f91;
+    --color-accent: #8b6cc4;
+    --color-background: #fff;
+    --color-line: #f3f7f9;
+    --color-gutter: #fafdfc;
+    
+    --logo: var(--color-accent);
+}
+
+:root.darkmode {
+    --color-text: #fff;
+    --color-dimmed: #706b5c;
+    --color-accent: #8b6cc4;
+    --color-background: #272822;
+    --color-line: #3b3d34;
+    --color-gutter: #2f3129;
+}
+
 * {
+    position: relative;
+    box-sizing: inherit;
     margin: 0;
     padding: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-size: 1em;
-}
-
-a,
-a:hover,
-a:focus {
     color: inherit;
+    font: inherit;
+    &:after,
+    &:before {
+        box-sizing: inherit;
+    }
+}
+
+html {
+    @apply bg-background;
+    @apply font-code;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+h1 {
+    font-size: inherit;
+}
+
+a {
     text-decoration: none;
 }
 
+ol,
 ul {
-    @apply .list-reset;
+    list-style: none;
 }
 
-blockquote p {
-    display: inline;
+img,
+svg {
+    display: block;
+}
+
+pre,
+code {
+    @apply font-code;
+}
+
+::selection {
+    background-color: rgba(150, 120, 200, .3);
 }
