@@ -120,8 +120,9 @@ We publish all received postcards [on our company website](https://spatie.be/en/
 ## Credits
 
 - [Freek Van der Herten](https://github.com/freekmurze)
-- [Marcel Pociot](https://github.com/mpociot)
 - [All Contributors](../../contributors)
+
+This package was inspired by and uses code from the [nova-tinker-tool](https://github.com/beyondcode/nova-tinker-tool) package by [Marcel Pociot](https://github.com/mpociot).
 
 ## Support us
 
