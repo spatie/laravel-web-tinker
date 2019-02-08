@@ -2,13 +2,13 @@
 
 namespace Spatie\WebTinker;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Collection;
-use Laravel\Tinker\ClassAliasAutoloader;
+use Psy\Shell;
 use Psy\Configuration;
 use Psy\ExecutionLoopClosure;
-use Psy\Shell;
+use Illuminate\Support\Collection;
+use Illuminate\Foundation\Application;
+use Illuminate\Database\Eloquent\Model;
+use Laravel\Tinker\ClassAliasAutoloader;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class Tinker
@@ -51,7 +51,7 @@ class Tinker
         $config->getPresenter()->addCasters([
             Collection::class => 'Laravel\Tinker\TinkerCaster::castCollection',
             Model::class => 'Laravel\Tinker\TinkerCaster::castModel',
-            Application::class => 'Laravel\Tinker\TinkerCaster::castApplication'
+            Application::class => 'Laravel\Tinker\TinkerCaster::castApplication',
         ]);
 
         $shell = new Shell($config);

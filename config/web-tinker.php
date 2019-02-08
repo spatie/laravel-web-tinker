@@ -12,7 +12,6 @@ return [
      */
     'dark_theme' => false,
 
-
     /*
      * By default this package will only run in local development.
      * Do not change this, unless you know what your are doing.

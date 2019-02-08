@@ -2,8 +2,8 @@
 
 namespace Spatie\WebTinker\Tests;
 
-use Orchestra\Testbench\TestCase as OrchestraTest;
 use Spatie\WebTinker\WebTinkerServiceProvider;
+use Orchestra\Testbench\TestCase as OrchestraTest;
 
 class TestCase extends OrchestraTest
 {
