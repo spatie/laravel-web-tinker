@@ -1,3 +1,7 @@
-@tailwind preflight;
-@import 'bootstrap.css';
+@charset 'UTF-8';
+
+@import "./bootstrap.css";
+@import "./components/*";
+
 @tailwind utilities;
+

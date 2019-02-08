@@ -1,28 +1,80 @@
+@tailwind preflight;
+
+:root {
+    --color-text: #000;
+    --color-warning: #ffffcf;
+    --color-error: #dd1144;
+    --color-keyword: #000;
+    --color-operator: #000;
+    --color-variable: #a09f91;
+    --color-number: #009999;
+    --color-string: #dd1144;
+    --color-dimmed: #a09f91;
+    --color-background: #fff;
+    --color-line: #f3f7f9;
+    --color-gutter: #fafdfc; 
+}
+
+:root.darkmode {
+    --color-text: #fff;
+    --color-warning: #eab21c;
+    --color-error: #dd1144;
+    --color-keyword: #fff;
+    --color-operator: #dd1144;
+    --color-variable: #a6e22e;
+    --color-number: #ae81ff;
+    --color-string: #e6db74;
+    --color-dimmed: #706b5c;
+    --color-background: #272822;
+    --color-line: #3b3d34;
+    --color-gutter: #2f3129;
+}
+
 * {
+    position: relative;
+    box-sizing: inherit;
     margin: 0;
     padding: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-size: 1em;
-}
-
-a,
-a:hover,
-a:focus {
     color: inherit;
+    font: inherit;
+    &:after,
+    &:before {
+        box-sizing: inherit;
+    }
+}
+
+html {
+    @apply bg-background;
+    @apply font-code;
+    @apply leading-normal;
+    @apply text-text;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+h1 {
+    font-size: inherit;
+}
+
+a {
     text-decoration: none;
 }
 
+ol,
 ul {
-    @apply .list-reset;
+    list-style: none;
 }
 
-blockquote p {
-    display: inline;
+img,
+svg {
+    display: block;
+}
+
+pre,
+code {
+    @apply font-code;
+}
+
+::selection {
+    background-color: rgba(150, 120, 200, .3);
 }

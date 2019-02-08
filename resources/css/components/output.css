@@ -1,0 +1,20 @@
+.output {
+    @apply bg-gutter;
+    @apply px-8 py-4;
+    @apply overflow-scroll;
+    grid-area: output;
+
+    & warning {
+        @apply block;
+        @apply px-2;
+        @apply bg-warning;
+        @apply whitespace-normal;
+    }
+
+    & error {
+        @apply block;
+        @apply px-2;
+        @apply bg-error;
+        @apply whitespace-normal;
+    }
+}

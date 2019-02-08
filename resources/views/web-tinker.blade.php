@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="{{ config('web-tinker.dark_theme') ? 'darkmode' : '' }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,19 +8,15 @@
     <title>Web Tinker</title>
 
     <!-- Style sheets-->
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    @if(config('web-tinker.dark_theme'))
-        <link href='{{asset(mix('app-dark.css', 'vendor/web-tinker'))}}' rel='stylesheet' type='text/css'>
-    @else
-        <link href='{{asset(mix('app.css', 'vendor/web-tinker'))}}' rel='stylesheet' type='text/css'>
-    @endif
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i,600" rel="stylesheet">
+    <link href='{{ asset(mix('app.css', 'vendor/web-tinker')) }}' rel='stylesheet' type='text/css'>
 </head>
-<body class="m-4">
+<body>
 
 <div id="web-tinker" v-cloak>
     <tinker></tinker>
 </div>
 
-<script src="{{asset(mix('app.js', 'vendor/web-tinker'))}}"></script>
+<script src="{{ asset(mix('app.js', 'vendor/web-tinker')) }}"></script>
 </body>
 </html>

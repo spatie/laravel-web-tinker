@@ -1,0 +1,15 @@
+.layout {
+    @apply fixed;
+    @apply h-screen w-screen;
+    display: grid;
+    grid-template: 50vh 50vh / 100vw;
+    grid-template-areas:
+        'input'
+        'output';
+    
+    @screen md {
+        grid-template: 100vh / 50vw 50vw;
+        grid-template-areas:
+            'input output';
+    }
+}
