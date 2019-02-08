@@ -17,6 +17,6 @@
     <tinker></tinker>
 </div>
 
-<script src="{{asset(mix('app.js', 'vendor/web-tinker'))}}"></script>
+<script src="{{ asset(mix('app.js', 'vendor/web-tinker')) }}"></script>
 </body>
 </html>
