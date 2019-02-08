@@ -497,18 +497,29 @@ table {
 
 :root {
   --color-text: #000;
+  --color-warning: #ffffcf;
+  --color-error: #d14;
+  --color-keyword: #000;
+  --color-operator: #000;
+  --color-variable: #a09f91;
+  --color-number: #099;
+  --color-string: #d14;
   --color-dimmed: #a09f91;
-  --color-accent: #8b6cc4;
   --color-background: #fff;
   --color-line: #f3f7f9;
   --color-gutter: #fafdfc;
-  --logo: var(--color-accent);
 }
 
 :root.darkmode {
   --color-text: #fff;
+  --color-warning: #eab21c;
+  --color-error: #d14;
+  --color-keyword: #fff;
+  --color-operator: #d14;
+  --color-variable: #a6e22e;
+  --color-number: #ae81ff;
+  --color-string: #e6db74;
   --color-dimmed: #706b5c;
-  --color-accent: #8b6cc4;
   --color-background: #272822;
   --color-line: #3b3d34;
   --color-gutter: #2f3129;
@@ -522,17 +533,19 @@ table {
   padding: 0;
   color: inherit;
   font: inherit;
+}
 
-  &:after,
-  &:before {
+*:after,
+  *:before {
     -webkit-box-sizing: inherit;
             box-sizing: inherit;
   }
-}
 
 html {
   background-color: var(--color-background);
   font-family: IBM Plex Mono, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  line-height: 1.5;
+  color: var(--color-text);
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-size: 14px;
@@ -569,23 +582,73 @@ code {
   background-color: rgba(150, 120, 200, .3);
 }
 
-html .CodeMirror {
+.CodeMirror.cm-s-spatie {
   height: 100%;
-}
-
-html .CodeMirror-gutters {
-  background-color: var(--color-gutter);
-  border-right-width: 2px;
-  border-color: var(--color-line);
-}
-
-html .CodeMirror-linenumber {
-  color: var(--color-dimmed);
-}
-
-html .CodeMirror pre {
   font-family: IBM Plex Mono, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  line-height: 1.5;
+  background-color: var(--color-background);
+  color: inherit;
 }
+
+.CodeMirror.cm-s-spatie .CodeMirror-cursor {
+    border-color: var(--color-text);
+  }
+
+.CodeMirror.cm-s-spatie .CodeMirror-lines {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+.CodeMirror.cm-s-spatie .CodeMirror-gutters {
+    background-color: var(--color-gutter);
+    padding-left: .5rem;
+    border-right-width: 2px;
+    border-color: var(--color-line);
+  }
+
+.CodeMirror.cm-s-spatie .CodeMirror-linenumber {
+    color: var(--color-dimmed);
+    font-size: 1rem;
+  }
+
+.CodeMirror.cm-s-spatie .CodeMirror pre {
+    font-family: IBM Plex Mono, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    white-space: nowrap;
+  }
+
+.CodeMirror.cm-s-spatie .CodeMirror-selected {
+    background: rgba(150, 120, 200, .2);
+  }
+
+.CodeMirror.cm-s-spatie .CodeMirror-focused .CodeMirror-selected {
+    background: rgba(150, 120, 200, .3);
+  }
+
+.CodeMirror.cm-s-spatie .cm-comment {
+    color: var(--color-dimmed);
+    font-style: italic;
+  }
+
+.CodeMirror.cm-s-spatie .cm-number {
+    color: var(--color-number);
+  }
+
+.CodeMirror.cm-s-spatie .cm-string {
+    color: var(--color-string);
+  }
+
+.CodeMirror.cm-s-spatie .cm-variable-2 {
+    color: var(--color-variable);
+  }
+
+.CodeMirror.cm-s-spatie .cm-operator {
+    color: var(--color-operator);
+  }
+
+.CodeMirror.cm-s-spatie .cm-keyword {
+    color: var(--color-keyword);
+    font-weight: 600;
+  }
 
 .input {
   border-bottom-width: 2px;
@@ -594,11 +657,12 @@ html .CodeMirror pre {
 }
 
 @media (min-width: 768px) {
-  .input {
+
+.input {
     border-bottom-width: 0;
     border-right-width: 2px;
-  }
 }
+  }
 
 .layout {
   position: fixed;
@@ -610,19 +674,30 @@ html .CodeMirror pre {
 }
 
 @media (min-width: 768px) {
-  .layout {
+
+.layout {
     grid-template: 100vh / 50vw 50vw;
     grid-template-areas: 'input output';
-  }
 }
+  }
 
 .output {
   background-color: var(--color-gutter);
-  color: var(--color-dimmed);
-  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   overflow: scroll;
   grid-area: output;
 }
+
+.output warning {
+    display: block;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    background-color: var(--color-warning);
+    white-space: normal;
+  }
 
 .list-reset {
   list-style: none;
@@ -651,20 +726,48 @@ html .CodeMirror pre {
   background-color: transparent;
 }
 
-.bg-logo {
-  background-color: var(--logo);
-}
-
 .bg-text {
   background-color: var(--color-text);
 }
 
-.bg-dimmed {
-  background-color: var(--color-dimmed);
+.bg-invers {
+  background-color: var(--color-invers);
 }
 
-.bg-accent {
-  background-color: var(--color-accent);
+.bg-output {
+  background-color: var(--color-output);
+}
+
+.bg-warning {
+  background-color: var(--color-warning);
+}
+
+.bg-error {
+  background-color: var(--color-error);
+}
+
+.bg-keyword {
+  background-color: var(--color-keyword);
+}
+
+.bg-variable {
+  background-color: var(--color-variable);
+}
+
+.bg-operator {
+  background-color: var(--color-operator);
+}
+
+.bg-number {
+  background-color: var(--color-number);
+}
+
+.bg-string {
+  background-color: var(--color-string);
+}
+
+.bg-dimmed {
+  background-color: var(--color-dimmed);
 }
 
 .bg-background {
@@ -683,20 +786,48 @@ html .CodeMirror pre {
   background-color: transparent;
 }
 
-.hover\:bg-logo:hover {
-  background-color: var(--logo);
-}
-
 .hover\:bg-text:hover {
   background-color: var(--color-text);
 }
 
-.hover\:bg-dimmed:hover {
-  background-color: var(--color-dimmed);
+.hover\:bg-invers:hover {
+  background-color: var(--color-invers);
 }
 
-.hover\:bg-accent:hover {
-  background-color: var(--color-accent);
+.hover\:bg-output:hover {
+  background-color: var(--color-output);
+}
+
+.hover\:bg-warning:hover {
+  background-color: var(--color-warning);
+}
+
+.hover\:bg-error:hover {
+  background-color: var(--color-error);
+}
+
+.hover\:bg-keyword:hover {
+  background-color: var(--color-keyword);
+}
+
+.hover\:bg-variable:hover {
+  background-color: var(--color-variable);
+}
+
+.hover\:bg-operator:hover {
+  background-color: var(--color-operator);
+}
+
+.hover\:bg-number:hover {
+  background-color: var(--color-number);
+}
+
+.hover\:bg-string:hover {
+  background-color: var(--color-string);
+}
+
+.hover\:bg-dimmed:hover {
+  background-color: var(--color-dimmed);
 }
 
 .hover\:bg-background:hover {
@@ -787,20 +918,48 @@ html .CodeMirror pre {
   border-color: transparent;
 }
 
-.border-logo {
-  border-color: var(--logo);
-}
-
 .border-text {
   border-color: var(--color-text);
 }
 
-.border-dimmed {
-  border-color: var(--color-dimmed);
+.border-invers {
+  border-color: var(--color-invers);
 }
 
-.border-accent {
-  border-color: var(--color-accent);
+.border-output {
+  border-color: var(--color-output);
+}
+
+.border-warning {
+  border-color: var(--color-warning);
+}
+
+.border-error {
+  border-color: var(--color-error);
+}
+
+.border-keyword {
+  border-color: var(--color-keyword);
+}
+
+.border-variable {
+  border-color: var(--color-variable);
+}
+
+.border-operator {
+  border-color: var(--color-operator);
+}
+
+.border-number {
+  border-color: var(--color-number);
+}
+
+.border-string {
+  border-color: var(--color-string);
+}
+
+.border-dimmed {
+  border-color: var(--color-dimmed);
 }
 
 .border-background {
@@ -819,20 +978,48 @@ html .CodeMirror pre {
   border-color: transparent;
 }
 
-.hover\:border-logo:hover {
-  border-color: var(--logo);
-}
-
 .hover\:border-text:hover {
   border-color: var(--color-text);
 }
 
-.hover\:border-dimmed:hover {
-  border-color: var(--color-dimmed);
+.hover\:border-invers:hover {
+  border-color: var(--color-invers);
 }
 
-.hover\:border-accent:hover {
-  border-color: var(--color-accent);
+.hover\:border-output:hover {
+  border-color: var(--color-output);
+}
+
+.hover\:border-warning:hover {
+  border-color: var(--color-warning);
+}
+
+.hover\:border-error:hover {
+  border-color: var(--color-error);
+}
+
+.hover\:border-keyword:hover {
+  border-color: var(--color-keyword);
+}
+
+.hover\:border-variable:hover {
+  border-color: var(--color-variable);
+}
+
+.hover\:border-operator:hover {
+  border-color: var(--color-operator);
+}
+
+.hover\:border-number:hover {
+  border-color: var(--color-number);
+}
+
+.hover\:border-string:hover {
+  border-color: var(--color-string);
+}
+
+.hover\:border-dimmed:hover {
+  border-color: var(--color-dimmed);
 }
 
 .hover\:border-background:hover {
@@ -1447,76 +1634,20 @@ html .CodeMirror pre {
   font-family: IBM Plex Mono, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 }
 
-.font-hairline {
-  font-weight: 100;
-}
-
-.font-thin {
-  font-weight: 200;
-}
-
-.font-light {
-  font-weight: 300;
-}
-
 .font-normal {
   font-weight: 400;
 }
 
-.font-medium {
-  font-weight: 500;
-}
-
-.font-semibold {
-  font-weight: 600;
-}
-
 .font-bold {
-  font-weight: 700;
-}
-
-.font-extrabold {
-  font-weight: 800;
-}
-
-.font-black {
-  font-weight: 900;
-}
-
-.hover\:font-hairline:hover {
-  font-weight: 100;
-}
-
-.hover\:font-thin:hover {
-  font-weight: 200;
-}
-
-.hover\:font-light:hover {
-  font-weight: 300;
+  font-weight: 600;
 }
 
 .hover\:font-normal:hover {
   font-weight: 400;
 }
 
-.hover\:font-medium:hover {
-  font-weight: 500;
-}
-
-.hover\:font-semibold:hover {
-  font-weight: 600;
-}
-
 .hover\:font-bold:hover {
-  font-weight: 700;
-}
-
-.hover\:font-extrabold:hover {
-  font-weight: 800;
-}
-
-.hover\:font-black:hover {
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .h-1 {
@@ -3384,7 +3515,7 @@ html .CodeMirror pre {
 }
 
 .fill-logo {
-  fill: var(--logo);
+  fill: undefined;
 }
 
 .stroke-current {
@@ -3419,20 +3550,48 @@ html .CodeMirror pre {
   color: transparent;
 }
 
-.text-logo {
-  color: var(--logo);
-}
-
 .text-text {
   color: var(--color-text);
 }
 
-.text-dimmed {
-  color: var(--color-dimmed);
+.text-invers {
+  color: var(--color-invers);
 }
 
-.text-accent {
-  color: var(--color-accent);
+.text-output {
+  color: var(--color-output);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-error {
+  color: var(--color-error);
+}
+
+.text-keyword {
+  color: var(--color-keyword);
+}
+
+.text-variable {
+  color: var(--color-variable);
+}
+
+.text-operator {
+  color: var(--color-operator);
+}
+
+.text-number {
+  color: var(--color-number);
+}
+
+.text-string {
+  color: var(--color-string);
+}
+
+.text-dimmed {
+  color: var(--color-dimmed);
 }
 
 .text-background {
@@ -3451,20 +3610,48 @@ html .CodeMirror pre {
   color: transparent;
 }
 
-.hover\:text-logo:hover {
-  color: var(--logo);
-}
-
 .hover\:text-text:hover {
   color: var(--color-text);
 }
 
-.hover\:text-dimmed:hover {
-  color: var(--color-dimmed);
+.hover\:text-invers:hover {
+  color: var(--color-invers);
 }
 
-.hover\:text-accent:hover {
-  color: var(--color-accent);
+.hover\:text-output:hover {
+  color: var(--color-output);
+}
+
+.hover\:text-warning:hover {
+  color: var(--color-warning);
+}
+
+.hover\:text-error:hover {
+  color: var(--color-error);
+}
+
+.hover\:text-keyword:hover {
+  color: var(--color-keyword);
+}
+
+.hover\:text-variable:hover {
+  color: var(--color-variable);
+}
+
+.hover\:text-operator:hover {
+  color: var(--color-operator);
+}
+
+.hover\:text-number:hover {
+  color: var(--color-number);
+}
+
+.hover\:text-string:hover {
+  color: var(--color-string);
+}
+
+.hover\:text-dimmed:hover {
+  color: var(--color-dimmed);
 }
 
 .hover\:text-background:hover {
@@ -3907,20 +4094,48 @@ html .CodeMirror pre {
     background-color: transparent;
   }
 
-  .xs\:bg-logo {
-    background-color: var(--logo);
-  }
-
   .xs\:bg-text {
     background-color: var(--color-text);
   }
 
-  .xs\:bg-dimmed {
-    background-color: var(--color-dimmed);
+  .xs\:bg-invers {
+    background-color: var(--color-invers);
   }
 
-  .xs\:bg-accent {
-    background-color: var(--color-accent);
+  .xs\:bg-output {
+    background-color: var(--color-output);
+  }
+
+  .xs\:bg-warning {
+    background-color: var(--color-warning);
+  }
+
+  .xs\:bg-error {
+    background-color: var(--color-error);
+  }
+
+  .xs\:bg-keyword {
+    background-color: var(--color-keyword);
+  }
+
+  .xs\:bg-variable {
+    background-color: var(--color-variable);
+  }
+
+  .xs\:bg-operator {
+    background-color: var(--color-operator);
+  }
+
+  .xs\:bg-number {
+    background-color: var(--color-number);
+  }
+
+  .xs\:bg-string {
+    background-color: var(--color-string);
+  }
+
+  .xs\:bg-dimmed {
+    background-color: var(--color-dimmed);
   }
 
   .xs\:bg-background {
@@ -3939,20 +4154,48 @@ html .CodeMirror pre {
     background-color: transparent;
   }
 
-  .xs\:hover\:bg-logo:hover {
-    background-color: var(--logo);
-  }
-
   .xs\:hover\:bg-text:hover {
     background-color: var(--color-text);
   }
 
-  .xs\:hover\:bg-dimmed:hover {
-    background-color: var(--color-dimmed);
+  .xs\:hover\:bg-invers:hover {
+    background-color: var(--color-invers);
   }
 
-  .xs\:hover\:bg-accent:hover {
-    background-color: var(--color-accent);
+  .xs\:hover\:bg-output:hover {
+    background-color: var(--color-output);
+  }
+
+  .xs\:hover\:bg-warning:hover {
+    background-color: var(--color-warning);
+  }
+
+  .xs\:hover\:bg-error:hover {
+    background-color: var(--color-error);
+  }
+
+  .xs\:hover\:bg-keyword:hover {
+    background-color: var(--color-keyword);
+  }
+
+  .xs\:hover\:bg-variable:hover {
+    background-color: var(--color-variable);
+  }
+
+  .xs\:hover\:bg-operator:hover {
+    background-color: var(--color-operator);
+  }
+
+  .xs\:hover\:bg-number:hover {
+    background-color: var(--color-number);
+  }
+
+  .xs\:hover\:bg-string:hover {
+    background-color: var(--color-string);
+  }
+
+  .xs\:hover\:bg-dimmed:hover {
+    background-color: var(--color-dimmed);
   }
 
   .xs\:hover\:bg-background:hover {
@@ -4035,20 +4278,48 @@ html .CodeMirror pre {
     border-color: transparent;
   }
 
-  .xs\:border-logo {
-    border-color: var(--logo);
-  }
-
   .xs\:border-text {
     border-color: var(--color-text);
   }
 
-  .xs\:border-dimmed {
-    border-color: var(--color-dimmed);
+  .xs\:border-invers {
+    border-color: var(--color-invers);
   }
 
-  .xs\:border-accent {
-    border-color: var(--color-accent);
+  .xs\:border-output {
+    border-color: var(--color-output);
+  }
+
+  .xs\:border-warning {
+    border-color: var(--color-warning);
+  }
+
+  .xs\:border-error {
+    border-color: var(--color-error);
+  }
+
+  .xs\:border-keyword {
+    border-color: var(--color-keyword);
+  }
+
+  .xs\:border-variable {
+    border-color: var(--color-variable);
+  }
+
+  .xs\:border-operator {
+    border-color: var(--color-operator);
+  }
+
+  .xs\:border-number {
+    border-color: var(--color-number);
+  }
+
+  .xs\:border-string {
+    border-color: var(--color-string);
+  }
+
+  .xs\:border-dimmed {
+    border-color: var(--color-dimmed);
   }
 
   .xs\:border-background {
@@ -4067,20 +4338,48 @@ html .CodeMirror pre {
     border-color: transparent;
   }
 
-  .xs\:hover\:border-logo:hover {
-    border-color: var(--logo);
-  }
-
   .xs\:hover\:border-text:hover {
     border-color: var(--color-text);
   }
 
-  .xs\:hover\:border-dimmed:hover {
-    border-color: var(--color-dimmed);
+  .xs\:hover\:border-invers:hover {
+    border-color: var(--color-invers);
   }
 
-  .xs\:hover\:border-accent:hover {
-    border-color: var(--color-accent);
+  .xs\:hover\:border-output:hover {
+    border-color: var(--color-output);
+  }
+
+  .xs\:hover\:border-warning:hover {
+    border-color: var(--color-warning);
+  }
+
+  .xs\:hover\:border-error:hover {
+    border-color: var(--color-error);
+  }
+
+  .xs\:hover\:border-keyword:hover {
+    border-color: var(--color-keyword);
+  }
+
+  .xs\:hover\:border-variable:hover {
+    border-color: var(--color-variable);
+  }
+
+  .xs\:hover\:border-operator:hover {
+    border-color: var(--color-operator);
+  }
+
+  .xs\:hover\:border-number:hover {
+    border-color: var(--color-number);
+  }
+
+  .xs\:hover\:border-string:hover {
+    border-color: var(--color-string);
+  }
+
+  .xs\:hover\:border-dimmed:hover {
+    border-color: var(--color-dimmed);
   }
 
   .xs\:hover\:border-background:hover {
@@ -4695,76 +4994,20 @@ html .CodeMirror pre {
     font-family: IBM Plex Mono, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
-  .xs\:font-hairline {
-    font-weight: 100;
-  }
-
-  .xs\:font-thin {
-    font-weight: 200;
-  }
-
-  .xs\:font-light {
-    font-weight: 300;
-  }
-
   .xs\:font-normal {
     font-weight: 400;
   }
 
-  .xs\:font-medium {
-    font-weight: 500;
-  }
-
-  .xs\:font-semibold {
-    font-weight: 600;
-  }
-
   .xs\:font-bold {
-    font-weight: 700;
-  }
-
-  .xs\:font-extrabold {
-    font-weight: 800;
-  }
-
-  .xs\:font-black {
-    font-weight: 900;
-  }
-
-  .xs\:hover\:font-hairline:hover {
-    font-weight: 100;
-  }
-
-  .xs\:hover\:font-thin:hover {
-    font-weight: 200;
-  }
-
-  .xs\:hover\:font-light:hover {
-    font-weight: 300;
+    font-weight: 600;
   }
 
   .xs\:hover\:font-normal:hover {
     font-weight: 400;
   }
 
-  .xs\:hover\:font-medium:hover {
-    font-weight: 500;
-  }
-
-  .xs\:hover\:font-semibold:hover {
-    font-weight: 600;
-  }
-
   .xs\:hover\:font-bold:hover {
-    font-weight: 700;
-  }
-
-  .xs\:hover\:font-extrabold:hover {
-    font-weight: 800;
-  }
-
-  .xs\:hover\:font-black:hover {
-    font-weight: 900;
+    font-weight: 600;
   }
 
   .xs\:h-1 {
@@ -6647,20 +6890,48 @@ html .CodeMirror pre {
     color: transparent;
   }
 
-  .xs\:text-logo {
-    color: var(--logo);
-  }
-
   .xs\:text-text {
     color: var(--color-text);
   }
 
-  .xs\:text-dimmed {
-    color: var(--color-dimmed);
+  .xs\:text-invers {
+    color: var(--color-invers);
   }
 
-  .xs\:text-accent {
-    color: var(--color-accent);
+  .xs\:text-output {
+    color: var(--color-output);
+  }
+
+  .xs\:text-warning {
+    color: var(--color-warning);
+  }
+
+  .xs\:text-error {
+    color: var(--color-error);
+  }
+
+  .xs\:text-keyword {
+    color: var(--color-keyword);
+  }
+
+  .xs\:text-variable {
+    color: var(--color-variable);
+  }
+
+  .xs\:text-operator {
+    color: var(--color-operator);
+  }
+
+  .xs\:text-number {
+    color: var(--color-number);
+  }
+
+  .xs\:text-string {
+    color: var(--color-string);
+  }
+
+  .xs\:text-dimmed {
+    color: var(--color-dimmed);
   }
 
   .xs\:text-background {
@@ -6679,20 +6950,48 @@ html .CodeMirror pre {
     color: transparent;
   }
 
-  .xs\:hover\:text-logo:hover {
-    color: var(--logo);
-  }
-
   .xs\:hover\:text-text:hover {
     color: var(--color-text);
   }
 
-  .xs\:hover\:text-dimmed:hover {
-    color: var(--color-dimmed);
+  .xs\:hover\:text-invers:hover {
+    color: var(--color-invers);
   }
 
-  .xs\:hover\:text-accent:hover {
-    color: var(--color-accent);
+  .xs\:hover\:text-output:hover {
+    color: var(--color-output);
+  }
+
+  .xs\:hover\:text-warning:hover {
+    color: var(--color-warning);
+  }
+
+  .xs\:hover\:text-error:hover {
+    color: var(--color-error);
+  }
+
+  .xs\:hover\:text-keyword:hover {
+    color: var(--color-keyword);
+  }
+
+  .xs\:hover\:text-variable:hover {
+    color: var(--color-variable);
+  }
+
+  .xs\:hover\:text-operator:hover {
+    color: var(--color-operator);
+  }
+
+  .xs\:hover\:text-number:hover {
+    color: var(--color-number);
+  }
+
+  .xs\:hover\:text-string:hover {
+    color: var(--color-string);
+  }
+
+  .xs\:hover\:text-dimmed:hover {
+    color: var(--color-dimmed);
   }
 
   .xs\:hover\:text-background:hover {
@@ -7136,20 +7435,48 @@ html .CodeMirror pre {
     background-color: transparent;
   }
 
-  .sm\:bg-logo {
-    background-color: var(--logo);
-  }
-
   .sm\:bg-text {
     background-color: var(--color-text);
   }
 
-  .sm\:bg-dimmed {
-    background-color: var(--color-dimmed);
+  .sm\:bg-invers {
+    background-color: var(--color-invers);
   }
 
-  .sm\:bg-accent {
-    background-color: var(--color-accent);
+  .sm\:bg-output {
+    background-color: var(--color-output);
+  }
+
+  .sm\:bg-warning {
+    background-color: var(--color-warning);
+  }
+
+  .sm\:bg-error {
+    background-color: var(--color-error);
+  }
+
+  .sm\:bg-keyword {
+    background-color: var(--color-keyword);
+  }
+
+  .sm\:bg-variable {
+    background-color: var(--color-variable);
+  }
+
+  .sm\:bg-operator {
+    background-color: var(--color-operator);
+  }
+
+  .sm\:bg-number {
+    background-color: var(--color-number);
+  }
+
+  .sm\:bg-string {
+    background-color: var(--color-string);
+  }
+
+  .sm\:bg-dimmed {
+    background-color: var(--color-dimmed);
   }
 
   .sm\:bg-background {
@@ -7168,20 +7495,48 @@ html .CodeMirror pre {
     background-color: transparent;
   }
 
-  .sm\:hover\:bg-logo:hover {
-    background-color: var(--logo);
-  }
-
   .sm\:hover\:bg-text:hover {
     background-color: var(--color-text);
   }
 
-  .sm\:hover\:bg-dimmed:hover {
-    background-color: var(--color-dimmed);
+  .sm\:hover\:bg-invers:hover {
+    background-color: var(--color-invers);
   }
 
-  .sm\:hover\:bg-accent:hover {
-    background-color: var(--color-accent);
+  .sm\:hover\:bg-output:hover {
+    background-color: var(--color-output);
+  }
+
+  .sm\:hover\:bg-warning:hover {
+    background-color: var(--color-warning);
+  }
+
+  .sm\:hover\:bg-error:hover {
+    background-color: var(--color-error);
+  }
+
+  .sm\:hover\:bg-keyword:hover {
+    background-color: var(--color-keyword);
+  }
+
+  .sm\:hover\:bg-variable:hover {
+    background-color: var(--color-variable);
+  }
+
+  .sm\:hover\:bg-operator:hover {
+    background-color: var(--color-operator);
+  }
+
+  .sm\:hover\:bg-number:hover {
+    background-color: var(--color-number);
+  }
+
+  .sm\:hover\:bg-string:hover {
+    background-color: var(--color-string);
+  }
+
+  .sm\:hover\:bg-dimmed:hover {
+    background-color: var(--color-dimmed);
   }
 
   .sm\:hover\:bg-background:hover {
@@ -7264,20 +7619,48 @@ html .CodeMirror pre {
     border-color: transparent;
   }
 
-  .sm\:border-logo {
-    border-color: var(--logo);
-  }
-
   .sm\:border-text {
     border-color: var(--color-text);
   }
 
-  .sm\:border-dimmed {
-    border-color: var(--color-dimmed);
+  .sm\:border-invers {
+    border-color: var(--color-invers);
   }
 
-  .sm\:border-accent {
-    border-color: var(--color-accent);
+  .sm\:border-output {
+    border-color: var(--color-output);
+  }
+
+  .sm\:border-warning {
+    border-color: var(--color-warning);
+  }
+
+  .sm\:border-error {
+    border-color: var(--color-error);
+  }
+
+  .sm\:border-keyword {
+    border-color: var(--color-keyword);
+  }
+
+  .sm\:border-variable {
+    border-color: var(--color-variable);
+  }
+
+  .sm\:border-operator {
+    border-color: var(--color-operator);
+  }
+
+  .sm\:border-number {
+    border-color: var(--color-number);
+  }
+
+  .sm\:border-string {
+    border-color: var(--color-string);
+  }
+
+  .sm\:border-dimmed {
+    border-color: var(--color-dimmed);
   }
 
   .sm\:border-background {
@@ -7296,20 +7679,48 @@ html .CodeMirror pre {
     border-color: transparent;
   }
 
-  .sm\:hover\:border-logo:hover {
-    border-color: var(--logo);
-  }
-
   .sm\:hover\:border-text:hover {
     border-color: var(--color-text);
   }
 
-  .sm\:hover\:border-dimmed:hover {
-    border-color: var(--color-dimmed);
+  .sm\:hover\:border-invers:hover {
+    border-color: var(--color-invers);
   }
 
-  .sm\:hover\:border-accent:hover {
-    border-color: var(--color-accent);
+  .sm\:hover\:border-output:hover {
+    border-color: var(--color-output);
+  }
+
+  .sm\:hover\:border-warning:hover {
+    border-color: var(--color-warning);
+  }
+
+  .sm\:hover\:border-error:hover {
+    border-color: var(--color-error);
+  }
+
+  .sm\:hover\:border-keyword:hover {
+    border-color: var(--color-keyword);
+  }
+
+  .sm\:hover\:border-variable:hover {
+    border-color: var(--color-variable);
+  }
+
+  .sm\:hover\:border-operator:hover {
+    border-color: var(--color-operator);
+  }
+
+  .sm\:hover\:border-number:hover {
+    border-color: var(--color-number);
+  }
+
+  .sm\:hover\:border-string:hover {
+    border-color: var(--color-string);
+  }
+
+  .sm\:hover\:border-dimmed:hover {
+    border-color: var(--color-dimmed);
   }
 
   .sm\:hover\:border-background:hover {
@@ -7924,76 +8335,20 @@ html .CodeMirror pre {
     font-family: IBM Plex Mono, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
-  .sm\:font-hairline {
-    font-weight: 100;
-  }
-
-  .sm\:font-thin {
-    font-weight: 200;
-  }
-
-  .sm\:font-light {
-    font-weight: 300;
-  }
-
   .sm\:font-normal {
     font-weight: 400;
   }
 
-  .sm\:font-medium {
-    font-weight: 500;
-  }
-
-  .sm\:font-semibold {
-    font-weight: 600;
-  }
-
   .sm\:font-bold {
-    font-weight: 700;
-  }
-
-  .sm\:font-extrabold {
-    font-weight: 800;
-  }
-
-  .sm\:font-black {
-    font-weight: 900;
-  }
-
-  .sm\:hover\:font-hairline:hover {
-    font-weight: 100;
-  }
-
-  .sm\:hover\:font-thin:hover {
-    font-weight: 200;
-  }
-
-  .sm\:hover\:font-light:hover {
-    font-weight: 300;
+    font-weight: 600;
   }
 
   .sm\:hover\:font-normal:hover {
     font-weight: 400;
   }
 
-  .sm\:hover\:font-medium:hover {
-    font-weight: 500;
-  }
-
-  .sm\:hover\:font-semibold:hover {
-    font-weight: 600;
-  }
-
   .sm\:hover\:font-bold:hover {
-    font-weight: 700;
-  }
-
-  .sm\:hover\:font-extrabold:hover {
-    font-weight: 800;
-  }
-
-  .sm\:hover\:font-black:hover {
-    font-weight: 900;
+    font-weight: 600;
   }
 
   .sm\:h-1 {
@@ -9876,20 +10231,48 @@ html .CodeMirror pre {
     color: transparent;
   }
 
-  .sm\:text-logo {
-    color: var(--logo);
-  }
-
   .sm\:text-text {
     color: var(--color-text);
   }
 
-  .sm\:text-dimmed {
-    color: var(--color-dimmed);
+  .sm\:text-invers {
+    color: var(--color-invers);
   }
 
-  .sm\:text-accent {
-    color: var(--color-accent);
+  .sm\:text-output {
+    color: var(--color-output);
+  }
+
+  .sm\:text-warning {
+    color: var(--color-warning);
+  }
+
+  .sm\:text-error {
+    color: var(--color-error);
+  }
+
+  .sm\:text-keyword {
+    color: var(--color-keyword);
+  }
+
+  .sm\:text-variable {
+    color: var(--color-variable);
+  }
+
+  .sm\:text-operator {
+    color: var(--color-operator);
+  }
+
+  .sm\:text-number {
+    color: var(--color-number);
+  }
+
+  .sm\:text-string {
+    color: var(--color-string);
+  }
+
+  .sm\:text-dimmed {
+    color: var(--color-dimmed);
   }
 
   .sm\:text-background {
@@ -9908,20 +10291,48 @@ html .CodeMirror pre {
     color: transparent;
   }
 
-  .sm\:hover\:text-logo:hover {
-    color: var(--logo);
-  }
-
   .sm\:hover\:text-text:hover {
     color: var(--color-text);
   }
 
-  .sm\:hover\:text-dimmed:hover {
-    color: var(--color-dimmed);
+  .sm\:hover\:text-invers:hover {
+    color: var(--color-invers);
   }
 
-  .sm\:hover\:text-accent:hover {
-    color: var(--color-accent);
+  .sm\:hover\:text-output:hover {
+    color: var(--color-output);
+  }
+
+  .sm\:hover\:text-warning:hover {
+    color: var(--color-warning);
+  }
+
+  .sm\:hover\:text-error:hover {
+    color: var(--color-error);
+  }
+
+  .sm\:hover\:text-keyword:hover {
+    color: var(--color-keyword);
+  }
+
+  .sm\:hover\:text-variable:hover {
+    color: var(--color-variable);
+  }
+
+  .sm\:hover\:text-operator:hover {
+    color: var(--color-operator);
+  }
+
+  .sm\:hover\:text-number:hover {
+    color: var(--color-number);
+  }
+
+  .sm\:hover\:text-string:hover {
+    color: var(--color-string);
+  }
+
+  .sm\:hover\:text-dimmed:hover {
+    color: var(--color-dimmed);
   }
 
   .sm\:hover\:text-background:hover {
@@ -10365,20 +10776,48 @@ html .CodeMirror pre {
     background-color: transparent;
   }
 
-  .md\:bg-logo {
-    background-color: var(--logo);
-  }
-
   .md\:bg-text {
     background-color: var(--color-text);
   }
 
-  .md\:bg-dimmed {
-    background-color: var(--color-dimmed);
+  .md\:bg-invers {
+    background-color: var(--color-invers);
   }
 
-  .md\:bg-accent {
-    background-color: var(--color-accent);
+  .md\:bg-output {
+    background-color: var(--color-output);
+  }
+
+  .md\:bg-warning {
+    background-color: var(--color-warning);
+  }
+
+  .md\:bg-error {
+    background-color: var(--color-error);
+  }
+
+  .md\:bg-keyword {
+    background-color: var(--color-keyword);
+  }
+
+  .md\:bg-variable {
+    background-color: var(--color-variable);
+  }
+
+  .md\:bg-operator {
+    background-color: var(--color-operator);
+  }
+
+  .md\:bg-number {
+    background-color: var(--color-number);
+  }
+
+  .md\:bg-string {
+    background-color: var(--color-string);
+  }
+
+  .md\:bg-dimmed {
+    background-color: var(--color-dimmed);
   }
 
   .md\:bg-background {
@@ -10397,20 +10836,48 @@ html .CodeMirror pre {
     background-color: transparent;
   }
 
-  .md\:hover\:bg-logo:hover {
-    background-color: var(--logo);
-  }
-
   .md\:hover\:bg-text:hover {
     background-color: var(--color-text);
   }
 
-  .md\:hover\:bg-dimmed:hover {
-    background-color: var(--color-dimmed);
+  .md\:hover\:bg-invers:hover {
+    background-color: var(--color-invers);
   }
 
-  .md\:hover\:bg-accent:hover {
-    background-color: var(--color-accent);
+  .md\:hover\:bg-output:hover {
+    background-color: var(--color-output);
+  }
+
+  .md\:hover\:bg-warning:hover {
+    background-color: var(--color-warning);
+  }
+
+  .md\:hover\:bg-error:hover {
+    background-color: var(--color-error);
+  }
+
+  .md\:hover\:bg-keyword:hover {
+    background-color: var(--color-keyword);
+  }
+
+  .md\:hover\:bg-variable:hover {
+    background-color: var(--color-variable);
+  }
+
+  .md\:hover\:bg-operator:hover {
+    background-color: var(--color-operator);
+  }
+
+  .md\:hover\:bg-number:hover {
+    background-color: var(--color-number);
+  }
+
+  .md\:hover\:bg-string:hover {
+    background-color: var(--color-string);
+  }
+
+  .md\:hover\:bg-dimmed:hover {
+    background-color: var(--color-dimmed);
   }
 
   .md\:hover\:bg-background:hover {
@@ -10493,20 +10960,48 @@ html .CodeMirror pre {
     border-color: transparent;
   }
 
-  .md\:border-logo {
-    border-color: var(--logo);
-  }
-
   .md\:border-text {
     border-color: var(--color-text);
   }
 
-  .md\:border-dimmed {
-    border-color: var(--color-dimmed);
+  .md\:border-invers {
+    border-color: var(--color-invers);
   }
 
-  .md\:border-accent {
-    border-color: var(--color-accent);
+  .md\:border-output {
+    border-color: var(--color-output);
+  }
+
+  .md\:border-warning {
+    border-color: var(--color-warning);
+  }
+
+  .md\:border-error {
+    border-color: var(--color-error);
+  }
+
+  .md\:border-keyword {
+    border-color: var(--color-keyword);
+  }
+
+  .md\:border-variable {
+    border-color: var(--color-variable);
+  }
+
+  .md\:border-operator {
+    border-color: var(--color-operator);
+  }
+
+  .md\:border-number {
+    border-color: var(--color-number);
+  }
+
+  .md\:border-string {
+    border-color: var(--color-string);
+  }
+
+  .md\:border-dimmed {
+    border-color: var(--color-dimmed);
   }
 
   .md\:border-background {
@@ -10525,20 +11020,48 @@ html .CodeMirror pre {
     border-color: transparent;
   }
 
-  .md\:hover\:border-logo:hover {
-    border-color: var(--logo);
-  }
-
   .md\:hover\:border-text:hover {
     border-color: var(--color-text);
   }
 
-  .md\:hover\:border-dimmed:hover {
-    border-color: var(--color-dimmed);
+  .md\:hover\:border-invers:hover {
+    border-color: var(--color-invers);
   }
 
-  .md\:hover\:border-accent:hover {
-    border-color: var(--color-accent);
+  .md\:hover\:border-output:hover {
+    border-color: var(--color-output);
+  }
+
+  .md\:hover\:border-warning:hover {
+    border-color: var(--color-warning);
+  }
+
+  .md\:hover\:border-error:hover {
+    border-color: var(--color-error);
+  }
+
+  .md\:hover\:border-keyword:hover {
+    border-color: var(--color-keyword);
+  }
+
+  .md\:hover\:border-variable:hover {
+    border-color: var(--color-variable);
+  }
+
+  .md\:hover\:border-operator:hover {
+    border-color: var(--color-operator);
+  }
+
+  .md\:hover\:border-number:hover {
+    border-color: var(--color-number);
+  }
+
+  .md\:hover\:border-string:hover {
+    border-color: var(--color-string);
+  }
+
+  .md\:hover\:border-dimmed:hover {
+    border-color: var(--color-dimmed);
   }
 
   .md\:hover\:border-background:hover {
@@ -11153,76 +11676,20 @@ html .CodeMirror pre {
     font-family: IBM Plex Mono, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
-  .md\:font-hairline {
-    font-weight: 100;
-  }
-
-  .md\:font-thin {
-    font-weight: 200;
-  }
-
-  .md\:font-light {
-    font-weight: 300;
-  }
-
   .md\:font-normal {
     font-weight: 400;
   }
 
-  .md\:font-medium {
-    font-weight: 500;
-  }
-
-  .md\:font-semibold {
-    font-weight: 600;
-  }
-
   .md\:font-bold {
-    font-weight: 700;
-  }
-
-  .md\:font-extrabold {
-    font-weight: 800;
-  }
-
-  .md\:font-black {
-    font-weight: 900;
-  }
-
-  .md\:hover\:font-hairline:hover {
-    font-weight: 100;
-  }
-
-  .md\:hover\:font-thin:hover {
-    font-weight: 200;
-  }
-
-  .md\:hover\:font-light:hover {
-    font-weight: 300;
+    font-weight: 600;
   }
 
   .md\:hover\:font-normal:hover {
     font-weight: 400;
   }
 
-  .md\:hover\:font-medium:hover {
-    font-weight: 500;
-  }
-
-  .md\:hover\:font-semibold:hover {
-    font-weight: 600;
-  }
-
   .md\:hover\:font-bold:hover {
-    font-weight: 700;
-  }
-
-  .md\:hover\:font-extrabold:hover {
-    font-weight: 800;
-  }
-
-  .md\:hover\:font-black:hover {
-    font-weight: 900;
+    font-weight: 600;
   }
 
   .md\:h-1 {
@@ -13105,20 +13572,48 @@ html .CodeMirror pre {
     color: transparent;
   }
 
-  .md\:text-logo {
-    color: var(--logo);
-  }
-
   .md\:text-text {
     color: var(--color-text);
   }
 
-  .md\:text-dimmed {
-    color: var(--color-dimmed);
+  .md\:text-invers {
+    color: var(--color-invers);
   }
 
-  .md\:text-accent {
-    color: var(--color-accent);
+  .md\:text-output {
+    color: var(--color-output);
+  }
+
+  .md\:text-warning {
+    color: var(--color-warning);
+  }
+
+  .md\:text-error {
+    color: var(--color-error);
+  }
+
+  .md\:text-keyword {
+    color: var(--color-keyword);
+  }
+
+  .md\:text-variable {
+    color: var(--color-variable);
+  }
+
+  .md\:text-operator {
+    color: var(--color-operator);
+  }
+
+  .md\:text-number {
+    color: var(--color-number);
+  }
+
+  .md\:text-string {
+    color: var(--color-string);
+  }
+
+  .md\:text-dimmed {
+    color: var(--color-dimmed);
   }
 
   .md\:text-background {
@@ -13137,20 +13632,48 @@ html .CodeMirror pre {
     color: transparent;
   }
 
-  .md\:hover\:text-logo:hover {
-    color: var(--logo);
-  }
-
   .md\:hover\:text-text:hover {
     color: var(--color-text);
   }
 
-  .md\:hover\:text-dimmed:hover {
-    color: var(--color-dimmed);
+  .md\:hover\:text-invers:hover {
+    color: var(--color-invers);
   }
 
-  .md\:hover\:text-accent:hover {
-    color: var(--color-accent);
+  .md\:hover\:text-output:hover {
+    color: var(--color-output);
+  }
+
+  .md\:hover\:text-warning:hover {
+    color: var(--color-warning);
+  }
+
+  .md\:hover\:text-error:hover {
+    color: var(--color-error);
+  }
+
+  .md\:hover\:text-keyword:hover {
+    color: var(--color-keyword);
+  }
+
+  .md\:hover\:text-variable:hover {
+    color: var(--color-variable);
+  }
+
+  .md\:hover\:text-operator:hover {
+    color: var(--color-operator);
+  }
+
+  .md\:hover\:text-number:hover {
+    color: var(--color-number);
+  }
+
+  .md\:hover\:text-string:hover {
+    color: var(--color-string);
+  }
+
+  .md\:hover\:text-dimmed:hover {
+    color: var(--color-dimmed);
   }
 
   .md\:hover\:text-background:hover {
@@ -13594,20 +14117,48 @@ html .CodeMirror pre {
     background-color: transparent;
   }
 
-  .lg\:bg-logo {
-    background-color: var(--logo);
-  }
-
   .lg\:bg-text {
     background-color: var(--color-text);
   }
 
-  .lg\:bg-dimmed {
-    background-color: var(--color-dimmed);
+  .lg\:bg-invers {
+    background-color: var(--color-invers);
   }
 
-  .lg\:bg-accent {
-    background-color: var(--color-accent);
+  .lg\:bg-output {
+    background-color: var(--color-output);
+  }
+
+  .lg\:bg-warning {
+    background-color: var(--color-warning);
+  }
+
+  .lg\:bg-error {
+    background-color: var(--color-error);
+  }
+
+  .lg\:bg-keyword {
+    background-color: var(--color-keyword);
+  }
+
+  .lg\:bg-variable {
+    background-color: var(--color-variable);
+  }
+
+  .lg\:bg-operator {
+    background-color: var(--color-operator);
+  }
+
+  .lg\:bg-number {
+    background-color: var(--color-number);
+  }
+
+  .lg\:bg-string {
+    background-color: var(--color-string);
+  }
+
+  .lg\:bg-dimmed {
+    background-color: var(--color-dimmed);
   }
 
   .lg\:bg-background {
@@ -13626,20 +14177,48 @@ html .CodeMirror pre {
     background-color: transparent;
   }
 
-  .lg\:hover\:bg-logo:hover {
-    background-color: var(--logo);
-  }
-
   .lg\:hover\:bg-text:hover {
     background-color: var(--color-text);
   }
 
-  .lg\:hover\:bg-dimmed:hover {
-    background-color: var(--color-dimmed);
+  .lg\:hover\:bg-invers:hover {
+    background-color: var(--color-invers);
   }
 
-  .lg\:hover\:bg-accent:hover {
-    background-color: var(--color-accent);
+  .lg\:hover\:bg-output:hover {
+    background-color: var(--color-output);
+  }
+
+  .lg\:hover\:bg-warning:hover {
+    background-color: var(--color-warning);
+  }
+
+  .lg\:hover\:bg-error:hover {
+    background-color: var(--color-error);
+  }
+
+  .lg\:hover\:bg-keyword:hover {
+    background-color: var(--color-keyword);
+  }
+
+  .lg\:hover\:bg-variable:hover {
+    background-color: var(--color-variable);
+  }
+
+  .lg\:hover\:bg-operator:hover {
+    background-color: var(--color-operator);
+  }
+
+  .lg\:hover\:bg-number:hover {
+    background-color: var(--color-number);
+  }
+
+  .lg\:hover\:bg-string:hover {
+    background-color: var(--color-string);
+  }
+
+  .lg\:hover\:bg-dimmed:hover {
+    background-color: var(--color-dimmed);
   }
 
   .lg\:hover\:bg-background:hover {
@@ -13722,20 +14301,48 @@ html .CodeMirror pre {
     border-color: transparent;
   }
 
-  .lg\:border-logo {
-    border-color: var(--logo);
-  }
-
   .lg\:border-text {
     border-color: var(--color-text);
   }
 
-  .lg\:border-dimmed {
-    border-color: var(--color-dimmed);
+  .lg\:border-invers {
+    border-color: var(--color-invers);
   }
 
-  .lg\:border-accent {
-    border-color: var(--color-accent);
+  .lg\:border-output {
+    border-color: var(--color-output);
+  }
+
+  .lg\:border-warning {
+    border-color: var(--color-warning);
+  }
+
+  .lg\:border-error {
+    border-color: var(--color-error);
+  }
+
+  .lg\:border-keyword {
+    border-color: var(--color-keyword);
+  }
+
+  .lg\:border-variable {
+    border-color: var(--color-variable);
+  }
+
+  .lg\:border-operator {
+    border-color: var(--color-operator);
+  }
+
+  .lg\:border-number {
+    border-color: var(--color-number);
+  }
+
+  .lg\:border-string {
+    border-color: var(--color-string);
+  }
+
+  .lg\:border-dimmed {
+    border-color: var(--color-dimmed);
   }
 
   .lg\:border-background {
@@ -13754,20 +14361,48 @@ html .CodeMirror pre {
     border-color: transparent;
   }
 
-  .lg\:hover\:border-logo:hover {
-    border-color: var(--logo);
-  }
-
   .lg\:hover\:border-text:hover {
     border-color: var(--color-text);
   }
 
-  .lg\:hover\:border-dimmed:hover {
-    border-color: var(--color-dimmed);
+  .lg\:hover\:border-invers:hover {
+    border-color: var(--color-invers);
   }
 
-  .lg\:hover\:border-accent:hover {
-    border-color: var(--color-accent);
+  .lg\:hover\:border-output:hover {
+    border-color: var(--color-output);
+  }
+
+  .lg\:hover\:border-warning:hover {
+    border-color: var(--color-warning);
+  }
+
+  .lg\:hover\:border-error:hover {
+    border-color: var(--color-error);
+  }
+
+  .lg\:hover\:border-keyword:hover {
+    border-color: var(--color-keyword);
+  }
+
+  .lg\:hover\:border-variable:hover {
+    border-color: var(--color-variable);
+  }
+
+  .lg\:hover\:border-operator:hover {
+    border-color: var(--color-operator);
+  }
+
+  .lg\:hover\:border-number:hover {
+    border-color: var(--color-number);
+  }
+
+  .lg\:hover\:border-string:hover {
+    border-color: var(--color-string);
+  }
+
+  .lg\:hover\:border-dimmed:hover {
+    border-color: var(--color-dimmed);
   }
 
   .lg\:hover\:border-background:hover {
@@ -14382,76 +15017,20 @@ html .CodeMirror pre {
     font-family: IBM Plex Mono, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
-  .lg\:font-hairline {
-    font-weight: 100;
-  }
-
-  .lg\:font-thin {
-    font-weight: 200;
-  }
-
-  .lg\:font-light {
-    font-weight: 300;
-  }
-
   .lg\:font-normal {
     font-weight: 400;
   }
 
-  .lg\:font-medium {
-    font-weight: 500;
-  }
-
-  .lg\:font-semibold {
-    font-weight: 600;
-  }
-
   .lg\:font-bold {
-    font-weight: 700;
-  }
-
-  .lg\:font-extrabold {
-    font-weight: 800;
-  }
-
-  .lg\:font-black {
-    font-weight: 900;
-  }
-
-  .lg\:hover\:font-hairline:hover {
-    font-weight: 100;
-  }
-
-  .lg\:hover\:font-thin:hover {
-    font-weight: 200;
-  }
-
-  .lg\:hover\:font-light:hover {
-    font-weight: 300;
+    font-weight: 600;
   }
 
   .lg\:hover\:font-normal:hover {
     font-weight: 400;
   }
 
-  .lg\:hover\:font-medium:hover {
-    font-weight: 500;
-  }
-
-  .lg\:hover\:font-semibold:hover {
-    font-weight: 600;
-  }
-
   .lg\:hover\:font-bold:hover {
-    font-weight: 700;
-  }
-
-  .lg\:hover\:font-extrabold:hover {
-    font-weight: 800;
-  }
-
-  .lg\:hover\:font-black:hover {
-    font-weight: 900;
+    font-weight: 600;
   }
 
   .lg\:h-1 {
@@ -16334,20 +16913,48 @@ html .CodeMirror pre {
     color: transparent;
   }
 
-  .lg\:text-logo {
-    color: var(--logo);
-  }
-
   .lg\:text-text {
     color: var(--color-text);
   }
 
-  .lg\:text-dimmed {
-    color: var(--color-dimmed);
+  .lg\:text-invers {
+    color: var(--color-invers);
   }
 
-  .lg\:text-accent {
-    color: var(--color-accent);
+  .lg\:text-output {
+    color: var(--color-output);
+  }
+
+  .lg\:text-warning {
+    color: var(--color-warning);
+  }
+
+  .lg\:text-error {
+    color: var(--color-error);
+  }
+
+  .lg\:text-keyword {
+    color: var(--color-keyword);
+  }
+
+  .lg\:text-variable {
+    color: var(--color-variable);
+  }
+
+  .lg\:text-operator {
+    color: var(--color-operator);
+  }
+
+  .lg\:text-number {
+    color: var(--color-number);
+  }
+
+  .lg\:text-string {
+    color: var(--color-string);
+  }
+
+  .lg\:text-dimmed {
+    color: var(--color-dimmed);
   }
 
   .lg\:text-background {
@@ -16366,20 +16973,48 @@ html .CodeMirror pre {
     color: transparent;
   }
 
-  .lg\:hover\:text-logo:hover {
-    color: var(--logo);
-  }
-
   .lg\:hover\:text-text:hover {
     color: var(--color-text);
   }
 
-  .lg\:hover\:text-dimmed:hover {
-    color: var(--color-dimmed);
+  .lg\:hover\:text-invers:hover {
+    color: var(--color-invers);
   }
 
-  .lg\:hover\:text-accent:hover {
-    color: var(--color-accent);
+  .lg\:hover\:text-output:hover {
+    color: var(--color-output);
+  }
+
+  .lg\:hover\:text-warning:hover {
+    color: var(--color-warning);
+  }
+
+  .lg\:hover\:text-error:hover {
+    color: var(--color-error);
+  }
+
+  .lg\:hover\:text-keyword:hover {
+    color: var(--color-keyword);
+  }
+
+  .lg\:hover\:text-variable:hover {
+    color: var(--color-variable);
+  }
+
+  .lg\:hover\:text-operator:hover {
+    color: var(--color-operator);
+  }
+
+  .lg\:hover\:text-number:hover {
+    color: var(--color-number);
+  }
+
+  .lg\:hover\:text-string:hover {
+    color: var(--color-string);
+  }
+
+  .lg\:hover\:text-dimmed:hover {
+    color: var(--color-dimmed);
   }
 
   .lg\:hover\:text-background:hover {
@@ -16823,20 +17458,48 @@ html .CodeMirror pre {
     background-color: transparent;
   }
 
-  .xl\:bg-logo {
-    background-color: var(--logo);
-  }
-
   .xl\:bg-text {
     background-color: var(--color-text);
   }
 
-  .xl\:bg-dimmed {
-    background-color: var(--color-dimmed);
+  .xl\:bg-invers {
+    background-color: var(--color-invers);
   }
 
-  .xl\:bg-accent {
-    background-color: var(--color-accent);
+  .xl\:bg-output {
+    background-color: var(--color-output);
+  }
+
+  .xl\:bg-warning {
+    background-color: var(--color-warning);
+  }
+
+  .xl\:bg-error {
+    background-color: var(--color-error);
+  }
+
+  .xl\:bg-keyword {
+    background-color: var(--color-keyword);
+  }
+
+  .xl\:bg-variable {
+    background-color: var(--color-variable);
+  }
+
+  .xl\:bg-operator {
+    background-color: var(--color-operator);
+  }
+
+  .xl\:bg-number {
+    background-color: var(--color-number);
+  }
+
+  .xl\:bg-string {
+    background-color: var(--color-string);
+  }
+
+  .xl\:bg-dimmed {
+    background-color: var(--color-dimmed);
   }
 
   .xl\:bg-background {
@@ -16855,20 +17518,48 @@ html .CodeMirror pre {
     background-color: transparent;
   }
 
-  .xl\:hover\:bg-logo:hover {
-    background-color: var(--logo);
-  }
-
   .xl\:hover\:bg-text:hover {
     background-color: var(--color-text);
   }
 
-  .xl\:hover\:bg-dimmed:hover {
-    background-color: var(--color-dimmed);
+  .xl\:hover\:bg-invers:hover {
+    background-color: var(--color-invers);
   }
 
-  .xl\:hover\:bg-accent:hover {
-    background-color: var(--color-accent);
+  .xl\:hover\:bg-output:hover {
+    background-color: var(--color-output);
+  }
+
+  .xl\:hover\:bg-warning:hover {
+    background-color: var(--color-warning);
+  }
+
+  .xl\:hover\:bg-error:hover {
+    background-color: var(--color-error);
+  }
+
+  .xl\:hover\:bg-keyword:hover {
+    background-color: var(--color-keyword);
+  }
+
+  .xl\:hover\:bg-variable:hover {
+    background-color: var(--color-variable);
+  }
+
+  .xl\:hover\:bg-operator:hover {
+    background-color: var(--color-operator);
+  }
+
+  .xl\:hover\:bg-number:hover {
+    background-color: var(--color-number);
+  }
+
+  .xl\:hover\:bg-string:hover {
+    background-color: var(--color-string);
+  }
+
+  .xl\:hover\:bg-dimmed:hover {
+    background-color: var(--color-dimmed);
   }
 
   .xl\:hover\:bg-background:hover {
@@ -16951,20 +17642,48 @@ html .CodeMirror pre {
     border-color: transparent;
   }
 
-  .xl\:border-logo {
-    border-color: var(--logo);
-  }
-
   .xl\:border-text {
     border-color: var(--color-text);
   }
 
-  .xl\:border-dimmed {
-    border-color: var(--color-dimmed);
+  .xl\:border-invers {
+    border-color: var(--color-invers);
   }
 
-  .xl\:border-accent {
-    border-color: var(--color-accent);
+  .xl\:border-output {
+    border-color: var(--color-output);
+  }
+
+  .xl\:border-warning {
+    border-color: var(--color-warning);
+  }
+
+  .xl\:border-error {
+    border-color: var(--color-error);
+  }
+
+  .xl\:border-keyword {
+    border-color: var(--color-keyword);
+  }
+
+  .xl\:border-variable {
+    border-color: var(--color-variable);
+  }
+
+  .xl\:border-operator {
+    border-color: var(--color-operator);
+  }
+
+  .xl\:border-number {
+    border-color: var(--color-number);
+  }
+
+  .xl\:border-string {
+    border-color: var(--color-string);
+  }
+
+  .xl\:border-dimmed {
+    border-color: var(--color-dimmed);
   }
 
   .xl\:border-background {
@@ -16983,20 +17702,48 @@ html .CodeMirror pre {
     border-color: transparent;
   }
 
-  .xl\:hover\:border-logo:hover {
-    border-color: var(--logo);
-  }
-
   .xl\:hover\:border-text:hover {
     border-color: var(--color-text);
   }
 
-  .xl\:hover\:border-dimmed:hover {
-    border-color: var(--color-dimmed);
+  .xl\:hover\:border-invers:hover {
+    border-color: var(--color-invers);
   }
 
-  .xl\:hover\:border-accent:hover {
-    border-color: var(--color-accent);
+  .xl\:hover\:border-output:hover {
+    border-color: var(--color-output);
+  }
+
+  .xl\:hover\:border-warning:hover {
+    border-color: var(--color-warning);
+  }
+
+  .xl\:hover\:border-error:hover {
+    border-color: var(--color-error);
+  }
+
+  .xl\:hover\:border-keyword:hover {
+    border-color: var(--color-keyword);
+  }
+
+  .xl\:hover\:border-variable:hover {
+    border-color: var(--color-variable);
+  }
+
+  .xl\:hover\:border-operator:hover {
+    border-color: var(--color-operator);
+  }
+
+  .xl\:hover\:border-number:hover {
+    border-color: var(--color-number);
+  }
+
+  .xl\:hover\:border-string:hover {
+    border-color: var(--color-string);
+  }
+
+  .xl\:hover\:border-dimmed:hover {
+    border-color: var(--color-dimmed);
   }
 
   .xl\:hover\:border-background:hover {
@@ -17611,76 +18358,20 @@ html .CodeMirror pre {
     font-family: IBM Plex Mono, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
-  .xl\:font-hairline {
-    font-weight: 100;
-  }
-
-  .xl\:font-thin {
-    font-weight: 200;
-  }
-
-  .xl\:font-light {
-    font-weight: 300;
-  }
-
   .xl\:font-normal {
     font-weight: 400;
   }
 
-  .xl\:font-medium {
-    font-weight: 500;
-  }
-
-  .xl\:font-semibold {
-    font-weight: 600;
-  }
-
   .xl\:font-bold {
-    font-weight: 700;
-  }
-
-  .xl\:font-extrabold {
-    font-weight: 800;
-  }
-
-  .xl\:font-black {
-    font-weight: 900;
-  }
-
-  .xl\:hover\:font-hairline:hover {
-    font-weight: 100;
-  }
-
-  .xl\:hover\:font-thin:hover {
-    font-weight: 200;
-  }
-
-  .xl\:hover\:font-light:hover {
-    font-weight: 300;
+    font-weight: 600;
   }
 
   .xl\:hover\:font-normal:hover {
     font-weight: 400;
   }
 
-  .xl\:hover\:font-medium:hover {
-    font-weight: 500;
-  }
-
-  .xl\:hover\:font-semibold:hover {
-    font-weight: 600;
-  }
-
   .xl\:hover\:font-bold:hover {
-    font-weight: 700;
-  }
-
-  .xl\:hover\:font-extrabold:hover {
-    font-weight: 800;
-  }
-
-  .xl\:hover\:font-black:hover {
-    font-weight: 900;
+    font-weight: 600;
   }
 
   .xl\:h-1 {
@@ -19563,20 +20254,48 @@ html .CodeMirror pre {
     color: transparent;
   }
 
-  .xl\:text-logo {
-    color: var(--logo);
-  }
-
   .xl\:text-text {
     color: var(--color-text);
   }
 
-  .xl\:text-dimmed {
-    color: var(--color-dimmed);
+  .xl\:text-invers {
+    color: var(--color-invers);
   }
 
-  .xl\:text-accent {
-    color: var(--color-accent);
+  .xl\:text-output {
+    color: var(--color-output);
+  }
+
+  .xl\:text-warning {
+    color: var(--color-warning);
+  }
+
+  .xl\:text-error {
+    color: var(--color-error);
+  }
+
+  .xl\:text-keyword {
+    color: var(--color-keyword);
+  }
+
+  .xl\:text-variable {
+    color: var(--color-variable);
+  }
+
+  .xl\:text-operator {
+    color: var(--color-operator);
+  }
+
+  .xl\:text-number {
+    color: var(--color-number);
+  }
+
+  .xl\:text-string {
+    color: var(--color-string);
+  }
+
+  .xl\:text-dimmed {
+    color: var(--color-dimmed);
   }
 
   .xl\:text-background {
@@ -19595,20 +20314,48 @@ html .CodeMirror pre {
     color: transparent;
   }
 
-  .xl\:hover\:text-logo:hover {
-    color: var(--logo);
-  }
-
   .xl\:hover\:text-text:hover {
     color: var(--color-text);
   }
 
-  .xl\:hover\:text-dimmed:hover {
-    color: var(--color-dimmed);
+  .xl\:hover\:text-invers:hover {
+    color: var(--color-invers);
   }
 
-  .xl\:hover\:text-accent:hover {
-    color: var(--color-accent);
+  .xl\:hover\:text-output:hover {
+    color: var(--color-output);
+  }
+
+  .xl\:hover\:text-warning:hover {
+    color: var(--color-warning);
+  }
+
+  .xl\:hover\:text-error:hover {
+    color: var(--color-error);
+  }
+
+  .xl\:hover\:text-keyword:hover {
+    color: var(--color-keyword);
+  }
+
+  .xl\:hover\:text-variable:hover {
+    color: var(--color-variable);
+  }
+
+  .xl\:hover\:text-operator:hover {
+    color: var(--color-operator);
+  }
+
+  .xl\:hover\:text-number:hover {
+    color: var(--color-number);
+  }
+
+  .xl\:hover\:text-string:hover {
+    color: var(--color-string);
+  }
+
+  .xl\:hover\:text-dimmed:hover {
+    color: var(--color-dimmed);
   }
 
   .xl\:hover\:text-background:hover {

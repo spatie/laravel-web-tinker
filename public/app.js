@@ -1716,7 +1716,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             lineWrapping: true,
             lineNumbers: true,
             mode: 'text/x-php',
-            theme: 'dracula',
+            theme: 'spatie',
             extraKeys: {
                 'Cmd-Enter': function CmdEnter() {
                     _this.executeCode();
@@ -15737,7 +15737,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "output" }, [
-    _c("pre", [_c("code", { domProps: { textContent: _vm._s(_vm.value) } })])
+    _c("pre", [_c("code", { domProps: { innerHTML: _vm._s(_vm.value) } })])
   ])
 }
 var staticRenderFns = []

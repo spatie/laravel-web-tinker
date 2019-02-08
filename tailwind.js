@@ -40,11 +40,17 @@ var defaultConfig = require('tailwindcss/defaultConfig')()
 var colors = {
     'transparent': 'transparent',
 
-    'logo': 'var(--logo)',
-
     'text': 'var(--color-text)',
+    'invers': 'var(--color-invers)',
+    'output': 'var(--color-output)',
+    'warning': 'var(--color-warning)',
+    'error': 'var(--color-error)',
+    'keyword': 'var(--color-keyword)',
+    'variable': 'var(--color-variable)',
+    'operator': 'var(--color-operator)',
+    'number': 'var(--color-number)',
+    'string': 'var(--color-string)',
     'dimmed': 'var(--color-dimmed)',
-    'accent': 'var(--color-accent)',
     'background': 'var(--color-background)',
     'line': 'var(--color-line)',
     'gutter': 'var(--color-gutter)',
@@ -176,15 +182,9 @@ module.exports = {
     */
 
     fontWeights: {
-        'hairline': 100,
-        'thin': 200,
-        'light': 300,
         'normal': 400,
-        'medium': 500,
-        'semibold': 600,
-        'bold': 700,
-        'extrabold': 800,
-        'black': 900,
+        'bold': 600,
+
     },
 
 

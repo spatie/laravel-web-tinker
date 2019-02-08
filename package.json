@@ -24,6 +24,7 @@
         "laravel-mix-purgecss": "^3.0.0",
         "lodash": "^4.17.4",
         "postcss-easy-import": "^2.1.0",
+        "postcss-nesting": "^7.0.0",
         "prettier": "^1.15.3",
         "tailwindcss": "^0.7.2",
         "vue": "^2.5.7"

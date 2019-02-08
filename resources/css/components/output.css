@@ -1,7 +1,13 @@
 .output {
     @apply bg-gutter;
-    @apply text-dimmed;
-    @apply p-4;
+    @apply px-8 py-4;
     @apply overflow-scroll;
     grid-area: output;
+
+    & warning {
+        @apply block;
+        @apply px-2;
+        @apply bg-warning;
+        @apply whitespace-normal;
+    }
 }

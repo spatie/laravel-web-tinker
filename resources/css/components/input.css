@@ -1,11 +1,10 @@
 .input {
     @apply border-b-2 border-line;
     grid-area: input;
-}
 
-@screen md {
-    .input {
+    @screen md {
         @apply border-b-0;
         @apply border-r-2;
     }
+
 }

@@ -1,0 +1,57 @@
+.CodeMirror-lines {
+  padding: 8px 0;
+}
+
+.CodeMirror-gutters {
+          box-shadow: 1px 0 2px 0 rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 1px 0 2px 0 rgba(0, 0, 0, .5);
+  background-color: #f8f8ff;
+  padding-right: 10px;
+  z-index: 3;
+  border: none;
+}
+
+div.CodeMirror-cursor {
+  border-left: 3px solid #000;
+}
+
+.CodeMirror-activeline-background {
+  background: #00000012;
+}
+
+.CodeMirror-selected {
+  background: #bcd5fa;
+}
+
+.cm-comment {
+  font-style: italic;
+  color: #998;
+}
+
+.cm-number {
+  color: null;
+}
+
+.cm-atom {
+  color: null;
+}
+
+.cm-string {
+  color: #e020a3;
+}
+
+.cm-variable-2 {
+  color: #099;
+}
+
+.cm-property {
+  color: null;
+}
+
+.cm-keyword {
+  color: null;
+}
+
+.cm-operator {
+  color: null;
+}

@@ -20,7 +20,7 @@ export default {
             lineWrapping: true,
             lineNumbers: true,
             mode: 'text/x-php',
-            theme: 'dracula',
+            theme: 'spatie',
             extraKeys: {
                 'Cmd-Enter': () => {
                     this.executeCode();

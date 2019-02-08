@@ -1,16 +1,65 @@
-html .CodeMirror {
-    height: 100%;
-}
-
-html .CodeMirror-gutters {
-    @apply bg-gutter;
-    @apply border-r-2 border-line;
-}
-
-html .CodeMirror-linenumber {
-    @apply text-dimmed;
-}
-
-html .CodeMirror pre {
+.CodeMirror.cm-s-spatie  { 
+    @apply h-full;
     @apply font-code;
+    @apply leading-normal;
+    @apply bg-background;
+    color: inherit;
+
+    & .CodeMirror-cursor{
+        border-color: var(--color-text);
+    }
+
+    & .CodeMirror-lines {
+        @apply py-4;
+    }
+
+    & .CodeMirror-gutters {
+        @apply bg-gutter;
+        @apply pl-2;
+        @apply border-r-2 border-line;
+    }
+
+    & .CodeMirror-linenumber {
+        @apply text-dimmed;
+        @apply text-base;
+    }
+
+    & .CodeMirror pre {
+        @apply font-code;
+        @apply whitespace-no-wrap;
+    }
+    
+    & .CodeMirror-selected {
+        background: rgba(150, 120, 200, .2);
+    }
+
+    & .CodeMirror-focused .CodeMirror-selected {
+        background: rgba(150, 120, 200, .3);
+    }
+    
+    & .cm-comment {
+        @apply text-dimmed;
+        font-style: italic;
+    }
+    
+    & .cm-number {
+        @apply text-number;
+    }
+    
+    & .cm-string {
+        @apply text-string;
+    }
+
+    & .cm-variable-2 {
+        @apply text-variable;
+    }
+
+    & .cm-operator {
+        @apply text-operator;
+    }
+       
+    & .cm-keyword {
+        @apply text-keyword;
+        @apply font-bold;
+    }
 }

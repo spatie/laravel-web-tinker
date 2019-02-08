@@ -9,7 +9,7 @@
 
     <!-- Style sheets-->
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i,600" rel="stylesheet">
-    <link href='{{asset(mix('app.css', 'vendor/web-tinker'))}}' rel='stylesheet' type='text/css'>
+    <link href='{{ asset(mix('app.css', 'vendor/web-tinker')) }}' rel='stylesheet' type='text/css'>
 </head>
 <body>
 

@@ -2,19 +2,29 @@
 
 :root {
     --color-text: #000;
+    --color-warning: #ffffcf;
+    --color-error: #dd1144;
+    --color-keyword: #000;
+    --color-operator: #000;
+    --color-variable: #a09f91;
+    --color-number: #009999;
+    --color-string: #dd1144;
     --color-dimmed: #a09f91;
-    --color-accent: #8b6cc4;
     --color-background: #fff;
     --color-line: #f3f7f9;
-    --color-gutter: #fafdfc;
-    
-    --logo: var(--color-accent);
+    --color-gutter: #fafdfc; 
 }
 
 :root.darkmode {
     --color-text: #fff;
+    --color-warning: #eab21c;
+    --color-error: #dd1144;
+    --color-keyword: #fff;
+    --color-operator: #dd1144;
+    --color-variable: #a6e22e;
+    --color-number: #ae81ff;
+    --color-string: #e6db74;
     --color-dimmed: #706b5c;
-    --color-accent: #8b6cc4;
     --color-background: #272822;
     --color-line: #3b3d34;
     --color-gutter: #2f3129;
@@ -36,6 +46,8 @@
 html {
     @apply bg-background;
     @apply font-code;
+    @apply leading-normal;
+    @apply text-text;
     box-sizing: border-box;
     font-size: 14px;
 }
