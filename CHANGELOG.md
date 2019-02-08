@@ -1,7 +1,7 @@
 # Changelog
 
-All notable changes to `web-tinker` will be documented in this file
+All notable changes to `laravel-web-tinker` will be documented in this file
 
-## 1.0.0 - 201X-XX-XX
+## 1.0.0 - 2019-02-08
 
 - initial release
