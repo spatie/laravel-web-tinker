@@ -9,7 +9,12 @@ Artisan's tinker command is a great way to tinker with your application in the t
 
 This package will add a route to your application where you can tinker to your heart's content.
 
-![Screenshot of web tinker](TODO: add screenshot)
+![Web tinker light](https://spatie.github.io/laravel-web-tinker/light.png)
+
+In case light hurts your eyes, there's a dark mode too.
+
+![Web tinker dark](https://spatie.github.io/laravel-web-tinker/dark.png)
+
 
 ## 🚨 A word to the wise 🚨
 
