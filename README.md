@@ -1,10 +1,10 @@
 # Artisan Tinker in your browser
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/web-tinker.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-web-tinker)
-[![Build Status](https://img.shields.io/travis/spatie/web-tinker/master.svg?style=flat-square)](https://travis-ci.org/spatie/laravel-web-tinker)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-web-tinker.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-web-tinker)
+[![Build Status](https://img.shields.io/travis/spatie/laravel-web-tinker/master.svg?style=flat-square)](https://travis-ci.org/spatie/laravel-web-tinker)
 [![StyleCI](https://github.styleci.io/repos/160545642/shield?branch=master)](https://github.styleci.io/repos/160545642)
-[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/web-tinker.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/laravel-web-tinker)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/web-tinker.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-web-tinker)
+[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/laravel-web-tinker.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/laravel-web-tinker)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-web-tinker.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-web-tinker)
 
 Artisan's tinker command is a great way to tinker with your application in the terminal. Unfortunately running a few lines of code, making edits, and copy/pasting code can be bothersome. Wouldn't it be great to tinker in the browser?
 
