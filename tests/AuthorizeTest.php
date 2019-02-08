@@ -14,11 +14,11 @@ class AuthorizeTest extends TestCase
 
         config()->set('web-tinker.enabled', true);
 
-        app()->detectEnvironment(function() {
+        app()->detectEnvironment(function () {
             return 'local';
         });
 
-        Route::get('/test', function() {
+        Route::get('/test', function () {
             return 'ok';
         })->middleware(Authorize::class);
     }
@@ -32,7 +32,7 @@ class AuthorizeTest extends TestCase
     /** @test */
     public function it_will_not_allow_requests_if_the_gate_does_not_allow_it()
     {
-        Gate::define('viewWebTinker', function() {
+        Gate::define('viewWebTinker', function () {
             return false;
         });
 
@@ -42,7 +42,7 @@ class AuthorizeTest extends TestCase
     /** @test */
     public function it_will_not_allow_requests_if_it_is_disabled_even_it_the_gate_allows_it()
     {
-        Gate::define('viewWebTinker', function() {
+        Gate::define('viewWebTinker', function () {
             return true;
         });
 

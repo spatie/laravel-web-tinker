@@ -2,8 +2,8 @@
 
 namespace Spatie\WebTinker\Console;
 
-use Illuminate\Console\DetectsApplicationNamespace;
 use Illuminate\Console\Command;
+use Illuminate\Console\DetectsApplicationNamespace;
 
 class InstallCommand extends Command
 {
