@@ -1666,7 +1666,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             input: '',
-            output: ''
+            output: '<span class="text-dimmed">//use cmd+enter or ctrl+enter to run.</span>'
         };
     },
 
@@ -1748,7 +1748,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var code = this.codeEditor.getValue().trim();
 
             if (code === '') {
-                alert('You must type some code to execute.');
+                this.$emit('executed', '<error>You must type some code to execute.</error>');
 
                 return;
             }

@@ -699,6 +699,14 @@ code {
     white-space: normal;
   }
 
+.output error {
+    display: block;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    background-color: var(--color-error);
+    white-space: normal;
+  }
+
 .list-reset {
   list-style: none;
   padding: 0;

@@ -10,4 +10,11 @@
         @apply bg-warning;
         @apply whitespace-normal;
     }
+
+    & error {
+        @apply block;
+        @apply px-2;
+        @apply bg-error;
+        @apply whitespace-normal;
+    }
 }

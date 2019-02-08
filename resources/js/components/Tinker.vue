@@ -21,7 +21,7 @@ export default {
 
     data: () => ({
         input: '',
-        output: '',
+        output: '<span class="text-dimmed">//use cmd+enter or ctrl+enter to run.</span>',
     }),
 
     methods: {

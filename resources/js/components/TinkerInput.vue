@@ -49,7 +49,7 @@ export default {
             let code = this.codeEditor.getValue().trim();
 
             if (code === '') {
-                alert('You must type some code to execute.');
+                this.$emit('executed', '<error>You must type some code to execute.</error>');
 
                 return;
             }
