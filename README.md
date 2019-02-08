@@ -1,5 +1,3 @@
-**THIS PACKAGE HASN'T BEEN RELEASED, DO NOT USE YET**
-
 # Artisan Tinker in your browser
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/web-tinker.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
@@ -85,7 +83,7 @@ public function boot()
 }
 ```
 
-2. You must set the `enabled` config variable in `web-tinker` to `true`.
+2. You must set the `enabled` variable in the `web-tinker` config file to `true`.
 
 ### Testing
 
