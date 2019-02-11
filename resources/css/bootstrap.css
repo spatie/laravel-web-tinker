@@ -15,7 +15,7 @@
     --color-gutter: #fafdfc; 
 }
 
-:root.darkmode {
+:root.theme-dark {
     --color-text: #fff;
     --color-warning: #eab21c;
     --color-error: #dd1144;
@@ -28,6 +28,23 @@
     --color-background: #272822;
     --color-line: #3b3d34;
     --color-gutter: #2f3129;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root.theme-auto {
+        --color-text: #fff;
+        --color-warning: #eab21c;
+        --color-error: #dd1144;
+        --color-keyword: #fff;
+        --color-operator: #dd1144;
+        --color-variable: #a6e22e;
+        --color-number: #ae81ff;
+        --color-string: #e6db74;
+        --color-dimmed: #706b5c;
+        --color-background: #272822;
+        --color-line: #3b3d34;
+        --color-gutter: #2f3129;
+    }
 }
 
 * {

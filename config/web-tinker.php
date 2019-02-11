@@ -8,9 +8,9 @@ return [
     'path' => '/tinker',
 
     /*
-     * If light hurts you eyes, set this to true.
+     * If 'light' hurts you eyes, set this to 'dark', or 'auto' to depend on a media query.
      */
-    'dark_theme' => false,
+    'theme' => 'auto',
 
     /*
      * By default this package will only run in local development.

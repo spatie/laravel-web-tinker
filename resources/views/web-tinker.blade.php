@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="{{ config('web-tinker.dark_theme') ? 'darkmode' : '' }}">
+<html lang="en" class="theme-{{ config('web-tinker.theme') }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
