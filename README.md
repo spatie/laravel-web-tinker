@@ -52,9 +52,9 @@ return [
     'path' => '/tinker',
 
     /*
-     * If light hurts you eyes, set this to true.
+     * Possible values are 'auto', 'light' and 'dark'.
      */
-    'dark_theme' => false,
+    'theme' => 'auto',
 
 
     /*

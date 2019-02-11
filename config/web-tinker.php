@@ -8,7 +8,7 @@ return [
     'path' => '/tinker',
 
     /*
-     * If 'light' hurts you eyes, set this to 'dark', or 'auto' to depend on a media query.
+     * Possible values are 'auto', 'light' and 'dark'.
      */
     'theme' => 'auto',
 
