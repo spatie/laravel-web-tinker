@@ -1716,7 +1716,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             lineWrapping: true,
             lineNumbers: true,
             mode: 'text/x-php',
-            theme: 'spatie',
+            theme: 'tinker',
             extraKeys: {
                 'Cmd-Enter': function CmdEnter() {
                     _this.executeCode();

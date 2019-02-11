@@ -510,7 +510,7 @@ table {
   --color-gutter: #fafdfc;
 }
 
-:root.darkmode {
+:root.theme-dark {
   --color-text: #fff;
   --color-warning: #eab21c;
   --color-error: #d14;
@@ -523,6 +523,23 @@ table {
   --color-background: #272822;
   --color-line: #3b3d34;
   --color-gutter: #2f3129;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root.theme-auto {
+    --color-text: #fff;
+    --color-warning: #eab21c;
+    --color-error: #d14;
+    --color-keyword: #fff;
+    --color-operator: #d14;
+    --color-variable: #a6e22e;
+    --color-number: #ae81ff;
+    --color-string: #e6db74;
+    --color-dimmed: #706b5c;
+    --color-background: #272822;
+    --color-line: #3b3d34;
+    --color-gutter: #2f3129;
+  }
 }
 
 * {
@@ -582,7 +599,7 @@ code {
   background-color: rgba(150, 120, 200, .3);
 }
 
-.CodeMirror.cm-s-spatie {
+.CodeMirror.cm-s-tinker {
   height: 100%;
   font-family: IBM Plex Mono, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   line-height: 1.5;
@@ -590,62 +607,62 @@ code {
   color: inherit;
 }
 
-.CodeMirror.cm-s-spatie .CodeMirror-cursor {
+.CodeMirror.cm-s-tinker .CodeMirror-cursor {
     border-color: var(--color-text);
   }
 
-.CodeMirror.cm-s-spatie .CodeMirror-lines {
+.CodeMirror.cm-s-tinker .CodeMirror-lines {
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
 
-.CodeMirror.cm-s-spatie .CodeMirror-gutters {
+.CodeMirror.cm-s-tinker .CodeMirror-gutters {
     background-color: var(--color-gutter);
     padding-left: .5rem;
     border-right-width: 2px;
     border-color: var(--color-line);
   }
 
-.CodeMirror.cm-s-spatie .CodeMirror-linenumber {
+.CodeMirror.cm-s-tinker .CodeMirror-linenumber {
     color: var(--color-dimmed);
     font-size: 1rem;
   }
 
-.CodeMirror.cm-s-spatie .CodeMirror pre {
+.CodeMirror.cm-s-tinker .CodeMirror pre {
     font-family: IBM Plex Mono, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
     white-space: nowrap;
   }
 
-.CodeMirror.cm-s-spatie .CodeMirror-selected {
+.CodeMirror.cm-s-tinker .CodeMirror-selected {
     background: rgba(150, 120, 200, .2);
   }
 
-.CodeMirror.cm-s-spatie .CodeMirror-focused .CodeMirror-selected {
+.CodeMirror.cm-s-tinker .CodeMirror-focused .CodeMirror-selected {
     background: rgba(150, 120, 200, .3);
   }
 
-.CodeMirror.cm-s-spatie .cm-comment {
+.CodeMirror.cm-s-tinker .cm-comment {
     color: var(--color-dimmed);
     font-style: italic;
   }
 
-.CodeMirror.cm-s-spatie .cm-number {
+.CodeMirror.cm-s-tinker .cm-number {
     color: var(--color-number);
   }
 
-.CodeMirror.cm-s-spatie .cm-string {
+.CodeMirror.cm-s-tinker .cm-string {
     color: var(--color-string);
   }
 
-.CodeMirror.cm-s-spatie .cm-variable-2 {
+.CodeMirror.cm-s-tinker .cm-variable-2 {
     color: var(--color-variable);
   }
 
-.CodeMirror.cm-s-spatie .cm-operator {
+.CodeMirror.cm-s-tinker .cm-operator {
     color: var(--color-operator);
   }
 
-.CodeMirror.cm-s-spatie .cm-keyword {
+.CodeMirror.cm-s-tinker .cm-keyword {
     color: var(--color-keyword);
     font-weight: 600;
   }
