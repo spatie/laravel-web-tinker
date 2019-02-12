@@ -15,7 +15,3 @@ new Vue({
 });
 
 initSplit();
-
-
-
-
