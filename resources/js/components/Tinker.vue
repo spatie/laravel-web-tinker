@@ -22,6 +22,7 @@ export default {
 
     data: () => ({
         gutterWidth: 9, // px
+        minSize: 100,
         breakpoint: 768,
         split: undefined,
         input: '',
@@ -80,7 +81,7 @@ export default {
                 }
             }
 
-            this.split = Split({...splitOptions, minSize: 200 });
+            this.split = Split({...splitOptions, minSize: this.minSize });
         },
     },
 

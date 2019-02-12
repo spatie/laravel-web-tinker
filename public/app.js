@@ -1670,6 +1670,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     data: function data() {
         return {
             gutterWidth: 9, // px
+            minSize: 100,
             breakpoint: 768,
             split: undefined,
             input: '',
@@ -1724,7 +1725,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 };
             }
 
-            this.split = Object(__WEBPACK_IMPORTED_MODULE_2_split_grid__["a" /* default */])(_extends({}, splitOptions, { minSize: 200 }));
+            this.split = Object(__WEBPACK_IMPORTED_MODULE_2_split_grid__["a" /* default */])(_extends({}, splitOptions, { minSize: this.minSize }));
         }
     },
 
