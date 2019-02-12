@@ -15,12 +15,7 @@ export default {
 
     mounted() {
         const config = {
-            tabSize: 4,
-            indentWithTabs: true,
-            lineWrapping: true,
-            lineNumbers: true,
-            mode: 'text/x-php',
-            theme: 'tinker',
+            autofocus: true,
             extraKeys: {
                 'Cmd-Enter': () => {
                     this.executeCode();
@@ -29,6 +24,12 @@ export default {
                     this.executeCode();
                 },
             },
+            indentWithTabs: true,
+            lineNumbers: true,
+            lineWrapping: true,
+            mode: 'text/x-php',
+            tabSize: 4,
+            theme: 'tinker',
         };
 
         this.codeEditor = CodeMirror.fromTextArea(this.$refs.codeEditor, config);
@@ -41,6 +42,7 @@ export default {
 
         if (typeof value === 'string') {
             this.codeEditor.setValue(value);
+            this.codeEditor.execCommand('goDocEnd');
         }
     },
 

@@ -26,6 +26,7 @@
         "postcss-easy-import": "^2.1.0",
         "postcss-nesting": "^7.0.0",
         "prettier": "^1.15.3",
+        "split-grid": "^1.0.9",
         "tailwindcss": "^0.7.2",
         "vue": "^2.5.7"
     }

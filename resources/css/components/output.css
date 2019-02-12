@@ -2,7 +2,6 @@
     @apply bg-gutter;
     @apply px-8 py-4;
     @apply overflow-scroll;
-    grid-area: output;
 
     & warning {
         @apply block;
