@@ -21,7 +21,7 @@ export default {
     },
 
     data: () => ({
-        gutterWidth: 9, // px
+        gutterWidth: 9, 
         minSize: 100,
         breakpoint: 768,
         split: undefined,
