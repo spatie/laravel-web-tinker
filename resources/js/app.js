@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import axios from 'axios';
-import initSplit from './split';
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
 
@@ -13,5 +12,3 @@ Vue.component('tinker', require('./components/Tinker.vue'));
 new Vue({
     el: '#web-tinker',
 });
-
-initSplit();

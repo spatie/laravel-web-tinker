@@ -1642,6 +1642,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__TinkerInput___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__TinkerInput__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TinkerOutput__ = __webpack_require__("./resources/js/components/TinkerOutput.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TinkerOutput___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__TinkerOutput__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_split_grid__ = __webpack_require__("./node_modules/split-grid/dist/split-grid.es.js");
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -1653,6 +1656,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -1665,15 +1669,77 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
+            gutterWidth: 9, // px
+            breakpoint: 768,
+            split: undefined,
             input: '',
             output: '<span class="text-dimmed">//use cmd+enter or ctrl+enter to run.</span>'
         };
     },
 
+    computed: {
+        columnPercentage: function columnPercentage() {
+            return (1 - this.gutterWidth / window.innerWidth) / 2 * 100 + '%';
+        },
+        rowPercentage: function rowPercentage() {
+            return (1 - this.gutterWidth / window.innerHeight) / 2 * 100 + '%';
+        }
+    },
+
     methods: {
         onExecuted: function onExecuted(output) {
             this.output = output;
+        },
+        needsColumnLayout: function needsColumnLayout() {
+            return window.innerWidth > this.breakpoint;
+        },
+        destroySplit: function destroySplit() {
+            if (this.split) {
+                this.split.destroy();
+                this.$refs["grid"].removeAttribute("style");
+            };
+        },
+        initSplit: function initSplit() {
+            this.destroySplit();
+
+            var splitOptions = {};
+
+            if (this.needsColumnLayout()) {
+                this.$refs["grid"].classList.add('layout-columns');
+                this.$refs["grid"].style.gridTemplateColumns = this.columnPercentage + ' ' + this.gutterWidth + 'px ' + this.columnPercentage;
+                splitOptions = {
+                    columnGutters: [{
+                        track: 1,
+                        element: this.$refs["gutter"]
+                    }]
+                };
+            } else {
+                this.$refs["grid"].classList.remove('layout-columns');
+                this.$refs["grid"].style.gridTemplateRows = this.rowPercentage + ' ' + this.gutterWidth + 'px ' + this.rowPercentage;
+                splitOptions = {
+                    rowGutters: [{
+                        track: 1,
+                        element: this.$refs["gutter"]
+                    }]
+                };
+            }
+
+            this.split = Object(__WEBPACK_IMPORTED_MODULE_2_split_grid__["a" /* default */])(_extends({}, splitOptions, { minSize: 200 }));
         }
+    },
+
+    mounted: function mounted() {
+        var _this = this;
+
+        this.initSplit();
+
+        window.addEventListener('resize', function () {
+            window.requestAnimationFrame(function () {
+                if (_this.$refs["grid"].classList.contains('layout-columns') != _this.needsColumnLayout()) {
+                    _this.initSplit();
+                }
+            });
+        });
     }
 });
 
@@ -16375,7 +16441,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "layout" },
+    { ref: "grid", staticClass: "layout" },
     [
       _c("tinker-input", {
         on: { executed: _vm.onExecuted },
@@ -16388,7 +16454,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "layout-gutter" }),
+      _c("div", { ref: "gutter", staticClass: "layout-gutter" }),
       _vm._v(" "),
       _c("tinker-output", { attrs: { value: this.output } })
     ],
@@ -27758,8 +27824,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__("./node_modules/axios/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__split__ = __webpack_require__("./resources/js/split.js");
-
 
 
 
@@ -27774,8 +27838,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('tinker', __webpack_requir
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#web-tinker'
 });
-
-Object(__WEBPACK_IMPORTED_MODULE_2__split__["a" /* default */])();
 
 /***/ }),
 
@@ -27925,77 +27987,6 @@ if (false) {(function () {
 
 module.exports = Component.exports
 
-
-/***/ }),
-
-/***/ "./resources/js/split.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_split_grid__ = __webpack_require__("./node_modules/split-grid/dist/split-grid.es.js");
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-
-
-/* harmony default export */ __webpack_exports__["a"] = (function () {
-
-    var split = undefined;
-    var splitOptions = {};
-    var grid = document.querySelector('.layout');
-    var gutter = document.querySelector('.layout-gutter');
-    var gutterWidth = 9; //px
-
-    function screenLarge() {
-        return window.innerWidth > 768;
-    }
-
-    function columnPercentage() {
-        return (1 - gutterWidth / window.innerWidth) / 2 * 100 + '%';
-    }
-
-    function rowPercentage() {
-        return (1 - gutterWidth / window.innerHeight) / 2 * 100 + '%';
-    }
-
-    function initSplit() {
-        if (split) {
-            split.destroy();
-            grid.removeAttribute("style");
-        };
-
-        if (screenLarge()) {
-            grid.classList.add('layout-columns');
-            grid.style.gridTemplateColumns = columnPercentage() + ' ' + gutterWidth + 'px ' + columnPercentage();
-            splitOptions = {
-                columnGutters: [{
-                    track: 1,
-                    element: gutter
-                }]
-            };
-        } else {
-            grid.classList.remove('layout-columns');
-            grid.style.gridTemplateRows = rowPercentage() + ' ' + gutterWidth + 'px ' + rowPercentage();
-            splitOptions = {
-                rowGutters: [{
-                    track: 1,
-                    element: gutter
-                }]
-            };
-        }
-
-        split = Object(__WEBPACK_IMPORTED_MODULE_0_split_grid__["a" /* default */])(_extends({}, splitOptions, { minSize: 200 }));
-    }
-
-    window.addEventListener('resize', function () {
-        window.requestAnimationFrame(function () {
-            if (grid.classList.contains('layout-columns') != screenLarge()) {
-                initSplit();
-            }
-        });
-    });
-
-    initSplit();
-});
 
 /***/ }),
 
