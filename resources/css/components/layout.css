@@ -2,14 +2,30 @@
     @apply fixed;
     @apply h-screen w-screen;
     display: grid;
-    grid-template: 50vh 50vh / 100vw;
-    grid-template-areas:
-        'input'
-        'output';
-    
-    @screen md {
-        grid-template: 100vh / 50vw 50vw;
-        grid-template-areas:
-            'input output';
+    grid-template-columns: 100vw;    
+}
+
+.layout-gutter {
+    @apply flex items-center justify-center;
+    @apply bg-line;
+    cursor: ns-resize;
+
+    &:after {
+        @apply text-dimmed;
+        @apply text-center;
+        content: '•••';
+        font-size: 10px;
+        line-height: 6px;
+        word-break: break-all;
+    }
+}
+
+.layout-columns {
+    &.layout{
+        grid-template-rows: 100vh;
+    }
+
+    & .layout-gutter {
+        cursor: ew-resize;
     }
 }

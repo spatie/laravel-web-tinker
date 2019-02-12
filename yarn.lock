@@ -6733,6 +6733,11 @@ spdy@^3.4.1:
     select-hose "^2.0.0"
     spdy-transport "^2.0.18"
 
+split-grid@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/split-grid/-/split-grid-1.0.9.tgz#d946e4d6d1767a98d6b1a97b338fc60e1f1bc930"
+  integrity sha512-D7Tgibf7ksIEZKxmAKbXb7kKFANcXRj9j2VgM097KIr146zMXErt9MIHQeEiRxL+HM7WwkJdDyPTxDDsSVUSBA==
+
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/split-string/-/split-string-3.1.0.tgz#7cb09dda3a86585705c64b39a6466038682e8fe2"

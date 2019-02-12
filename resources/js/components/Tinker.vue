@@ -4,7 +4,7 @@
             v-model="this.input"
             v-on:executed="onExecuted"
         ></tinker-input>
-
+        <div class="layout-gutter"></div>
         <tinker-output :value="this.output"></tinker-output>
     </div>
 </template>
