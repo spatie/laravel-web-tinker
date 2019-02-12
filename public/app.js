@@ -1711,12 +1711,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         var config = {
-            tabSize: 4,
-            indentWithTabs: true,
-            lineWrapping: true,
-            lineNumbers: true,
-            mode: 'text/x-php',
-            theme: 'tinker',
+            autofocus: true,
             extraKeys: {
                 'Cmd-Enter': function CmdEnter() {
                     _this.executeCode();
@@ -1724,7 +1719,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'Ctrl-Enter': function CtrlEnter() {
                     _this.executeCode();
                 }
-            }
+            },
+            indentWithTabs: true,
+            lineNumbers: true,
+            lineWrapping: true,
+            mode: 'text/x-php',
+            tabSize: 4,
+            theme: 'tinker'
         };
 
         this.codeEditor = __WEBPACK_IMPORTED_MODULE_0_codemirror___default.a.fromTextArea(this.$refs.codeEditor, config);
@@ -1737,6 +1738,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         if (typeof value === 'string') {
             this.codeEditor.setValue(value);
+            this.codeEditor.execCommand('goDocEnd');
         }
     },
 
