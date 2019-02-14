@@ -69,7 +69,7 @@ return [
 
 By default this package will only run in a local environment.
 
-Visit `/tinker` in your local environment of you app to view the tinker page.
+Visit `/tinker` in your local environment of your app to view the tinker page.
 
 
 ## Authorization
