@@ -26,7 +26,7 @@ class AuthorizeTest extends TestCase
     /** @test */
     public function it_will_allow_requests_if_it_is_enabled()
     {
-        $this->get('/test')->assertStatus(200);
+        $this->get('/test')->assertOk();
     }
 
     /** @test */
@@ -40,7 +40,7 @@ class AuthorizeTest extends TestCase
     }
 
     /** @test */
-    public function it_will_not_allow_requests_if_it_is_disabled_even_it_the_gate_allows_it()
+    public function it_will_not_allow_requests_if_it_is_disabled_even_if_the_gate_allows_it()
     {
         Gate::define('viewWebTinker', function () {
             return true;
