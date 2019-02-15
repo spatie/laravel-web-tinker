@@ -69,7 +69,7 @@ class Tinker
 
     protected function cleanOutput(string $output): string
     {
-        $output = preg_replace('/<aside>(.*)?<\/aside>(.*)Exit:  Ctrl\+D/ms', '$2', $output);
+        $output = preg_replace('/(?s)(<aside.*?<\/aside>)|Exit:  Ctrl\+D/ms', '$2', $output);
 
         return trim($output);
     }
