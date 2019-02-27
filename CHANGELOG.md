@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.2.2 - 2019-02-19
+
+- add support for Laravel 5.8
+
 ## 1.2.1 - 2019-02-16
 
 - fix 'echo'
