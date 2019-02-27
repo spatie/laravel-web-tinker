@@ -8,7 +8,7 @@ use Spatie\WebTinker\Http\Middleware\Authorize;
 
 class AuthorizeTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
