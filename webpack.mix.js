@@ -4,7 +4,9 @@ require('laravel-mix-purgecss');
 mix
     .setPublicPath('public')
     .postCss('resources/css/app.css', 'public')
-    .purgeCss()
+    .purgeCss({
+        whitelistPatterns: [/CodeMirror/, /cm/],
+    })
     .js('resources/js/app.js', 'public')
     .version()
     .options({

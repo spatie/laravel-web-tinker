@@ -12,7 +12,7 @@
     --color-dimmed: #a09f91;
     --color-background: #fff;
     --color-line: #f3f7f9;
-    --color-gutter: #fafdfc; 
+    --color-gutter: #fafdfc;
 }
 
 :root.theme-dark {
@@ -93,5 +93,5 @@ code {
 }
 
 ::selection {
-    background-color: rgba(150, 120, 200, .3);
+    background-color: rgba(150, 120, 200, 0.3);
 }

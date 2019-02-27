@@ -1,12 +1,9 @@
 <template>
-    <div ref="grid" class="layout">
-        <tinker-input
-            v-model="this.input"
-            v-on:executed="onExecuted"
-        ></tinker-input>
-        <div ref="gutter" class="layout-gutter"></div>
-        <tinker-output :value="this.output"></tinker-output>
-    </div>
+    <main :class="['layout', { 'layout-columns': needsColumnLayout }]" :style="gridStyle">
+        <tinker-input v-model="input" @execute="handleExecute"></tinker-input>
+        <hr ref="gutter" class="layout-gutter" />
+        <tinker-output :value="output"></tinker-output>
+    </main>
 </template>
 
 <script>
@@ -21,80 +18,78 @@ export default {
     },
 
     data: () => ({
-        gutterWidth: 9, 
+        windowWidth: window.innerWidth,
+        gutterWidth: 9,
         minSize: 100,
         breakpoint: 768,
-        split: undefined,
         input: '',
-        output: '<span class="text-dimmed">//use cmd+enter or ctrl+enter to run.</span>',
+        output: '<span class="text-dimmed">// Use cmd+enter or ctrl+enter to run.</span>',
     }),
 
     computed: {
         columnPercentage() {
-            return (( 1 - this.gutterWidth/window.innerWidth) / 2 ) * 100 + '%';
+            return ((1 - this.gutterWidth / window.innerWidth) / 2) * 100 + '%';
         },
 
         rowPercentage() {
-            return (( 1 - this.gutterWidth/window.innerHeight) / 2 ) * 100 + '%';
+            return ((1 - this.gutterWidth / window.innerHeight) / 2) * 100 + '%';
+        },
+
+        needsColumnLayout() {
+            return this.windowWidth > this.breakpoint;
+        },
+
+        gridStyle() {
+            if (this.needsColumnLayout) {
+                return {
+                    gridTemplateColumns: `${this.columnPercentage} ${this.gutterWidth}px ${
+                        this.columnPercentage
+                    }`,
+                };
+            }
+
+            return {
+                gridTemplateRows: `${this.rowPercentage} ${this.gutterWidth}px ${
+                    this.rowPercentage
+                }`,
+            };
         },
     },
 
     methods: {
-        onExecuted(output) {
+        handleExecute(output) {
             this.output = output;
-        },
-
-        needsColumnLayout() {
-            return window.innerWidth > this.breakpoint;
-        },
-
-        destroySplit() {
-            if(this.split) {
-                this.split.destroy();
-                this.$refs["grid"].removeAttribute("style");
-            };
         },
 
         initSplit() {
             this.destroySplit();
 
-            let splitOptions = {};
+            this.split = Split({
+                [this.needsColumnLayout ? 'columnGutters' : 'rowGutters']: [
+                    {
+                        track: 1,
+                        element: this.$refs.gutter,
+                    },
+                ],
+                minSize: this.minSize,
+            });
+        },
 
-            if(this.needsColumnLayout()) {
-                this.$refs["grid"].classList.add('layout-columns');
-                this.$refs["grid"].style.gridTemplateColumns = `${this.columnPercentage} ${this.gutterWidth}px ${this.columnPercentage}`;
-                splitOptions = {
-                    columnGutters: [{
-                        track: 1,
-                        element: this.$refs["gutter"],
-                    }],
-                }
-            } 
-            else {
-                this.$refs["grid"].classList.remove('layout-columns');
-                this.$refs["grid"].style.gridTemplateRows = `${this.rowPercentage} ${this.gutterWidth}px ${this.rowPercentage}`;
-                splitOptions = {
-                    rowGutters: [{
-                        track: 1,
-                        element: this.$refs["gutter"],
-                    }],
-                }
+        destroySplit() {
+            if (this.split) {
+                this.split.destroy();
             }
-
-            this.split = Split({...splitOptions, minSize: this.minSize });
         },
     },
 
     mounted() {
         this.initSplit();
 
+        this.$watch('needsColumnLayout', this.initSplit);
+
         window.addEventListener('resize', () => {
-            window.requestAnimationFrame( () => {
-                if(this.$refs["grid"].classList.contains('layout-columns') != this.needsColumnLayout()) {
-                    this.initSplit();
-                }
-            });
+            this.windowWidth = window.innerWidth;
         });
-    }
+    },
 };
 </script>

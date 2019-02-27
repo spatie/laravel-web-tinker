@@ -1,7 +1,7 @@
 <template>
-    <div class="output">
-        <pre><code v-html="value"></code></pre>       
-    </div>
+    <section class="output">
+        <pre><code v-html="value"></code></pre>
+    </section>
 </template>
 
 <script>

@@ -1,11 +1,11 @@
-.CodeMirror.cm-s-tinker  { 
+.CodeMirror.cm-s-tinker {
     @apply h-full;
     @apply font-code;
     @apply leading-normal;
     @apply bg-background;
     color: inherit;
 
-    & .CodeMirror-cursor{
+    & .CodeMirror-cursor {
         border-color: var(--color-text);
     }
 
@@ -28,24 +28,24 @@
         @apply font-code;
         @apply whitespace-no-wrap;
     }
-    
+
     & .CodeMirror-selected {
-        background: rgba(150, 120, 200, .2);
+        background: rgba(150, 120, 200, 0.2);
     }
 
     & .CodeMirror-focused .CodeMirror-selected {
-        background: rgba(150, 120, 200, .3);
+        background: rgba(150, 120, 200, 0.3);
     }
-    
+
     & .cm-comment {
         @apply text-dimmed;
         font-style: italic;
     }
-    
+
     & .cm-number {
         @apply text-number;
     }
-    
+
     & .cm-string {
         @apply text-string;
     }
@@ -57,7 +57,7 @@
     & .cm-operator {
         @apply text-operator;
     }
-       
+
     & .cm-keyword {
         @apply text-keyword;
         @apply font-bold;

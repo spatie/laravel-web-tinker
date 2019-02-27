@@ -2,12 +2,13 @@
     @apply fixed;
     @apply h-screen w-screen;
     display: grid;
-    grid-template-columns: 100vw;    
+    grid-template-columns: 100vw;
 }
 
 .layout-gutter {
     @apply flex items-center justify-center;
     @apply bg-line;
+    height: auto;
     cursor: ns-resize;
 
     &:after {
@@ -21,7 +22,7 @@
 }
 
 .layout-columns {
-    &.layout{
+    &.layout {
         grid-template-rows: 100vh;
     }
 

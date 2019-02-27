@@ -8,17 +8,13 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "format": "prettier --write 'resources/**/*.{css,js,vue}'",
-        "lint": "eslint resources/js --fix --ext js,vue"
+        "format": "prettier --write 'resources/**/*.{css,js,vue}'"
     },
     "dependencies": {
         "axios": "^0.18",
         "bootstrap": "^4.0.0",
         "codemirror": "^5.42.0",
         "cross-env": "^5.1",
-        "eslint": "^5.9.0",
-        "eslint-config-prettier": "^3.3.0",
-        "eslint-plugin-vue": "^5.0.0",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
         "laravel-mix-purgecss": "^3.0.0",
