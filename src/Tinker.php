@@ -69,7 +69,7 @@ class Tinker
         return $shell;
     }
 
-    public function removeComments($code)
+    public function removeComments(string: $code): string
     {
         $tokens = token_get_all("<?php\n".$code."\n?>");
         $cleanCode = "";
