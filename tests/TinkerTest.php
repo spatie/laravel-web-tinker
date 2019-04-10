@@ -2,7 +2,6 @@
 
 namespace Spatie\WebTinker\Tests;
 
-
 use Spatie\WebTinker\Tinker;
 
 class TinkerTest extends TestCase
