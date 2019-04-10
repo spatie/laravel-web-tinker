@@ -77,7 +77,6 @@ class Tinker
             if (is_string($token)) {
                 // simple 1-character token
                 $cleanCode .= $token;
-
             } else {
                 // token array
                 list($id, $text) = $token;

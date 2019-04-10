@@ -22,7 +22,7 @@ class TinkerTest extends TestCase
     }
 
     /** @test */
-    function remove_shell_style_single_line_comments()
+    public function remove_shell_style_single_line_comments()
     {
         $tinker = new Tinker();
 
@@ -36,7 +36,7 @@ class TinkerTest extends TestCase
     }
 
     /** @test */
-    function remove_php_multi_line_comments()
+    public function remove_php_multi_line_comments()
     {
         $tinker = new Tinker();
 
@@ -47,7 +47,7 @@ class TinkerTest extends TestCase
         // Multi line comment at the end of a line of code
         $cleanCode = $tinker->removeComments(
             "\$user = 'Test User';/* This is a multi line comment \n".
-            " yet another line of comment */"
+            ' yet another line of comment */'
         );
         $this->assertSame('$user = \'Test User\';', $cleanCode);
 
@@ -60,14 +60,14 @@ class TinkerTest extends TestCase
     }
 
     /** @test */
-    function remove_comments_with_multiline_code_input()
+    public function remove_comments_with_multiline_code_input()
     {
         $tinker = new Tinker();
 
         // Multi line comment in between lines of code
         $cleanCode = $tinker->removeComments(
             "\$user_id = 1; /* This is a multi line comment \n yet another line of comment */\n".
-            "\\App\\User::find(\$user_id);"
+            '\App\User::find($user_id);'
         );
         $this->assertSame("\$user_id = 1; \n\\App\\User::find(\$user_id);", $cleanCode);
 
