@@ -71,12 +71,13 @@ class Tinker
 
     public function removeComments(string $code): string
     {
-        $tokens = token_get_all("<?php\n".$code."\n?>");
-        $cleanCode = "";
+        $tokens = token_get_all("<?php\n".$code."?>");
+        $cleanCode = '';
         foreach ($tokens as $token) {
             if (is_string($token)) {
                 // simple 1-character token
                 $cleanCode .= $token;
+
             } else {
                 // token array
                 list($id, $text) = $token;
