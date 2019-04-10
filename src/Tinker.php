@@ -95,6 +95,7 @@ class Tinker
                 }
             }
         }
+
         return $cleanCode;
     }
 

@@ -8,7 +8,7 @@ use Spatie\WebTinker\Tinker;
 class TinkerTest extends TestCase
 {
     /** @test */
-    function remove_c_style_single_line_comments()
+    public function remove_c_style_single_line_comments()
     {
         $tinker = new Tinker();
 
