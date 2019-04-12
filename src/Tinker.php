@@ -71,32 +71,27 @@ class Tinker
 
     public function removeComments(string $code): string
     {
-        $tokens = token_get_all("<?php\n".$code.'?>');
-        $cleanCode = '';
-        foreach ($tokens as $token) {
-            if (is_string($token)) {
-                // simple 1-character token
-                $cleanCode .= $token;
-            } else {
-                // token array
-                list($id, $text) = $token;
+        $tokens = collect(token_get_all("<?php\n".$code.'?>'));
 
-                switch ($id) {
-                    case T_COMMENT:
-                    case T_DOC_COMMENT:
-                    case T_OPEN_TAG:
-                    case T_CLOSE_TAG:
-                        // no action on comments and php tags
-                        break;
-                    default:
-                        // anything else -> output "as is"
-                        $cleanCode .= $text;
-                        break;
-                }
-            }
-        }
+        return $tokens->reduce(function($carry, $token) {
+                if(is_string($token))
+                    return $carry.$token;
 
-        return $cleanCode;
+                // Destructure token array
+                [$id, $text] = $token;
+
+                // Ingore comments and php tags
+                if($id === T_COMMENT)
+                    return $carry;
+                if($id === T_DOC_COMMENT)
+                    return $carry;
+                if($id === T_OPEN_TAG)
+                    return $carry;
+                if($id === T_CLOSE_TAG)
+                    return $carry;
+
+                return $carry.$text;
+            }, "");
     }
 
     protected function cleanOutput(string $output): string
