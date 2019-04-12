@@ -75,7 +75,7 @@ class Tinker
 
         return $tokens->reduce(function ($carry, $token) {
             if (is_string($token)) {
-                return $carry . $token;
+                return $carry.$token;
             }
 
             // Destructure token array
@@ -95,7 +95,7 @@ class Tinker
                 return $carry;
             }
 
-            return $carry . $text;
+            return $carry.$text;
         }, '');
     }
 
