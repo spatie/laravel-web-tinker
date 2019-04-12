@@ -74,23 +74,28 @@ class Tinker
         $tokens = collect(token_get_all("<?php\n".$code.'?>'));
 
         return $tokens->reduce(function($carry, $token) {
-            if(is_string($token))
-                return $carry.$token;
+            if(is_string($token)) {
+                return $carry . $token;
+            }
 
             // Destructure token array
             [$id, $text] = $token;
 
             // Ingore comments and php tags
-            if($id === T_COMMENT)
+            if($id === T_COMMENT) {
                 return $carry;
-            if($id === T_DOC_COMMENT)
+            }
+            if($id === T_DOC_COMMENT) {
                 return $carry;
-            if($id === T_OPEN_TAG)
+            }
+            if($id === T_OPEN_TAG) {
                 return $carry;
-            if($id === T_CLOSE_TAG)
+            }
+            if($id === T_CLOSE_TAG) {
                 return $carry;
+            }
 
-            return $carry.$text;
+            return $carry . $text;
         }, "");
     }
 
