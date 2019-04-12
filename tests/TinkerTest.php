@@ -13,6 +13,7 @@ class TinkerTest extends TestCase
         parent::setUp();
         $this->tinker = new Tinker();
     }
+
     /** @test */
     public function it_removes_c_style_single_line_comments()
     {
