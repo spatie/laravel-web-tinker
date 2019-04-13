@@ -6,6 +6,7 @@ use Spatie\WebTinker\Tinker;
 
 class TinkerTest extends TestCase
 {
+    /** @var \Spatie\WebTinker\Tinker */
     private $tinker;
 
     public function setUp(): void
