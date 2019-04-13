@@ -33,6 +33,8 @@ class Tinker
 
     public function run(string $phpCode): string
     {
+        $phpCode = $this->removeComments($phpCode);
+
         $this->shell->addInput($phpCode);
 
         $closure = new ExecutionLoopClosure($this->shell);
@@ -65,6 +67,41 @@ class Tinker
         }
 
         return $shell;
+    }
+
+    public function removeComments(string $code): string
+    {
+        $tokens = collect(token_get_all("<?php\n".$code.'?>'));
+
+        return $tokens->reduce(function ($carry, $token) {
+            if (is_string($token)) {
+                return $carry.$token;
+            }
+
+            $text = $this->ignoreCommentsAndPhpTags($token);
+
+            return $carry.$text;
+        }, '');
+    }
+
+    protected function ignoreCommentsAndPhpTags(array $token)
+    {
+        [$id, $text] = $token;
+
+        if ($id === T_COMMENT) {
+            return '';
+        }
+        if ($id === T_DOC_COMMENT) {
+            return '';
+        }
+        if ($id === T_OPEN_TAG) {
+            return '';
+        }
+        if ($id === T_CLOSE_TAG) {
+            return '';
+        }
+
+        return $text;
     }
 
     protected function cleanOutput(string $output): string
