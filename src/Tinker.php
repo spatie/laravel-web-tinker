@@ -78,25 +78,30 @@ class Tinker
                 return $carry.$token;
             }
 
-            // Destructure token array
-            [$id, $text] = $token;
-
-            // Ingore comments and php tags
-            if ($id === T_COMMENT) {
-                return $carry;
-            }
-            if ($id === T_DOC_COMMENT) {
-                return $carry;
-            }
-            if ($id === T_OPEN_TAG) {
-                return $carry;
-            }
-            if ($id === T_CLOSE_TAG) {
-                return $carry;
-            }
+            $text = $this->ignoreCommentsAndPhpTags($token);
 
             return $carry.$text;
         }, '');
+    }
+
+    protected function ignoreCommentsAndPhpTags(array $token)
+    {
+        [$id, $text] = $token;
+
+        if ($id === T_COMMENT) {
+            return '';
+        }
+        if ($id === T_DOC_COMMENT) {
+            return '';
+        }
+        if ($id === T_OPEN_TAG) {
+            return '';
+        }
+        if ($id === T_CLOSE_TAG) {
+            return '';
+        }
+
+        return $text;
     }
 
     protected function cleanOutput(string $output): string
