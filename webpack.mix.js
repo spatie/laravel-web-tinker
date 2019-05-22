@@ -5,7 +5,7 @@ mix
     .setPublicPath('public')
     .postCss('resources/css/app.css', 'public')
     .purgeCss({
-        whitelistPatterns: [/CodeMirror/, /cm/],
+        whitelistPatterns: [/CodeMirror/, /cm/, /^theme-/],
     })
     .js('resources/js/app.js', 'public')
     .version()
