@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.3.2 - 2019-05-23
+
+- fix auto theme
+
 ## 1.3.1 - 2019-04-13
 
 - clean input code of comments before sending to psysh to execute
