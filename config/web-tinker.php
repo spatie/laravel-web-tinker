@@ -17,4 +17,11 @@ return [
      * Do not change this, unless you know what your are doing.
      */
     'enabled' => env('APP_ENV') === 'local',
+
+    /*
+     * If you want to fine-tune PsySH configuration specify
+     * configuration file name, relative to the root of your
+     * application directory.
+     */
+    'config_file' => env('PSYSH_CONFIG', null),
 ];
