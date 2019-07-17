@@ -20,7 +20,7 @@ return [
 
     /*
      * If you want to fine-tune PsySH configuration specify
-     * configuration file name, relative to the root of your 
+     * configuration file name, relative to the root of your
      * application directory.
      */
     'config_file' => env('PSYSH_CONFIG', null),

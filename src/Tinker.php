@@ -48,7 +48,7 @@ class Tinker
     {
         $config = new Configuration([
             'updateCheck' => 'never',
-            'configFile' => config('web-tinker.config_file') !== null ? base_path().'/'.config('web-tinker.config_file') : null
+            'configFile' => config('web-tinker.config_file') !== null ? base_path().'/'.config('web-tinker.config_file') : null,
         ]);
 
         $config->getPresenter()->addCasters([
