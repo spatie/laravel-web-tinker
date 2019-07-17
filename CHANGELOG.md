@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.3.3 - 2019-07-17
+
+- fix support for custom PsySH config
+
 ## 1.3.2 - 2019-05-23
 
 - fix auto theme
