@@ -110,7 +110,7 @@ class Tinker
         $output = preg_replace('/(?s)(<aside.*?<\/aside>)|Exit:  Ctrl\+D/ms', '$2', $output);
 
         if (config('web-tinker.show_timestamp')) {
-        	$output = $this->getTimestamp().$output;
+            $output = $this->getTimestamp().$output;
         }
 
         return trim($output);
@@ -118,6 +118,6 @@ class Tinker
 
     protected function getTimestamp()
     {
-    	return '<span class="text-dimmed">'.now().'</span><br>';
+        return '<span class="text-dimmed">'.now().'</span><br>';
     }
 }
