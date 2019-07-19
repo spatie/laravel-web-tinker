@@ -24,4 +24,9 @@ return [
      * application directory.
      */
     'config_file' => env('PSYSH_CONFIG', null),
+
+    /*
+     * Show execution timestamp
+     */
+    'show_timestamp' => false,
 ];
