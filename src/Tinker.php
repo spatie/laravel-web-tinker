@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Tinker\ClassAliasAutoloader;
+use Spatie\WebTinker\OutputModifiers\OutputModifier;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class Tinker
@@ -19,19 +20,19 @@ class Tinker
     /** @var \Psy\Shell */
     protected $shell;
 
-    public static function execute(string $phpCode): string
-    {
-        return(new static())->run($phpCode);
-    }
+    /** @var \Spatie\WebTinker\OutputModifiers\OutputModifier */
+    protected $outputModifier;
 
-    public function __construct()
+    public function __construct(OutputModifier $outputModifier)
     {
         $this->output = new BufferedOutput();
 
         $this->shell = $this->createShell($this->output);
+
+        $this->outputModifier = $outputModifier;
     }
 
-    public function run(string $phpCode): string
+    public function execute(string $phpCode): string
     {
         $phpCode = $this->removeComments($phpCode);
 
@@ -41,7 +42,9 @@ class Tinker
 
         $closure->execute();
 
-        return $this->cleanOutput($this->output->fetch());
+        $output = $this->cleanOutput($this->output->fetch());
+
+        return $this->outputModifier->modify($output);
     }
 
     protected function createShell(BufferedOutput $output): Shell

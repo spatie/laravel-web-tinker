@@ -12,7 +12,8 @@ class TinkerTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->tinker = new Tinker();
+
+        $this->tinker = app(Tinker::class);
     }
 
     /** @test */
