@@ -42,16 +42,12 @@ export default {
         gridStyle() {
             if (this.needsColumnLayout) {
                 return {
-                    gridTemplateColumns: `${this.columnPercentage} ${this.gutterWidth}px ${
-                        this.columnPercentage
-                    }`,
+                    gridTemplateColumns: `${this.columnPercentage} ${this.gutterWidth}px ${this.columnPercentage}`,
                 };
             }
 
             return {
-                gridTemplateRows: `${this.rowPercentage} ${this.gutterWidth}px ${
-                    this.rowPercentage
-                }`,
+                gridTemplateRows: `${this.rowPercentage} ${this.gutterWidth}px ${this.rowPercentage}`,
             };
         },
     },
