@@ -4,7 +4,7 @@ All notable changes to `laravel-web-tinker` will be documented in this file
 
 ## 1.4.0 - 2019-07-22
 
-- add output modifiers:wq
+- add output modifiers
 
 ## 1.3.3 - 2019-07-17
 
