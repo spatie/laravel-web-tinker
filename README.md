@@ -45,7 +45,7 @@ This is the content that will be published to `config/web-tinker.php`
 
 ```php
 return [
-    
+
     /*
      * The web tinker page will be available on this path.
      */
@@ -56,12 +56,17 @@ return [
      */
     'theme' => 'auto',
 
-
     /*
      * By default this package will only run in local development.
      * Do not change this, unless you know what your are doing.
      */
     'enabled' => env('APP_ENV') === 'local',
+
+   /*
+    * This class can modify the output returned by Tinker. You can replace this with
+    * any class that implements \Spatie\WebTinker\OutputModifiers\OutputModifier.
+    */
+    'output_modifier' => \Spatie\WebTinker\OutputModifiers\PrefixDateTime::class,
 
     /*
      * If you want to fine-tune PsySH configuration specify
@@ -98,13 +103,30 @@ public function boot()
 
 2. You must set the `enabled` variable in the `web-tinker` config file to `true`.
 
-### Testing
+## Modifying the output
+
+You can modify the output of tinker by specifying an output modifier in the `output_modifier` key of the `web-tinker` config file. An output modifier is any class that implements `\Spatie\WebTinker\OutputModifiers\OutputModifier`.
+
+This is how that interface looks like.
+
+```php
+namespace Spatie\WebTinker\OutputModifiers;
+
+interface OutputModifier
+{
+    public function modify(string $output = ''): string;
+}
+```
+
+The default install of this package will use the `PrefixDataTime` output modifier which prefixes the output from Tinker with the current date time.
+
+## Testing
 
 ``` bash
 composer test
 ```
 
-### Changelog
+## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
@@ -112,7 +134,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-### Security
+## Security
 
 If you discover any security related issues, please email freek@spatie.be instead of using the issue tracker.
 

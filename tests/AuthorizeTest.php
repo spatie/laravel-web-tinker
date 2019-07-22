@@ -2,6 +2,7 @@
 
 namespace Spatie\WebTinker\Tests;
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Spatie\WebTinker\Http\Middleware\Authorize;
@@ -11,6 +12,8 @@ class AuthorizeTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+
+        $this->actingAs(new User());
 
         config()->set('web-tinker.enabled', true);
 

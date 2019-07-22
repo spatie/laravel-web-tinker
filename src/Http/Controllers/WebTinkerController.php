@@ -12,12 +12,12 @@ class WebTinkerController
         return view('web-tinker::web-tinker');
     }
 
-    public function execute(Request $request)
+    public function execute(Request $request, Tinker $tinker)
     {
         $validated = $request->validate([
             'code' => 'required',
         ]);
 
-        return Tinker::execute($validated['code']);
+        return $tinker->execute($validated['code']);
     }
 }

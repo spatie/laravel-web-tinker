@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Spatie\WebTinker\Console\InstallCommand;
 use Spatie\WebTinker\Http\Middleware\Authorize;
+use Spatie\WebTinker\OutputModifiers\OutputModifier;
 use Spatie\WebTinker\Http\Controllers\WebTinkerController;
 
 class WebTinkerServiceProvider extends ServiceProvider
@@ -28,6 +29,8 @@ class WebTinkerServiceProvider extends ServiceProvider
         }
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'web-tinker');
+
+        $this->app->bind(OutputModifier::class, config('web-tinker.output_modifier'));
 
         $this
             ->registerRoutes()

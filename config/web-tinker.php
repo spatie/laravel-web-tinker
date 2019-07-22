@@ -18,6 +18,12 @@ return [
      */
     'enabled' => env('APP_ENV') === 'local',
 
+   /*
+    * This class can modify the output returned by Tinker. You can replace this with
+    * any class that implements \Spatie\WebTinker\OutputModifiers\OutputModifier.
+    */
+    'output_modifier' => \Spatie\WebTinker\OutputModifiers\PrefixDateTime::class,
+
     /*
      * If you want to fine-tune PsySH configuration specify
      * configuration file name, relative to the root of your
