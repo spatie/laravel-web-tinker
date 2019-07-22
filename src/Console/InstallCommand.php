@@ -13,11 +13,6 @@ class InstallCommand extends Command
 
     protected $description = 'Install all of the Web Tinker resources';
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
     public function handle()
     {
         $this->comment('Publishing Web Tinker Assets...');
