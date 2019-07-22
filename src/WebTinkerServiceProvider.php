@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Spatie\WebTinker\Console\InstallCommand;
 use Spatie\WebTinker\Http\Middleware\Authorize;
-use Spatie\WebTinker\Http\Controllers\WebTinkerController;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
+use Spatie\WebTinker\Http\Controllers\WebTinkerController;
 
 class WebTinkerServiceProvider extends ServiceProvider
 {

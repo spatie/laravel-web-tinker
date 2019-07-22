@@ -9,4 +9,3 @@ class PrefixDateTime implements OutputModifier
         return '<span class="text-dimmed">'.now()->format('Y-m-d H:i:s').'</span><br>';
     }
 }
-
