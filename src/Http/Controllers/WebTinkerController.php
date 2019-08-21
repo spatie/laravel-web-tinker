@@ -9,7 +9,7 @@ class WebTinkerController
 {
     public function index()
     {
-        return view('web-tinker::web-tinker');
+        return view('web-tinker::web-tinker', ['path' => config('web-tinker.path')]);
     }
 
     public function execute(Request $request, Tinker $tinker)

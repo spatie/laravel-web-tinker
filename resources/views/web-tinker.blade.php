@@ -14,7 +14,7 @@
 <body>
 
 <div id="web-tinker" v-cloak>
-    <tinker></tinker>
+    <tinker path="{{ $path }}"></tinker>
 </div>
 
 <script src="{{ asset(mix('app.js', 'vendor/web-tinker')) }}"></script>
