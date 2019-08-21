@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.4.2 - 2019-08-21
+
+- fix for "Writing to /var/www/.config/psysh is not allowed" on Windows
+
 ## 1.4.1 - 2019-07-23
 
 - fix datetime output modifier
