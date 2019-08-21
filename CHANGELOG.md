@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.4.3 - 2019-08-21
+
+- explicitly pass tinker path
+
 ## 1.4.2 - 2019-08-21
 
 - fix for "Writing to /var/www/.config/psysh is not allowed"
