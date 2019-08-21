@@ -14,7 +14,7 @@ export default {
         codeEditor: null,
     }),
 
-    props: [path],
+    props: ['path'],
 
     mounted() {
         const config = {
