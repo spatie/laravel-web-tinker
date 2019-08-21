@@ -14,8 +14,6 @@ export default {
         codeEditor: null,
     }),
 
-    props: ['path'],
-
     mounted() {
         const config = {
             autofocus: true,
@@ -59,7 +57,7 @@ export default {
                 return;
             }
 
-            axios.post(this.path, { code }).then(({ data }) => {
+            axios.post('/tinker', { code }).then(({ data }) => {
                 this.$emit('execute', data);
             });
         },
