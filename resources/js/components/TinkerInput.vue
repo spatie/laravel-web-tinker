@@ -57,7 +57,7 @@ export default {
                 return;
             }
 
-            axios.post('/tinker', { code }).then(({ data }) => {
+            axios.post(window.location.pathname, { code }).then(({ data }) => {
                 this.$emit('execute', data);
             });
         },
