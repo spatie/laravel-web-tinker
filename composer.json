@@ -21,7 +21,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "illuminate/support": "^5.8",
+        "illuminate/support": "^5.8 || ^6.0",
         "laravel/tinker": "^1.0"
     },
     "require-dev": {
