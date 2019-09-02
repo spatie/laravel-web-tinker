@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.4.5 - 2019-09-02
+
+- fix custom path in Vue 
+
 ## 1.4.4 - 2019-08-31
 
 - add support for L6
