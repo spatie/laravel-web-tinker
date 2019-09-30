@@ -2,7 +2,6 @@
 
 namespace Spatie\WebTinker;
 
-use Psy\Shell;
 use Psy\Configuration;
 use Psy\ExecutionLoopClosure;
 use Illuminate\Support\Collection;
@@ -10,6 +9,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Tinker\ClassAliasAutoloader;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
+use Spatie\WebTinker\Shell\Shell;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class Tinker
@@ -17,7 +17,7 @@ class Tinker
     /** @var \Symfony\Component\Console\Output\BufferedOutput */
     protected $output;
 
-    /** @var \Psy\Shell */
+    /** @var Shell */
     protected $shell;
 
     /** @var \Spatie\WebTinker\OutputModifiers\OutputModifier */
