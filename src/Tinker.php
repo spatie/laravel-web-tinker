@@ -17,7 +17,7 @@ class Tinker
     /** @var \Symfony\Component\Console\Output\BufferedOutput */
     protected $output;
 
-    /** @var  \Psy\Shell */
+    /** @var \Psy\Shell */
     protected $shell;
 
     /** @var \Spatie\WebTinker\OutputModifiers\OutputModifier */
