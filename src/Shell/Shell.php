@@ -26,14 +26,13 @@ class Shell extends PsyShell
             $this->inputBuffer[] = $silent ? new SilentInput($line) : $line;
         }
     }
+    
     protected function readline()
     {
-
         if (! empty($this->inputBuffer)) {
             return \array_shift($this->inputBuffer);
         }
 
         return false;
     }
-
 }
