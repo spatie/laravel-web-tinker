@@ -17,7 +17,7 @@ class Shell extends PsyShell
     {
         parent::__construct($config);
 
-        $this->inputBuffer   = [];
+        $this->inputBuffer = [];
     }
 
     public function addInput($input, $silent = false)
@@ -29,7 +29,7 @@ class Shell extends PsyShell
     protected function readline()
     {
 
-        if (!empty($this->inputBuffer)) {
+        if (! empty($this->inputBuffer)) {
             return \array_shift($this->inputBuffer);
         }
 
