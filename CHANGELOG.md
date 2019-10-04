@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.5.2 - 2019-10-05
+
+- remove custom Shell
+
 ## 1.5.1 - 2019-09-30
 
 - use a custom Shell to avoid \readline (#35)
