@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.5.3 - 2019-10-12
+
+- fix for Windows
+
 ## 1.5.2 - 2019-10-05
 
 - remove custom Shell
