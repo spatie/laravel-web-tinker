@@ -54,7 +54,7 @@ class Tinker
             'configFile' => config('web-tinker.config_file') !== null ? base_path().'/'.config('web-tinker.config_file') : null,
         ]);
 
-        $config->setHistoryFile(defined('PHP_WINDOWS_VERSION_BUILD') ? 'nul' : '/dev/null');
+        $config->setHistoryFile(defined('PHP_WINDOWS_VERSION_BUILD') ? 'null' : '/dev/null');
 
         $config->getPresenter()->addCasters([
             Collection::class => 'Laravel\Tinker\TinkerCaster::castCollection',
