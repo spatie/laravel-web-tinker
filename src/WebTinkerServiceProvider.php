@@ -2,13 +2,13 @@
 
 namespace Spatie\WebTinker;
 
-use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Spatie\WebTinker\Console\InstallCommand;
+use Illuminate\Session\Middleware\StartSession;
 use Spatie\WebTinker\Http\Middleware\Authorize;
+use Illuminate\Cookie\Middleware\EncryptCookies;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 use Spatie\WebTinker\Http\Controllers\WebTinkerController;
 
