@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.6.0 - 2019-10-16
+
+- added the `StrartSession` and `EncryptsCookies` middlewares to fix an authorisation bug
+
 ## 1.5.3 - 2019-10-12
 
 - fix for Windows
