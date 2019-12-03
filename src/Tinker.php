@@ -2,13 +2,13 @@
 
 namespace Spatie\WebTinker;
 
-use Psy\Shell;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Collection;
+use Laravel\Tinker\ClassAliasAutoloader;
 use Psy\Configuration;
 use Psy\ExecutionLoopClosure;
-use Illuminate\Support\Collection;
-use Illuminate\Foundation\Application;
-use Illuminate\Database\Eloquent\Model;
-use Laravel\Tinker\ClassAliasAutoloader;
+use Psy\Shell;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 use Symfony\Component\Console\Output\BufferedOutput;
 
