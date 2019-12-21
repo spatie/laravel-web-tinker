@@ -4,6 +4,8 @@ cache:
 
 language: php
 
+dist: bionic
+
 env:
     global:
         - COVERAGE=0
@@ -18,6 +20,10 @@ matrix:
           env: LARAVEL='5.8.*' TESTBENCH='3.8.*' COMPOSER_FLAGS='--prefer-lowest'
         - php: 7.3
           env: LARAVEL='5.8.*' TESTBENCH='3.8.*' COMPOSER_FLAGS='--prefer-stable'
+        - php: 7.4
+          env: LARAVEL='5.8.*' TESTBENCH='3.8.*' COMPOSER_FLAGS='--prefer-lowest'
+        - php: 7.4
+          env: LARAVEL='5.8.*' TESTBENCH='3.8.*' COMPOSER_FLAGS='--prefer-stable'
         - php: 7.2
           env: LARAVEL='6.*' TESTBENCH='4.*' COMPOSER_FLAGS='--prefer-lowest'
         - php: 7.2
@@ -25,6 +31,10 @@ matrix:
         - php: 7.3
           env: LARAVEL='6.*' TESTBENCH='4.*' COMPOSER_FLAGS='--prefer-lowest'
         - php: 7.3
+          env: LARAVEL='6.*' TESTBENCH='4.*' COMPOSER_FLAGS='--prefer-stable'
+        - php: 7.4
+          env: LARAVEL='6.*' TESTBENCH='4.*' COMPOSER_FLAGS='--prefer-lowest'
+        - php: 7.4
           env: LARAVEL='6.*' TESTBENCH='4.*' COMPOSER_FLAGS='--prefer-stable'
     fast_finish: true
 
