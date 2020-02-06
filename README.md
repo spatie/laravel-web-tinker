@@ -19,7 +19,7 @@ In case light hurts your eyes, there's a dark mode too.
 
 ## 🚨 A word to the wise 🚨
 
-This package can run arbritary code. Unless you know what you are doing, you should never install or use this in a production environment, or any environment where you handle real world data.
+This package can run arbitrary code. Unless you know what you are doing, you should never install or use this in a production environment, or any environment where you handle real world data.
 
 ## Installation
 
