@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 use Laravel\Tinker\ClassAliasAutoloader;
 use Psy\Configuration;
 use Psy\ExecutionLoopClosure;
-use Psy\Shell;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -17,7 +16,7 @@ class Tinker
     /** @var \Symfony\Component\Console\Output\BufferedOutput */
     protected $output;
 
-    /** @var Shell */
+    /** @var \Spatie\WebTinker\Shell */
     protected $shell;
 
     /** @var \Spatie\WebTinker\OutputModifiers\OutputModifier */
