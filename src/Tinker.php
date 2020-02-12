@@ -4,13 +4,13 @@ namespace Spatie\WebTinker;
 
 use Psy\Configuration;
 use Psy\ExecutionLoopClosure;
-use Spatie\WebTinker\Shell\Shell;
-use Illuminate\Support\Collection;
-use Illuminate\Foundation\Application;
-use Illuminate\Database\Eloquent\Model;
-use Laravel\Tinker\ClassAliasAutoloader;
+use Psy\Shell;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use Illuminate\Foundation\Application;
+use Laravel\Tinker\ClassAliasAutoloader;
 
 class Tinker
 {
@@ -54,7 +54,7 @@ class Tinker
             'configFile' => config('web-tinker.config_file') !== null ? base_path().'/'.config('web-tinker.config_file') : null,
         ]);
 
-        $config->setHistoryFile(defined('PHP_WINDOWS_VERSION_BUILD') ? 'nul' : '/dev/null');
+        $config->setHistoryFile(defined('PHP_WINDOWS_VERSION_BUILD') ? 'null' : '/dev/null');
 
         $config->getPresenter()->addCasters([
             Collection::class => 'Laravel\Tinker\TinkerCaster::castCollection',
