@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.7.0 - 2020-03-03
+
+- add support for Laravel 7
+
 ## 1.6.1 -2019-12-04
 
 - allow tinker v2
