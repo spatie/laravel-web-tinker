@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.7.2 - 2020-03-05
+
+- fix for running Laravel from subfolder (#53)
+
 ## 1.7.1 - 2020-03-04
 
 - fix install command in Laravel 7
