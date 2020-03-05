@@ -9,6 +9,7 @@ use Laravel\Tinker\ClassAliasAutoloader;
 use Psy\Configuration;
 use Psy\ExecutionLoopClosure;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
+use Spatie\WebTinker\Shell;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class Tinker
