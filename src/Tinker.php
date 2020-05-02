@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 use Laravel\Tinker\ClassAliasAutoloader;
 use Psy\Configuration;
 use Psy\Shell;
-use Spatie\WebTinker\CustomExecutionClosure;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 use Symfony\Component\Console\Output\BufferedOutput;
 

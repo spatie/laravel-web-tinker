@@ -10,7 +10,7 @@ use Psy\ExecutionClosure;
 use Psy\Shell;
 
 /**
- * The custom execustion closure
+ * The custom execustion closure.
  *
  * This class is base on the Psy\ExecutionLoopClosure
  * Extracted the do while loop and removed the loop
