@@ -7,8 +7,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use Laravel\Tinker\ClassAliasAutoloader;
 use Psy\Configuration;
-use Psy\ExecutionLoopClosure;
 use Psy\Shell;
+use Spatie\WebTinker\CustomExecutionClosure;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -38,7 +38,7 @@ class Tinker
 
         $this->shell->addInput($phpCode);
 
-        $closure = new ExecutionLoopClosure($this->shell);
+        $closure = new CustomExecutionClosure($this->shell);
 
         $closure->execute();
 
