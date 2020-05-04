@@ -35,8 +35,6 @@ class Tinker
     {
         $phpCode = $this->removeComments($phpCode);
 
-        $this->shell->addInput($phpCode);
-
         $this->shell->execute($phpCode);
 
         $output = $this->cleanOutput($this->output->fetch());
