@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.7.3 - 2020-05-07
+
+- fix infinite loop using custom execution closure class (#55)
+
 ## 1.7.2 - 2020-03-05
 
 - fix for running Laravel from subfolder (#53)
