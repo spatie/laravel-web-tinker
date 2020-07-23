@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.7.4 - 2020-07-23
+
+- Fix execution (#62)
+
 ## 1.7.3 - 2020-05-07
 
 - fix infinite loop using custom execution closure class (#55)
