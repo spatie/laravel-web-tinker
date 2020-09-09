@@ -3,3 +3,4 @@ composer.lock
 vendor
 coverage
 node_modules
+.php_cs.cache
