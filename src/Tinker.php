@@ -38,7 +38,7 @@ class Tinker
         
         $this->shell->addInput($phpCode);
 
-        $closure = new ExecutionLoopClosure($this->shell);	
+        $closure = new ExecutionLoopClosure($this->shell);
 
         $closure->execute();
 
