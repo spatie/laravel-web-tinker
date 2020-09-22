@@ -5,6 +5,10 @@ All notable changes to `laravel-web-tinker` will be documented in this file
 ## 1.7.6 - 2020-10-22
 
 - fix typo in config
+- bump lodash from 4.17.15 to 4.17.19
+- bump elliptic from 6.5.0 to 6.5.3
+- bump http-proxy from 1.17.0 to 1.18.1
+- bump node-sass from 4.12.0 to 4.14.1
 
 ## 1.7.5 - 2020-09-09
 
