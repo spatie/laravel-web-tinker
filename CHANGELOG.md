@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.7.6 - 2020-10-22
+
+- fix typo in config
+
 ## 1.7.5 - 2020-09-09
 
 - Support Laravel 8
