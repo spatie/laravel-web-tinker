@@ -76,13 +76,13 @@ class TinkerTest extends TestCase
     }
 
     /** @test */
-//    public function it_executes_php_code()
-//    {
-//        $result = $this->tinker->execute('echo "hello";');
-//
-//        $this->assertEquals(
-//            app()->make(config('web-tinker.output_modifier'))->modify('hello'),
-//            $result
-//        );
-//    }
+    public function it_executes_php_code()
+    {
+        $result = $this->tinker->execute('echo "hello";');
+
+        $this->assertEquals(
+            app()->make(config('web-tinker.output_modifier'))->modify('hello'),
+            $result
+        );
+    }
 }
