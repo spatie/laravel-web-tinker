@@ -7,7 +7,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use Laravel\Tinker\ClassAliasAutoloader;
 use Psy\Configuration;
-use Psy\ExecutionLoopClosure;
 use Psy\Shell;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -35,12 +34,10 @@ class Tinker
     public function execute(string $phpCode): string
     {
         $phpCode = $this->removeComments($phpCode);
-        
-        $this->shell->addInput($phpCode);
 
-        $closure = new ExecutionLoopClosure($this->shell);
+        $output = $this->shell->execute($phpCode);
 
-        $closure->execute();
+        $this->shell->writeReturnValue($output);
 
         $output = $this->cleanOutput($this->output->fetch());
 
