@@ -35,9 +35,9 @@ class Tinker
     {
         $phpCode = $this->removeComments($phpCode);
 
-        $output = $this->shell->execute($phpCode);
+        $returnValue = $this->shell->execute($phpCode);
 
-        $this->shell->writeReturnValue($output);
+        $this->shell->writeReturnValue($returnValue);
 
         $output = $this->cleanOutput($this->output->fetch());
 
