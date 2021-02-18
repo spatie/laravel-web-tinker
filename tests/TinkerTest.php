@@ -74,4 +74,15 @@ class TinkerTest extends TestCase
         );
         $this->assertSame("\$newUsers = User::latest()->take(3)->get();\n\n", $cleanCode);
     }
+
+    /** @test */
+    public function it_executes_php_code()
+    {
+        $result = $this->tinker->execute('echo "hello";');
+
+        $this->assertEquals(
+            app()->make(config('web-tinker.output_modifier'))->modify('hello'),
+            $result
+        );
+    }
 }
