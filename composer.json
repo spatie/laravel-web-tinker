@@ -24,7 +24,7 @@
         "illuminate/support": "^5.8|^6.0|^7.0|^8.0",
         "illuminate/cookie": "^5.8|^6.0|^7.0|^8.0",
         "illuminate/session": "^5.8|^6.0|^7.0|^8.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^1.0|^2.0"
     },
     "require-dev": {
         "orchestra/testbench": "^3.8|^4.0|^5.0|^6.0",
