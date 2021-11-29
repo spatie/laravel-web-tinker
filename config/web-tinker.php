@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Session\Middleware\StartSession;
-use Spatie\WebTinker\Http\Middleware\Authorize;
-
 return [
 
     /*
@@ -33,9 +29,9 @@ return [
     * to add your own middlewares to this list or change any of the existing middleware.
     */
     'middleware' => [
-        EncryptCookies::class,
-        StartSession::class,
-        Authorize::class,
+        Illuminate\Cookie\Middleware\EncryptCookies::class,
+        Illuminate\Session\Middleware\StartSession::class,
+        Spatie\WebTinker\Http\Middleware\Authorize::class,
     ],
 
     /*
