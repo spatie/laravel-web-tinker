@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.8.0 - 2021-11-29
+
+## What's Changed
+
+- Bump axios from 0.18.1 to 0.21.1 by @dependabot in https://github.com/spatie/laravel-web-tinker/pull/73
+- Allow for middleware customization by @emiliopedrollo in https://github.com/spatie/laravel-web-tinker/pull/87
+
+## New Contributors
+
+- @emiliopedrollo made their first contribution in https://github.com/spatie/laravel-web-tinker/pull/87
+
+**Full Changelog**: https://github.com/spatie/laravel-web-tinker/compare/1.7.7...1.8.0
+
 ## 1.7.7 - 2021-01-04
 
 - add PHP 8 support (#72)
@@ -64,7 +77,7 @@ All notable changes to `laravel-web-tinker` will be documented in this file
 
 ## 1.4.5 - 2019-09-02
 
-- fix custom path in Vue 
+- fix custom path in Vue
 
 ## 1.4.4 - 2019-08-31
 
