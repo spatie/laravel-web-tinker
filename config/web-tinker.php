@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Session\Middleware\StartSession;
+use Spatie\WebTinker\Http\Middleware\Authorize;
+
 return [
 
     /*
@@ -23,6 +27,16 @@ return [
     * any class that implements \Spatie\WebTinker\OutputModifiers\OutputModifier.
     */
     'output_modifier' => \Spatie\WebTinker\OutputModifiers\PrefixDateTime::class,
+
+    /*
+    * These middleware will be assigned to every WebTinker route, giving you the chance
+    * to add your own middlewares to this list or change any of the existing middleware.
+    */
+    'middleware' => [
+        EncryptCookies::class,
+        StartSession::class,
+        Authorize::class,
+    ],
 
     /*
      * If you want to fine-tune PsySH configuration specify

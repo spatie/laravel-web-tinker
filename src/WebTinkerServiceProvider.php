@@ -34,6 +34,8 @@ class WebTinkerServiceProvider extends ServiceProvider
 
         $this->app->bind(OutputModifier::class, config('web-tinker.output_modifier'));
 
+        Route::middlewareGroup('web-tinker', config('web-tinker.middleware', []));
+
         $this
             ->registerRoutes()
             ->registerWebTinkerGate();
@@ -46,13 +48,17 @@ class WebTinkerServiceProvider extends ServiceProvider
         $this->commands(InstallCommand::class);
     }
 
+    protected function routeConfiguration()
+    {
+        return [
+            'prefix' => config('web-tinker.path'),
+            'middleware' => 'web-tinker'
+        ];
+    }
+
     protected function registerRoutes()
     {
-        Route::prefix(config('web-tinker.path'))->middleware([
-            EncryptCookies::class,
-            StartSession::class,
-            Authorize::class,
-        ])->group(function () {
+        Route::group($this->routeConfiguration(), function () {
             Route::get('/', [WebTinkerController::class, 'index']);
             Route::post('/', [WebTinkerController::class, 'execute']);
         });
