@@ -13,6 +13,8 @@ jobs:
                 laravel: [5.8.*, 6.20.*, 7.29.*, 8.20.*] # use lowest versions that support PHP 8
                 dependency-version: [prefer-lowest, prefer-stable]
                 include:
+                    -   laravel: 9.*
+                        testbench: 7.*
                     -   laravel: 8.20.*
                         testbench: 6.*
                     -   laravel: 7.29.*
@@ -22,6 +24,12 @@ jobs:
                     -   laravel: 5.8.*
                         testbench: 3.8.*
                 exclude:
+                    -   laravel: 9.*
+                        php: 7.4
+                    -   laravel: 9.*
+                        php: 7.3
+                    -   laravel: 9.*
+                        php: 7.2
                     -   laravel: 8.20.*
                         php: 7.2
                     -   laravel: 5.8.*
