@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.8.1 - 2022-01-14
+
+- allow Laravel 9
+
 ## 1.8.0 - 2021-11-29
 
 ## What's Changed
