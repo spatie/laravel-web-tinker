@@ -30,13 +30,13 @@ jobs:
                         php: 7.2
                     -   laravel: 8.20.*
                         php: 7.2
-                    -   laravel: 76.*
+                    -   laravel: 7.29.*
                         php: 8.1
-                    -   laravel: 7.*
+                    -   laravel: 7.29.*
                         php: 8.0
-                    -   laravel: 6.*
+                    -   laravel: 6.20.*
                         php: 8.1
-                    -   laravel: 6.*
+                    -   laravel: 6.20.*
                         php: 8.0
                     -   laravel: 5.8.*
                         php: 8.1
