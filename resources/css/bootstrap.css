@@ -54,10 +54,11 @@
     padding: 0;
     color: inherit;
     font: inherit;
-    &:after,
-    &:before {
-        box-sizing: inherit;
-    }
+}
+
+*:after,
+*:before {
+    box-sizing: inherit;
 }
 
 html {
