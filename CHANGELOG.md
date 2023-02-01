@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.8.2 - 2023-02-01
+
+### What's Changed
+
+- Laravel 10.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-web-tinker/pull/96
+
+### New Contributors
+
+- @laravel-shift made their first contribution in https://github.com/spatie/laravel-web-tinker/pull/96
+
+**Full Changelog**: https://github.com/spatie/laravel-web-tinker/compare/1.8.1...1.8.2
+
 ## 1.8.1 - 2022-01-14
 
 - allow Laravel 9
