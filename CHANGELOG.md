@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.8.3 - 2023-02-21
+
+### What's Changed
+
+- Pass through tinker alias config by @tymondesigns in https://github.com/spatie/laravel-web-tinker/pull/97
+
+### New Contributors
+
+- @tymondesigns made their first contribution in https://github.com/spatie/laravel-web-tinker/pull/97
+
+**Full Changelog**: https://github.com/spatie/laravel-web-tinker/compare/1.8.2...1.8.3
+
 ## 1.8.2 - 2023-02-01
 
 ### What's Changed
