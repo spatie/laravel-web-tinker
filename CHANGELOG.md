@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.8.4 - 2023-03-01
+
+### What's Changed
+
+- Clean '<whisper> - </whisper>' and 'INFO Ctrl+D' from the output by @geradrum in https://github.com/spatie/laravel-web-tinker/pull/99
+
+### New Contributors
+
+- @geradrum made their first contribution in https://github.com/spatie/laravel-web-tinker/pull/99
+
+**Full Changelog**: https://github.com/spatie/laravel-web-tinker/compare/1.8.3...1.8.4
+
 ## 1.8.3 - 2023-02-21
 
 ### What's Changed
