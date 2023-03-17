@@ -1,77 +1,58 @@
 <?php
-
-namespace Spatie\WebTinker\Tests;
-
 use Spatie\WebTinker\Tinker;
 
-class TinkerTest extends TestCase
-{
-    /** @var \Spatie\WebTinker\Tinker */
-    private $tinker;
+beforeEach(function () {
+    $this->tinker = app(Tinker::class);
+});
 
-    public function setUp(): void
-    {
-        parent::setUp();
+it('removes c style single line comments', function () {
+    $cleanCode = $this->tinker->removeComments('// This is a comment ');
+    expect($cleanCode)->toEqual('');
 
-        $this->tinker = app(Tinker::class);
-    }
+    $cleanCode = $this->tinker->removeComments('$user = \'Test\'; // This is a comment ');
+    expect($cleanCode)->toEqual('$user = \'Test\'; ');
+});
+it('removes shell style single line comments', function() {
+    $cleanCode = $this->tinker->removeComments('# This is a comment ');
+    expect($cleanCode)->toEqual('');
 
-    /** @test */
-    public function it_removes_c_style_single_line_comments()
-    {
-        $cleanCode = $this->tinker->removeComments('// This is a comment ');
-        $this->assertSame('', $cleanCode);
+    $cleanCode = $this->tinker->removeComments('$user = \'Test\'; # This is a comment ');
+    expect($cleanCode)->toEqual('$user = \'Test\'; ');
+});
 
-        $cleanCode = $this->tinker->removeComments('$user = \'Test\'; // This is a comment ');
-        $this->assertSame('$user = \'Test\'; ', $cleanCode);
-    }
+it('removes php multi line comments', function (){
 
-    /** @test */
-    public function it_removes_shell_style_single_line_comments()
-    {
-        $cleanCode = $this->tinker->removeComments('# This is a comment ');
-        $this->assertSame('', $cleanCode);
+    $cleanCode = $this->tinker->removeComments("/* This is a multi line comment \n yet another line of comment */");
+    expect($cleanCode)->toEqual('');
 
-        $cleanCode = $this->tinker->removeComments('$user = \'Test\'; # This is a comment ');
-        $this->assertSame('$user = \'Test\'; ', $cleanCode);
-    }
+    $cleanCode = $this->tinker->removeComments(
+        "\$user = 'Test User';/* This is a multi line comment \n".
+        ' yet another line of comment */'
+    );
+    expect($cleanCode)->toEqual('$user = \'Test User\';');
 
-    /** @test */
-    public function it_removes_php_multi_line_comments()
-    {
-        $cleanCode = $this->tinker->removeComments("/* This is a multi line comment \n yet another line of comment */");
-        $this->assertSame('', $cleanCode);
+    $cleanCode = $this->tinker->removeComments(
+        "\$user = /* This is a multi line comment \n".
+        " yet another line of comment */'Test User';"
+    );
+    expect($cleanCode)->toEqual('$user = \'Test User\';');
+});
+it('removes comments with multiline code input',function(){
 
-        $cleanCode = $this->tinker->removeComments(
-            "\$user = 'Test User';/* This is a multi line comment \n".
-            ' yet another line of comment */'
-        );
-        $this->assertSame('$user = \'Test User\';', $cleanCode);
+    $cleanCode = $this->tinker->removeComments(
+        "\$user_id = 1; /* This is a multi line comment \n yet another line of comment */\n".
+        '\App\User::find($user_id);'
+    );
+    expect($cleanCode)->toEqual("\$user_id = 1; \n\\App\\User::find(\$user_id);");
 
-        $cleanCode = $this->tinker->removeComments(
-            "\$user = /* This is a multi line comment \n".
-            " yet another line of comment */'Test User';"
-        );
-        $this->assertSame('$user = \'Test User\';', $cleanCode);
-    }
+    $cleanCode = $this->tinker->removeComments(
+        "\$newUsers = User::latest()->take(3)->get();\n\n// \$allUsers = User::all();"
+    );
+    expect($cleanCode)->toEqual("\$newUsers = User::latest()->take(3)->get();\n\n");
 
-    /** @test */
-    public function it_removes_comments_with_multiline_code_input()
-    {
-        $cleanCode = $this->tinker->removeComments(
-            "\$user_id = 1; /* This is a multi line comment \n yet another line of comment */\n".
-            '\App\User::find($user_id);'
-        );
-        $this->assertSame("\$user_id = 1; \n\\App\\User::find(\$user_id);", $cleanCode);
+    $cleanCode = $this->tinker->removeComments(
+        "\$newUsers = User::latest()->take(3)->get();\n\n# \$allUsers = User::all();"
+    );
+    expect($cleanCode)->toEqual("\$newUsers = User::latest()->take(3)->get();\n\n");
 
-        $cleanCode = $this->tinker->removeComments(
-            "\$newUsers = User::latest()->take(3)->get();\n\n// \$allUsers = User::all();"
-        );
-        $this->assertSame("\$newUsers = User::latest()->take(3)->get();\n\n", $cleanCode);
-
-        $cleanCode = $this->tinker->removeComments(
-            "\$newUsers = User::latest()->take(3)->get();\n\n# \$allUsers = User::all();"
-        );
-        $this->assertSame("\$newUsers = User::latest()->take(3)->get();\n\n", $cleanCode);
-    }
-}
+});
