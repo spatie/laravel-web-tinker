@@ -12,65 +12,14 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        php: [7.2, 7.3, 7.4, 8.0, 8.1, '8.2']
-        laravel: ['5.8.*', '6.20.*', '7.29.*', '8.20.*', '9.*', '10.*', '11.*']
+        php: [8.0, 8.1, 8.2, 8.3]
+        laravel: [ '10.*', '11.*']
         dependency-version: [prefer-lowest, prefer-stable]
         include:
           - laravel: 10.*
             testbench: 8.*
-          - laravel: 9.*
-            testbench: 7.*
-          - laravel: 8.20.*
-            testbench: 6.*
-          - laravel: 7.29.*
-            testbench: 5.*
-          - laravel: 6.20.*
-            testbench: 4.*
-          - laravel: 5.8.*
-            testbench: 3.8.*
           - laravel: 11.*
             testbench: 9.*
-        exclude:
-          - laravel: 10.*
-            php: 8.0
-          - laravel: 10.*
-            php: 7.4
-          - laravel: 10.*
-            php: 7.3
-          - laravel: 10.*
-            php: 7.2
-          - laravel: 9.*
-            php: 7.4
-          - laravel: 9.*
-            php: 7.3
-          - laravel: 9.*
-            php: 7.2
-          - laravel: 8.20.*
-            php: 8.1
-          - laravel: 8.20.*
-            php: 7.2
-          - laravel: 7.29.*
-            php: 8.1
-          - laravel: 7.29.*
-            php: 8.0
-          - laravel: 6.20.*
-            php: 8.1
-          - laravel: 6.20.*
-            php: 8.0
-          - laravel: 5.8.*
-            php: 8.1
-          - laravel: 5.8.*
-            php: 8.0
-          - laravel: 11.*
-            php: 7.2
-          - laravel: 11.*
-            php: 7.3
-          - laravel: 11.*
-            php: 7.4
-          - laravel: 11.*
-            php: 8.0
-          - laravel: 11.*
-            php: 8.1
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
