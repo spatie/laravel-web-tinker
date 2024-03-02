@@ -1,82 +1,49 @@
 name: run-tests
-on: [push, pull_request]
+
+on:
+  - push
+  - pull_request
+
 jobs:
-    test:
-        runs-on: ${{ matrix.os }}
-        strategy:
-            fail-fast: false
-            matrix:
-                os: [ubuntu-latest, windows-latest]
-                php: [8.1, 8.0, 7.4, 7.3, 7.2]
-                laravel: [5.8.*, 6.20.*, 7.29.*, 8.20.*, 9.*, 10.*] # use lowest versions that support PHP 8
-                dependency-version: [prefer-lowest, prefer-stable]
-                include:
-                    -   laravel: 10.*
-                        testbench: 8.*
-                    -   laravel: 9.*
-                        testbench: 7.*
-                    -   laravel: 8.20.*
-                        testbench: 6.*
-                    -   laravel: 7.29.*
-                        testbench: 5.*
-                    -   laravel: 6.20.*
-                        testbench: 4.*
-                    -   laravel: 5.8.*
-                        testbench: 3.8.*
-                exclude:
-                    -   laravel: 10.*
-                        php: 8.0
-                    -   laravel: 10.*
-                        php: 7.4
-                    -   laravel: 10.*
-                        php: 7.3
-                    -   laravel: 10.*
-                        php: 7.2
-                    -   laravel: 9.*
-                        php: 7.4
-                    -   laravel: 9.*
-                        php: 7.3
-                    -   laravel: 9.*
-                        php: 7.2
-                    -   laravel: 8.20.*
-                        php: 8.1
-                    -   laravel: 8.20.*
-                        php: 7.2
-                    -   laravel: 7.29.*
-                        php: 8.1
-                    -   laravel: 7.29.*
-                        php: 8.0
-                    -   laravel: 6.20.*
-                        php: 8.1
-                    -   laravel: 6.20.*
-                        php: 8.0
-                    -   laravel: 5.8.*
-                        php: 8.1
-                    -   laravel: 5.8.*
-                        php: 8.0
-        name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
+  test:
+    runs-on: ${{ matrix.os }}
 
-        steps:
-            -   name: Checkout code
-                uses: actions/checkout@v2
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        php: [8.2, 8.3]
+        laravel: [ '10.*', '11.*']
+        dependency-version: [prefer-lowest, prefer-stable]
+        include:
+          - laravel: 10.*
+            testbench: 8.*
+          - laravel: 11.*
+            testbench: 9.*
 
-            -   name: Cache dependencies
-                uses: actions/cache@v2
-                with:
-                    path: ~/.composer/cache/files
-                    key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: ${{ matrix.php }}
-                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-                    coverage: none
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-            -   name: Install dependencies
-                run: |
-                    composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-                    composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
 
-            -   name: Execute tests
-                run: vendor/bin/phpunit
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+
+      - name: Execute tests
+        run: vendor/bin/phpunit
