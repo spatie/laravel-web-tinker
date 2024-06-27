@@ -35,7 +35,7 @@ class Tinker
     public function execute(string $phpCode): string
     {
         $phpCode = $this->removeComments($phpCode);
-        
+
         $this->shell->addInput($phpCode);
 
         $closure = new ExecutionLoopClosure($this->shell);
@@ -116,6 +116,6 @@ class Tinker
 
         $output = preg_replace('/(?s)(<whisper.*?<\/whisper>)|INFO  Ctrl\+D\./ms', '$2', $output);
 
-        return trim($output);
+        return htmlentities(trim($output));
     }
 }
