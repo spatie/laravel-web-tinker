@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.9.1 - 2024-12-23
+
+### What's Changed
+
+* Prevent HTML injection by @AuditeMarlow in https://github.com/spatie/laravel-web-tinker/pull/107
+
+### New Contributors
+
+* @AuditeMarlow made their first contribution in https://github.com/spatie/laravel-web-tinker/pull/107
+
+**Full Changelog**: https://github.com/spatie/laravel-web-tinker/compare/1.9.0...1.9.1
+
 ## 1.9.0 - 2024-03-02
 
 ### What's Changed
