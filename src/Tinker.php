@@ -116,6 +116,6 @@ class Tinker
 
         $output = preg_replace('/(?s)(<whisper.*?<\/whisper>)|INFO  Ctrl\+D\./ms', '$2', $output);
 
-        return htmlentities(trim($output));
+        return trim($output);
     }
 }

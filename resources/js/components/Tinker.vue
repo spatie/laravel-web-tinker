@@ -10,6 +10,7 @@
 import TinkerInput from './TinkerInput';
 import TinkerOutput from './TinkerOutput';
 import Split from 'split-grid';
+import DOMPurify from 'dompurify';
 
 export default {
     components: {
@@ -56,7 +57,7 @@ export default {
 
     methods: {
         handleExecute(output) {
-            this.output = output;
+            this.output = DOMPurify.sanitize(output);
         },
 
         initSplit() {
