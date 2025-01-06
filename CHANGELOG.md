@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.10.0 - 2025-01-06
+
+### What's Changed
+
+* Clientside output purifying by @xHeaven in https://github.com/spatie/laravel-web-tinker/pull/110
+
+### New Contributors
+
+* @xHeaven made their first contribution in https://github.com/spatie/laravel-web-tinker/pull/110
+
+**Full Changelog**: https://github.com/spatie/laravel-web-tinker/compare/1.9.1...1.10.0
+
 ## 1.9.1 - 2024-12-23
 
 ### What's Changed
