@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.10.1 - 2025-02-17
+
+### What's Changed
+
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-web-tinker/pull/111
+
+**Full Changelog**: https://github.com/spatie/laravel-web-tinker/compare/1.10.0...1.10.1
+
 ## 1.10.0 - 2025-01-06
 
 ### What's Changed
