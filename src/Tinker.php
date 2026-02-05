@@ -7,7 +7,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use Laravel\Tinker\ClassAliasAutoloader;
 use Psy\Configuration;
-
 use Psy\Shell;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -25,7 +24,7 @@ class Tinker
 
     public function __construct(OutputModifier $outputModifier)
     {
-        $this->output = new BufferedOutput();
+        $this->output = new BufferedOutput;
 
         $this->shell = $this->createShell($this->output);
 
