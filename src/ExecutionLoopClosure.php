@@ -11,6 +11,16 @@ class ExecutionLoopClosure extends PsyExecutionClosure
 {
     public function __construct(Shell $__psysh__)
     {
+        if (!defined('STDIN')) {
+            define('STDIN', fopen('php://stdin', 'r') ?: fopen('/dev/null', 'r'));
+        }
+        if (!defined('STDOUT')) {
+            define('STDOUT', fopen('php://stdout', 'w') ?: fopen('/dev/null', 'w'));
+        }
+        if (!defined('STDERR')) {
+            define('STDERR', fopen('php://stderr', 'w') ?: fopen('/dev/null', 'w'));
+        }
+
         $this->setClosure($__psysh__, function () use ($__psysh__) {
             try {
                 // Restore execution scope variables
