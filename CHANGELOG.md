@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.10.2 - 2026-02-09
+
+### What's Changed
+
+* Fix hanging requests in Docker environments by using a custom ExecutionLoopClosure by @Pfroi in https://github.com/spatie/laravel-web-tinker/pull/118
+
+**Full Changelog**: https://github.com/spatie/laravel-web-tinker/compare/1.10.1...1.10.2
+
 ## 1.10.1 - 2025-02-17
 
 ### What's Changed
