@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.5",
         "illuminate/support": "^10.0|^11.0|^12.0",
         "illuminate/cookie": "^10.0|^11.0|^12.0",
         "illuminate/session": "^10.0|^11.0|^12.0",
