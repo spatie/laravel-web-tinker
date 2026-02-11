@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.10.4 - 2026-02-11
+
+### What's Changed
+
+* Write return value and exceptions, force non-interactive mode. by @bobthecow in https://github.com/spatie/laravel-web-tinker/pull/121
+
+### New Contributors
+
+* @bobthecow made their first contribution in https://github.com/spatie/laravel-web-tinker/pull/121
+
+**Full Changelog**: https://github.com/spatie/laravel-web-tinker/compare/1.10.3...1.10.4
+
 ## 1.10.3 - 2026-02-11
 
 ### What's Changed
