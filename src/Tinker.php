@@ -35,7 +35,12 @@ class Tinker
     {
         $phpCode = $this->removeComments($phpCode);
 
-        $this->shell->execute($phpCode);
+        try {
+            $returnValue = $this->shell->execute($phpCode, true);
+            $this->shell->writeReturnValue($returnValue);
+        } catch (\Throwable $throwable) {
+            $this->shell->writeException($throwable);
+        }
 
         $output = $this->cleanOutput($this->output->fetch());
 
@@ -48,6 +53,8 @@ class Tinker
             'updateCheck' => 'never',
             'configFile' => config('web-tinker.config_file') !== null ? base_path().'/'.config('web-tinker.config_file') : null,
         ]);
+
+        $config->setInteractiveMode(Configuration::INTERACTIVE_MODE_DISABLED);
 
         $config->setHistoryFile(defined('PHP_WINDOWS_VERSION_BUILD') ? 'null' : '/dev/null');
 

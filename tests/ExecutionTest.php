@@ -2,6 +2,8 @@
 
 namespace Spatie\WebTinker\Tests;
 
+use Psy\Configuration;
+use Psy\Shell;
 use Spatie\WebTinker\Tinker;
 
 class ExecutionTest extends TestCase
@@ -30,5 +32,20 @@ class ExecutionTest extends TestCase
         $output = $this->tinker->execute('return 1 + 1;');
 
         $this->assertStringContainsString('2', $output);
+    }
+
+    /** @test */
+    public function it_runs_psysh_in_non_interactive_mode()
+    {
+        $shellProperty = new \ReflectionProperty(Tinker::class, 'shell');
+        $shellProperty->setAccessible(true);
+        $shell = $shellProperty->getValue($this->tinker);
+
+        $configProperty = new \ReflectionProperty(Shell::class, 'config');
+        $configProperty->setAccessible(true);
+        $config = $configProperty->getValue($shell);
+
+        $this->assertSame(Configuration::INTERACTIVE_MODE_DISABLED, $config->interactiveMode());
+        $this->assertFalse($config->getInputInteractive());
     }
 }
