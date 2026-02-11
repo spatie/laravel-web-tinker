@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.10.3 - 2026-02-11
+
+### What's Changed
+
+* Use PsySH built-in Shell::execute() instead of custom ExecutionLoopClosure by @freekbot in https://github.com/spatie/laravel-web-tinker/pull/119
+
+### New Contributors
+
+* @freekbot made their first contribution in https://github.com/spatie/laravel-web-tinker/pull/119
+
+**Full Changelog**: https://github.com/spatie/laravel-web-tinker/compare/1.10.2...1.10.3
+
 ## 1.10.2 - 2026-02-09
 
 ### What's Changed
