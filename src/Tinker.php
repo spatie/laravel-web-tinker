@@ -35,11 +35,7 @@ class Tinker
     {
         $phpCode = $this->removeComments($phpCode);
 
-        $this->shell->addInput($phpCode);
-
-        $closure = new ExecutionLoopClosure($this->shell);
-
-        $closure->execute();
+        $this->shell->execute($phpCode);
 
         $output = $this->cleanOutput($this->output->fetch());
 
