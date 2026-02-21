@@ -21,15 +21,15 @@
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^10.0|^11.0|^12.0",
-        "illuminate/cookie": "^10.0|^11.0|^12.0",
-        "illuminate/session": "^10.0|^11.0|^12.0",
-        "laravel/tinker": "^2.0",
+        "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/cookie": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/session": "^10.0|^11.0|^12.0|^13.0",
+        "laravel/tinker": "^2.0|^3.0",
         "psy/psysh": "^0.12"
     },
     "require-dev": {
-        "orchestra/testbench": "^8.22|^9.6|^10.0",
-        "phpunit/phpunit": "^9.0|^10.5|^11.5.3"
+        "orchestra/testbench": "^8.22|^9.6|^10.0|^11.0",
+        "phpunit/phpunit": "^9.0|^10.5|^11.5.3|^12.5.12"
     },
     "autoload": {
         "psr-4": {
