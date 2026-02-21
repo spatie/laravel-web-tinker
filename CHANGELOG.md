@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.10.5 - 2026-02-21
+
+Add Laravel 13 support
+
 ## 1.10.4 - 2026-02-11
 
 ### What's Changed
