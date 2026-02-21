@@ -2,6 +2,7 @@
 
 namespace Spatie\WebTinker\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Spatie\WebTinker\Tinker;
 
 class TinkerTest extends TestCase
@@ -16,7 +17,7 @@ class TinkerTest extends TestCase
         $this->tinker = app(Tinker::class);
     }
 
-    /** @test */
+        #[Test]
     public function it_removes_c_style_single_line_comments()
     {
         $cleanCode = $this->tinker->removeComments('// This is a comment ');
@@ -26,7 +27,7 @@ class TinkerTest extends TestCase
         $this->assertSame('$user = \'Test\'; ', $cleanCode);
     }
 
-    /** @test */
+        #[Test]
     public function it_removes_shell_style_single_line_comments()
     {
         $cleanCode = $this->tinker->removeComments('# This is a comment ');
@@ -36,7 +37,7 @@ class TinkerTest extends TestCase
         $this->assertSame('$user = \'Test\'; ', $cleanCode);
     }
 
-    /** @test */
+        #[Test]
     public function it_removes_php_multi_line_comments()
     {
         $cleanCode = $this->tinker->removeComments("/* This is a multi line comment \n yet another line of comment */");
@@ -55,7 +56,7 @@ class TinkerTest extends TestCase
         $this->assertSame('$user = \'Test User\';', $cleanCode);
     }
 
-    /** @test */
+        #[Test]
     public function it_removes_comments_with_multiline_code_input()
     {
         $cleanCode = $this->tinker->removeComments(

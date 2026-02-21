@@ -2,6 +2,7 @@
 
 namespace Spatie\WebTinker\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
@@ -26,13 +27,13 @@ class AuthorizeTest extends TestCase
         })->middleware(Authorize::class);
     }
 
-    /** @test */
+        #[Test]
     public function it_will_allow_requests_if_it_is_enabled()
     {
         $this->get('/test')->assertOk();
     }
 
-    /** @test */
+        #[Test]
     public function it_will_not_allow_requests_if_the_gate_does_not_allow_it()
     {
         Gate::define('viewWebTinker', function () {
@@ -42,7 +43,7 @@ class AuthorizeTest extends TestCase
         $this->get('/test')->assertStatus(403);
     }
 
-    /** @test */
+        #[Test]
     public function it_will_not_allow_requests_if_it_is_disabled_even_if_the_gate_allows_it()
     {
         Gate::define('viewWebTinker', function () {
