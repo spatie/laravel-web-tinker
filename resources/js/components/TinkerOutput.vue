@@ -9,3 +9,10 @@ export default {
     props: ['value'],
 };
 </script>
+
+<style>
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+</style>
