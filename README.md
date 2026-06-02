@@ -1,7 +1,7 @@
 # Artisan Tinker in your browser
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-web-tinker.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-web-tinker)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/spatie/laravel-web-tinker/run-tests?label=tests)
+![GitHub Workflow Status](https://github.com/spatie/laravel-web-tinker/actions/workflows/run-tests.yml/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-web-tinker.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-web-tinker)
 
 Artisan's tinker command is a great way to tinker with your application in the terminal. Unfortunately running a few lines of code, making edits, and copy/pasting code can be bothersome. Wouldn't it be great to tinker in the browser?
