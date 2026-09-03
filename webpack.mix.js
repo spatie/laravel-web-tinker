@@ -5,7 +5,9 @@ mix
     .setPublicPath('public')
     .postCss('resources/css/app.css', 'public')
     .purgeCss({
-        whitelistPatterns: [/CodeMirror/, /cm/, /^theme-/],
+        // `wt-` and `sf-dump-` classes only appear in markup built at runtime,
+        // so PurgeCSS cannot see them in the source.
+        whitelistPatterns: [/CodeMirror/, /cm/, /^theme-/, /^wt-/, /^sf-dump/],
     })
     .js('resources/js/app.js', 'public')
     .version()

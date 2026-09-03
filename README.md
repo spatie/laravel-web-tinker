@@ -117,6 +117,34 @@ public function boot()
 
 2. You must set the `enabled` variable in the `web-tinker` config file to `true`.
 
+## Rich output
+
+Results render as [VarDumper](https://symfony.com/doc/current/components/var_dumper.html)
+markup: real types, collapsible nodes, and Laravel's own casters for models and
+collections. Anything the snippet echoed is shown above the value it returned,
+and a thrown exception is rendered rather than swallowed.
+
+Depth and size limits keep a dump of something enormous from reaching the
+browser:
+
+```php
+// config/web-tinker.php
+'dump' => [
+    'enabled' => env('WEB_TINKER_RICH_OUTPUT_ENABLED', true),
+    'max_depth' => 6,
+    'max_items' => 250,
+    'max_string_length' => 2500,
+],
+```
+
+Set `WEB_TINKER_RICH_OUTPUT_ENABLED=false` and every result comes back as
+PsySH's plain text, whatever a request asks for.
+
+The browser asks for this format explicitly. A request that does not — a script
+or test suite posting to the endpoint — gets the plain text it always got, so
+nothing built against the response format breaks. Change the default with
+`output_format` if you want HTML everywhere.
+
 ## Modifying the output
 
 You can modify the output of tinker by specifying an output modifier in the `output_modifier` key of the `web-tinker` config file. An output modifier is any class that implements `\Spatie\WebTinker\OutputModifiers\OutputModifier`.

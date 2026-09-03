@@ -10,6 +10,7 @@ use Illuminate\Support\ServiceProvider;
 use Spatie\WebTinker\Console\InstallCommand;
 use Spatie\WebTinker\Http\Controllers\WebTinkerController;
 use Spatie\WebTinker\Http\Middleware\Authorize;
+use Spatie\WebTinker\Output\DumpRenderer;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 
 class WebTinkerServiceProvider extends ServiceProvider
@@ -46,6 +47,21 @@ class WebTinkerServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/web-tinker.php', 'web-tinker');
 
         $this->commands(InstallCommand::class);
+
+        $this->registerDumpRenderer();
+    }
+
+    protected function registerDumpRenderer(): self
+    {
+        $this->app->singleton(DumpRenderer::class, function () {
+            return new DumpRenderer(
+                (int) config('web-tinker.dump.max_depth', 6),
+                (int) config('web-tinker.dump.max_items', 250),
+                (int) config('web-tinker.dump.max_string_length', 2500)
+            );
+        });
+
+        return $this;
     }
 
     protected function routeConfiguration()

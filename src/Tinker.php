@@ -8,6 +8,8 @@ use Illuminate\Support\Collection;
 use Laravel\Tinker\ClassAliasAutoloader;
 use Psy\Configuration;
 use Psy\Shell;
+use Spatie\WebTinker\Output\DumpRenderer;
+use Spatie\WebTinker\Output\OutputFormat;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -22,19 +24,41 @@ class Tinker
     /** @var \Spatie\WebTinker\OutputModifiers\OutputModifier */
     protected $outputModifier;
 
-    public function __construct(OutputModifier $outputModifier)
+    /** @var \Spatie\WebTinker\Output\DumpRenderer */
+    protected $dumpRenderer;
+
+    public function __construct(OutputModifier $outputModifier, ?DumpRenderer $dumpRenderer = null)
     {
         $this->output = new BufferedOutput;
 
         $this->shell = $this->createShell($this->output);
 
         $this->outputModifier = $outputModifier;
+
+        $this->dumpRenderer = $dumpRenderer ?? new DumpRenderer;
     }
 
-    public function execute(string $phpCode): string
+    /**
+     * Run a snippet and return its rendered output.
+     *
+     * The format stays an argument rather than a setting because the two
+     * callers want different things from the same shell: the browser wants a
+     * VarDumper tree, while anything driving this endpoint over HTTP wants the
+     * plain text it has always received.
+     */
+    public function execute(string $phpCode, OutputFormat $format = OutputFormat::Text): string
     {
         $phpCode = $this->removeComments($phpCode);
 
+        $output = $format === OutputFormat::Html
+            ? $this->executeToHtml($phpCode)
+            : $this->executeToText($phpCode);
+
+        return $this->outputModifier->modify($output);
+    }
+
+    protected function executeToText(string $phpCode): string
+    {
         try {
             $returnValue = $this->shell->execute($phpCode, true);
             $this->shell->writeReturnValue($returnValue);
@@ -42,9 +66,24 @@ class Tinker
             $this->shell->writeException($throwable);
         }
 
-        $output = $this->cleanOutput($this->output->fetch());
+        return $this->cleanOutput($this->output->fetch());
+    }
 
-        return $this->outputModifier->modify($output);
+    protected function executeToHtml(string $phpCode): string
+    {
+        try {
+            $returnValue = $this->shell->execute($phpCode, true);
+        } catch (\Throwable $throwable) {
+            return $this->dumpRenderer->renderThrowable($this->flushStdout(), $throwable);
+        }
+
+        return $this->dumpRenderer->render($this->flushStdout(), $returnValue);
+    }
+
+    /** Whatever the snippet echoed, drained from the shell's buffer. */
+    protected function flushStdout(): string
+    {
+        return $this->cleanOutput($this->output->fetch());
     }
 
     protected function createShell(BufferedOutput $output): Shell

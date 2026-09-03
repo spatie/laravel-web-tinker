@@ -17,3 +17,64 @@
         @apply whitespace-normal;
     }
 }
+
+/* Wrapper the result is inserted into — text and VarDumper markup alike. */
+.output-body {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+/* Anything the snippet echoed, shown above the value it returned. */
+.wt-stdout {
+    @apply mb-2;
+    @apply pb-2;
+    border-bottom: 1px solid var(--color-line);
+    color: var(--color-text);
+}
+
+.wt-exception-heading {
+    @apply mb-2;
+    @apply px-2 py-1;
+    @apply bg-error;
+    @apply whitespace-normal;
+}
+
+/*
+ * VarDumper ships its own palette on a dark background. These overrides win on
+ * specificity (its stylesheet is inlined later in the document) and hand the
+ * dump back to the editor's theme.
+ */
+.output-body .sf-dump {
+    background-color: transparent;
+    color: var(--color-text);
+    padding: 0;
+    font-family: var(--font-code, monospace);
+}
+
+.output-body .sf-dump .sf-dump-str {
+    color: var(--color-string);
+}
+
+.output-body .sf-dump .sf-dump-num {
+    color: var(--color-number);
+}
+
+.output-body .sf-dump .sf-dump-const,
+.output-body .sf-dump .sf-dump-public,
+.output-body .sf-dump .sf-dump-protected,
+.output-body .sf-dump .sf-dump-private {
+    color: var(--color-variable);
+}
+
+.output-body .sf-dump .sf-dump-note {
+    color: var(--color-keyword);
+}
+
+.output-body .sf-dump .sf-dump-key {
+    color: var(--color-text);
+}
+
+.output-body .sf-dump .sf-dump-ellipsis,
+.output-body .sf-dump .sf-dump-ref {
+    color: var(--color-dimmed);
+}
