@@ -10,8 +10,12 @@ class WebTinkerController
 {
     public function index()
     {
+        $path = app(UrlGenerator::class)->to(config('web-tinker.path'));
+
         return view('web-tinker::web-tinker', [
-            'path' => app(UrlGenerator::class)->to(config('web-tinker.path')),
+            'path' => $path,
+            'completionPath' => rtrim($path, '/').'/completions',
+            'completionEnabled' => (bool) config('web-tinker.completion.enabled', true),
         ]);
     }
 

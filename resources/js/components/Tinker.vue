@@ -1,6 +1,12 @@
 <template>
     <main :class="['layout', { 'layout-columns': needsColumnLayout }]" :style="gridStyle">
-        <tinker-input v-model="input" :path="path" @execute="handleExecute"></tinker-input>
+        <tinker-input
+            v-model="input"
+            :path="path"
+            :completion-path="completionPath"
+            :completion-enabled="completionEnabled"
+            @execute="handleExecute"
+        ></tinker-input>
         <hr ref="gutter" class="layout-gutter" />
         <tinker-output :value="output"></tinker-output>
     </main>
@@ -18,7 +24,11 @@ export default {
         TinkerOutput,
     },
 
-    props: ['path'],
+    props: {
+        path: { type: String, required: true },
+        completionPath: { type: String, default: '' },
+        completionEnabled: { type: [Boolean, String], default: false },
+    },
 
     data: () => ({
         windowWidth: window.innerWidth,
