@@ -1,0 +1,49 @@
+/*
+ * Suggestion list (CodeMirror's show-hint addon).
+ *
+ * Written against the theme's CSS variables rather than utilities so the popup
+ * follows the light/dark switch the rest of the page already responds to.
+ */
+.CodeMirror-hints {
+    position: absolute;
+    z-index: 20;
+    overflow-y: auto;
+    max-height: 20em;
+    margin: 0;
+    padding: 0.25rem 0;
+    list-style: none;
+    font-family: var(--font-code, monospace);
+    font-size: 0.9rem;
+    background-color: var(--color-gutter);
+    border: 1px solid var(--color-line);
+    border-radius: 3px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.CodeMirror-hint {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0.15rem 0.75rem;
+    color: var(--color-text);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+li.CodeMirror-hint-active {
+    background-color: var(--color-line);
+    color: var(--color-text);
+}
+
+.wt-hint-value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* The kind of thing being suggested: class, env, config, method, keyword… */
+.wt-hint-meta {
+    padding-left: 1.5rem;
+    color: var(--color-dimmed);
+    font-size: 0.75rem;
+    text-transform: lowercase;
+}

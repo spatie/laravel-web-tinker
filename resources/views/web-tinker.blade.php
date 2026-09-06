@@ -14,7 +14,11 @@
 <body>
 
 <div id="web-tinker" v-cloak>
-    <tinker path="{{ $path }}"></tinker>
+    <tinker
+        path="{{ $path }}"
+        completion-path="{{ $completionPath }}"
+        :completion-enabled="{{ $completionEnabled ? 'true' : 'false' }}"
+    ></tinker>
 </div>
 
 <script src="{{ asset(mix('app.js', 'vendor/web-tinker')) }}"></script>

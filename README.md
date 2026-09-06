@@ -117,6 +117,120 @@ public function boot()
 
 2. You must set the `enabled` variable in the `web-tinker` config file to `true`.
 
+## Autocompletion
+
+The editor completes as you type, and on <kbd>Ctrl</kbd>+<kbd>Space</kbd>. Every
+suggestion is produced by inspecting your code — nothing in the snippet is
+executed to work out what fits.
+
+Parsing, context detection and candidate collection are PsySH's own
+[`CompletionEngine`](https://github.com/bobthecow/psysh/blob/main/src/Completion/CompletionEngine.php),
+so the browser and the CLI shell agree about what belongs where. What is added
+here is what a browser needs and a readline prompt does not — where the
+replacement starts and what kind of thing each suggestion is — plus the sources
+below, registered into that engine.
+
+| What you type | What you get |
+| --- | --- |
+| `new Use` | classes, interfaces, traits and enums, matched on the short **or** fully qualified name |
+| `$user->` | the members of `$user`, including the columns and relations a model documents with `@property` |
+| `User::` | static methods, constants and static properties |
+| `env("APP_` | environment variable **names** |
+| `config("database.` | configuration keys, groups as well as leaves |
+| `str_re` | functions, constants and keywords, via PsySH's own matchers |
+
+Accepting a method inserts the call and leaves the caret between the
+parentheses.
+
+Only names ever reach the browser. The value behind an env or config key is
+never sent.
+
+### How a variable's type is found
+
+PsySH answers this from the shell's context: it looks the variable up and
+reflects on the object it finds. Run from a browser there is no such object —
+every request builds a fresh shell that has evaluated nothing — so the type is
+read out of the code instead and handed to the engine before its member sources
+run:
+
+```php
+$user = User::first();      // Eloquent's static forwards
+$user = new User;           // constructors
+$user = app(User::class);   // the container
+$user = $repo->findUser();  // declared and @return-annotated return types
+/** @var User $user */      // an annotation, when all else fails
+$user->…
+```
+
+Chains are followed link by link, through properties as well as calls, and can
+start from a static call with no variable in between:
+
+```php
+Company::getById(1)->individuals->first()->…
+```
+
+Every step has to say what it returns, natively or in a docblock. A static
+method with neither — `public static function getById($id)` with no `@return` —
+resolves to nothing, and the list stays empty rather than guessing. The one
+exception is Eloquent's own static forwards (`first`, `find`, `create`, …),
+which are `__callStatic` and so have nothing to reflect on at all.
+
+Because the analysis is a real parse, arguments, `?->`, ternaries and
+multi-line snippets all cost nothing extra. And a type the shell already
+knows is always left alone: a real object beats anything inferred from source.
+
+### Eloquent models
+
+A model's columns and relations exist only at runtime — `$company->individuals`
+goes through `__get`, and reflection will never find it. What does describe
+them is the annotation block above the class, so that is what gets read:
+
+```php
+/**
+ * @property string                  $site_description
+ * @property Individual[]|Collection $individuals
+ *
+ * @method static Builder active()
+ */
+class Company extends Model
+```
+
+`@property`, `@property-read`, `@property-write` and `@method` are all
+understood, inherited annotations included, and documented members are offered
+before the two hundred methods a model inherits.
+
+`@property` names come from PsySH's own docblock sources. Resolving them to a
+type — needed to carry on down a chain — is done here: short names in an
+annotation are resolved against the `use` statements of the file the annotation
+was written in, so `Collection` means the collection that file imported. A union like `Individual[]|Collection` describes the value twice
+— collection and element — and both are kept, which is what lets
+`$company->individuals->first()->email` land on the individual. Generic
+annotations (`Collection<int, Individual>`) work the same way.
+
+### Where class names come from
+
+PsySH's symbol catalog is built from `get_declared_classes()`, which is the
+right answer in a long-running shell but in a web request is whatever the
+framework happened to autoload on the way to the page. This package registers
+an index alongside it: Composer's classmap, a scan of your own PSR-4 roots
+(reading the `namespace` and `class` declared in each file, so global-namespace
+classes are indexed correctly), and the registered facade aliases.
+
+The scan is cached for `completion.cache_ttl` seconds and re-keyed on every
+`composer dump-autoload`. Set the TTL to `0` while working on the index itself.
+
+```php
+// config/web-tinker.php
+'completion' => [
+    'enabled' => env('WEB_TINKER_COMPLETION_ENABLED', true),
+    'limit' => 100,
+    'cache_ttl' => 300,
+],
+```
+
+Set `WEB_TINKER_COMPLETION_ENABLED=false` to turn the whole feature off: the
+endpoint then returns nothing and the editor stops asking.
+
 ## Modifying the output
 
 You can modify the output of tinker by specifying an output modifier in the `output_modifier` key of the `web-tinker` config file. An output modifier is any class that implements `\Spatie\WebTinker\OutputModifiers\OutputModifier`.

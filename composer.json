@@ -25,7 +25,7 @@
         "illuminate/cookie": "^10.0|^11.0|^12.0|^13.0",
         "illuminate/session": "^10.0|^11.0|^12.0|^13.0",
         "laravel/tinker": "^2.0|^3.0",
-        "psy/psysh": "^0.12"
+        "psy/psysh": "^0.12.21"
     },
     "require-dev": {
         "orchestra/testbench": "^8.22|^9.6|^10.0|^11.0",
