@@ -31,6 +31,12 @@ class DocumentedModel extends Model
         return new self();
     }
 
+    /** Declared as a method and documented as a property, the way a relation is. */
+    public function widgets()
+    {
+        return new Collection();
+    }
+
     /**
      * @return Collection<int, Widget>
      */

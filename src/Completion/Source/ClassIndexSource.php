@@ -86,6 +86,15 @@ class ClassIndexSource implements SourceInterface
             }
         }
 
+        // Among short-name matches the closest fit first, so `Compan` offers
+        // `Company` ahead of `CompaniesAddAccountTypeColumn`. The engine's
+        // fuzzy matcher scores these alike and keeps the order it is given.
+        usort($short, function (string $a, string $b) {
+            $byLength = strlen($this->shortNameOf($a)) <=> strlen($this->shortNameOf($b));
+
+            return $byLength !== 0 ? $byLength : strcmp($a, $b);
+        });
+
         return array_merge($exact, $short, $qualified);
     }
 

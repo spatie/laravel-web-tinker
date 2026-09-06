@@ -50,6 +50,23 @@ class DocBlockCompletionTest extends TestCase
     }
 
         #[Test]
+    public function a_documented_property_outranks_a_method_of_the_same_name()
+    {
+        // On a model a relation is declared as `widgets()` and documented as
+        // `$widgets`; the two return different things, and the annotation says
+        // which one is meant.
+        $result = $this->completer->complete($code = $this->model('widget'), strlen($code));
+
+        $widgets = array_values(array_filter(
+            $result->completions,
+            fn ($completion) => $completion->value === 'widgets'
+        ));
+
+        $this->assertCount(1, $widgets);
+        $this->assertSame('property', $widgets[0]->meta);
+    }
+
+        #[Test]
     public function it_completes_a_method_that_only_exists_in_the_docblock()
     {
         $this->assertContains('findByEmail', $this->values($this->model('findByE')));

@@ -125,6 +125,16 @@ class CompletionLabeler
     protected function memberMeta(string $completion, array $reflections): string
     {
         foreach ($reflections as $reflection) {
+            // A documented property wins over a method of the same name, and
+            // on a model that is the common case: a relation is declared as
+            // `individuals()` and documented as `$individuals`, and the two
+            // return different things. The annotation is the author saying
+            // which one is meant to be reached for — and it is the collection,
+            // not the query builder behind it.
+            if (isset($this->docBlocks->properties($reflection)[$completion])) {
+                return 'property';
+            }
+
             if ($reflection->hasMethod($completion) || in_array($completion, $this->docBlocks->methods($reflection), true)) {
                 return 'method';
             }
