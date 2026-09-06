@@ -112,6 +112,24 @@ class DocBlockReader
     }
 
     /**
+     * The class named by a `@var` annotation for `$name` in a snippet.
+     *
+     * Annotations are comments, so this reads the text rather than the AST —
+     * and it is the one hint a person can write when nothing else in the code
+     * says what a variable holds.
+     */
+    public function annotatedVariableType(string $code, string $name): ?string
+    {
+        $pattern = '/@var\s+\\\\?('.self::TYPE.')(?:\[\])?\s+\$'.preg_quote($name, '/').'\b/';
+
+        if (! preg_match_all($pattern, $code, $matches)) {
+            return null;
+        }
+
+        return end($matches[1]);
+    }
+
+    /**
      * The documented type of a property, and its element type when it is a
      * collection.
      *

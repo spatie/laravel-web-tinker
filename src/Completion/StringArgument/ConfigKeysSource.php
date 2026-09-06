@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\WebTinker\Completion\Matchers;
+namespace Spatie\WebTinker\Completion\StringArgument;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
@@ -8,20 +8,20 @@ use Illuminate\Support\Facades\Config;
 /**
  * Completes dotted configuration keys inside `config("…")`.
  *
- * Both leaves and the groups above them are offered, so `config("database.` is
- * as useful a stopping point as the full key. As with {@see EnvKeysMatcher},
- * only key names are exposed.
+ * Both leaves and the groups above them are offered, since `config("mail")`
+ * returning the whole group is as valid a thing to want as a single value. As
+ * with {@see EnvKeysSource}, only key names are exposed.
  */
-class ConfigKeysMatcher extends StringArgumentMatcher
+class ConfigKeysSource extends StringArgumentSource
 {
+    public function meta(): string
+    {
+        return 'config';
+    }
+
     protected function functions(): array
     {
         return ['config'];
-    }
-
-    protected function meta(): string
-    {
-        return 'config';
     }
 
     protected function keyPattern(): string
@@ -31,15 +31,11 @@ class ConfigKeysMatcher extends StringArgumentMatcher
 
     protected function candidates(): array
     {
-        $leaves = array_keys(Arr::dot(Config::all()));
-
         $keys = [];
 
-        foreach ($leaves as $leaf) {
+        foreach (array_keys(Arr::dot(Config::all())) as $leaf) {
             $keys[$leaf] = true;
 
-            // Every ancestor is a valid key too: `config("mail.mailers")`
-            // returns the whole group.
             $segments = explode('.', $leaf);
 
             array_pop($segments);

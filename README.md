@@ -123,6 +123,13 @@ The editor completes as you type, and on <kbd>Ctrl</kbd>+<kbd>Space</kbd>. Every
 suggestion is produced by inspecting your code — nothing in the snippet is
 executed to work out what fits.
 
+Parsing, context detection and candidate collection are PsySH's own
+[`CompletionEngine`](https://github.com/bobthecow/psysh/blob/main/src/Completion/CompletionEngine.php),
+so the browser and the CLI shell agree about what belongs where. What is added
+here is what a browser needs and a readline prompt does not — where the
+replacement starts and what kind of thing each suggestion is — plus the sources
+below, registered into that engine.
+
 | What you type | What you get |
 | --- | --- |
 | `new Use` | classes, interfaces, traits and enums, matched on the short **or** fully qualified name |
@@ -140,8 +147,11 @@ never sent.
 
 ### How a variable's type is found
 
-There is no shell context to reflect on — each request builds a fresh shell —
-so the type comes from reading the assignment rather than running it:
+PsySH answers this from the shell's context: it looks the variable up and
+reflects on the object it finds. Run from a browser there is no such object —
+every request builds a fresh shell that has evaluated nothing — so the type is
+read out of the code instead and handed to the engine before its member sources
+run:
 
 ```php
 $user = User::first();      // Eloquent's static forwards
@@ -165,6 +175,10 @@ resolves to nothing, and the list stays empty rather than guessing. The one
 exception is Eloquent's own static forwards (`first`, `find`, `create`, …),
 which are `__callStatic` and so have nothing to reflect on at all.
 
+Because the analysis is a real parse, arguments, `?->`, ternaries and
+multi-line snippets all cost nothing extra. And a type the shell already
+knows is always left alone: a real object beats anything inferred from source.
+
 ### Eloquent models
 
 A model's columns and relations exist only at runtime — `$company->individuals`
@@ -185,20 +199,22 @@ class Company extends Model
 understood, inherited annotations included, and documented members are offered
 before the two hundred methods a model inherits.
 
-Short names in an annotation are resolved against the `use` statements of the
-file the annotation was written in, so `Collection` means the collection that
-file imported. A union like `Individual[]|Collection` describes the value twice
+`@property` names come from PsySH's own docblock sources. Resolving them to a
+type — needed to carry on down a chain — is done here: short names in an
+annotation are resolved against the `use` statements of the file the annotation
+was written in, so `Collection` means the collection that file imported. A union like `Individual[]|Collection` describes the value twice
 — collection and element — and both are kept, which is what lets
 `$company->individuals->first()->email` land on the individual. Generic
 annotations (`Collection<int, Individual>`) work the same way.
 
 ### Where class names come from
 
-PsySH completes against `get_declared_classes()`, which in a web request is
-whatever the framework happened to autoload. This package builds a real index
-instead: Composer's classmap, a scan of your own PSR-4 roots (reading the
-`namespace` and `class` declared in each file, so global-namespace classes are
-indexed correctly), and the registered facade aliases.
+PsySH's symbol catalog is built from `get_declared_classes()`, which is the
+right answer in a long-running shell but in a web request is whatever the
+framework happened to autoload on the way to the page. This package registers
+an index alongside it: Composer's classmap, a scan of your own PSR-4 roots
+(reading the `namespace` and `class` declared in each file, so global-namespace
+classes are indexed correctly), and the registered facade aliases.
 
 The scan is cached for `completion.cache_ttl` seconds and re-keyed on every
 `composer dump-autoload`. Set the TTL to `0` while working on the index itself.

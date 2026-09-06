@@ -7,16 +7,18 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Psy\TabCompletion\Matcher as PsyshMatchers;
+use Psy\Completion\CompletionEngine;
+use Psy\Context;
 use Spatie\WebTinker\Completion\ClassIndex;
 use Spatie\WebTinker\Completion\Completer;
-use Spatie\WebTinker\Completion\Matchers\ClassNamesMatcher;
-use Spatie\WebTinker\Completion\Matchers\ConfigKeysMatcher;
-use Spatie\WebTinker\Completion\Matchers\EnvKeysMatcher;
-use Spatie\WebTinker\Completion\Matchers\ObjectMembersMatcher;
-use Spatie\WebTinker\Completion\Matchers\PsyshMatcher;
+use Spatie\WebTinker\Completion\CompletionLabeler;
+use Spatie\WebTinker\Completion\Source\AnalysisCapture;
+use Spatie\WebTinker\Completion\Source\ClassIndexSource;
+use Spatie\WebTinker\Completion\Source\StaticTypeSource;
+use Spatie\WebTinker\Completion\StringArgument\ConfigKeysSource;
+use Spatie\WebTinker\Completion\StringArgument\EnvKeysSource;
 use Spatie\WebTinker\Completion\TypeInference\DocBlockReader;
-use Spatie\WebTinker\Completion\TypeInference\VariableTypeResolver;
+use Spatie\WebTinker\Completion\TypeInference\StaticTypeResolver;
 use Spatie\WebTinker\Console\InstallCommand;
 use Spatie\WebTinker\Http\Controllers\CompletionController;
 use Spatie\WebTinker\Http\Controllers\WebTinkerController;
@@ -63,49 +65,54 @@ class WebTinkerServiceProvider extends ServiceProvider
 
     protected function registerCompleter(): self
     {
+        $this->app->singleton(DocBlockReader::class);
+
         $this->app->singleton(ClassIndex::class, function () {
             return new ClassIndex(base_path(), (int) config('web-tinker.completion.cache_ttl', 300));
         });
 
-        $this->app->singleton(DocBlockReader::class);
-
-        $this->app->singleton(VariableTypeResolver::class, function ($app) {
-            return new VariableTypeResolver(
+        $this->app->singleton(StaticTypeResolver::class, function ($app) {
+            return new StaticTypeResolver(
                 $app->make(ClassIndex::class),
                 $app->make(DocBlockReader::class)
             );
         });
 
+        $this->app->singleton(AnalysisCapture::class);
+
+        $this->app->singleton(CompletionEngine::class, function ($app) {
+            // An empty context, because there is nothing in it: each request
+            // gets a fresh shell that has evaluated nothing. StaticTypeSource
+            // is what stands in for the runtime types the shell would
+            // otherwise supply.
+            $engine = new CompletionEngine(new Context());
+
+            $engine->addSource($app->make(StaticTypeSource::class));
+
+            $engine->registerDefaultSources([
+                new ClassIndexSource(
+                    $app->make(ClassIndex::class),
+                    (int) config('web-tinker.completion.limit', 100)
+                ),
+            ]);
+
+            // Last, so the analysis it keeps is the one every other source saw.
+            $engine->addSource($app->make(AnalysisCapture::class));
+
+            return $engine;
+        });
+
         $this->app->singleton(Completer::class, function ($app) {
             return new Completer(
-                $this->completionMatchers($app->make(ClassIndex::class), $app->make(VariableTypeResolver::class)),
+                $app->make(CompletionEngine::class),
+                $app->make(CompletionLabeler::class),
+                $app->make(AnalysisCapture::class),
+                [new EnvKeysSource(base_path()), new ConfigKeysSource()],
                 (int) config('web-tinker.completion.limit', 100)
             );
         });
 
         return $this;
-    }
-
-    /**
-     * Registration order is significant: the first matcher to claim a
-     * suggestion decides how it is labelled, and the exclusive string matchers
-     * come first so a half-typed `env("APP_` is not drowned in keywords.
-     *
-     * @return \Spatie\WebTinker\Completion\Matchers\Matcher[]
-     */
-    protected function completionMatchers(ClassIndex $classIndex, VariableTypeResolver $typeResolver): array
-    {
-        return [
-            new ObjectMembersMatcher($typeResolver),
-            new EnvKeysMatcher(base_path()),
-            new ConfigKeysMatcher(),
-            new ClassNamesMatcher($classIndex, (int) config('web-tinker.completion.limit', 100)),
-            new PsyshMatcher(new PsyshMatchers\ClassMethodsMatcher(), 'method', true),
-            new PsyshMatcher(new PsyshMatchers\ClassAttributesMatcher(), 'property', true),
-            new PsyshMatcher(new PsyshMatchers\FunctionsMatcher(), 'function'),
-            new PsyshMatcher(new PsyshMatchers\ConstantsMatcher(), 'constant'),
-            new PsyshMatcher(new PsyshMatchers\KeywordsMatcher(), 'keyword'),
-        ];
     }
 
     protected function routeConfiguration()

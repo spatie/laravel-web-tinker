@@ -1,16 +1,15 @@
 <?php
 
-namespace Spatie\WebTinker\Completion\Matchers;
+namespace Spatie\WebTinker\Completion\StringArgument;
 
 /**
  * Completes environment variable names inside `env("…")`.
  *
  * Names only — a value never leaves the server through this endpoint. Names
- * come from the process environment plus any `.env` files present, so keys
- * that are defined but currently unset (the common case for `.env.example`)
- * are still offered.
+ * come from the process environment plus any dotenv files present, so keys
+ * that are declared but currently unset are still offered.
  */
-class EnvKeysMatcher extends StringArgumentMatcher
+class EnvKeysSource extends StringArgumentSource
 {
     /** Files scanned for key names, relative to the application root. */
     protected const ENV_FILES = ['.env', '.env.example'];
@@ -19,25 +18,25 @@ class EnvKeysMatcher extends StringArgumentMatcher
     {
     }
 
+    public function meta(): string
+    {
+        return 'env';
+    }
+
     protected function functions(): array
     {
         return ['env'];
-    }
-
-    protected function meta(): string
-    {
-        return 'env';
     }
 
     protected function candidates(): array
     {
         $keys = array_keys($_ENV);
 
-        foreach (static::ENV_FILES as $file) {
+        foreach (self::ENV_FILES as $file) {
             $keys = array_merge($keys, $this->keysDeclaredIn($this->basePath.'/'.$file));
         }
 
-        return array_values(array_unique($keys));
+        return $keys;
     }
 
     /**
