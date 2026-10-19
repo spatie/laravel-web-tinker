@@ -6,7 +6,7 @@
         "watch": "vite build --watch --mode development",
         "prod": "npm run production",
         "production": "vite build",
-        "test": "playwright test",
+        "test": "vitest run && playwright test",
         "format": "prettier --write 'resources/**/*.{css,js,vue}'"
     },
     "dependencies": {
@@ -20,10 +20,14 @@
         "@fullhuman/postcss-purgecss": "^8.0.0",
         "@playwright/test": "^1.56.0",
         "@vitejs/plugin-vue2": "^2.3.4",
+        "@vue/test-utils": "^1.3.6",
+        "jsdom": "^27.0.0",
         "postcss-nesting": "^14.0.0",
         "prettier": "^3.0.0",
         "tailwindcss": "^0.7.2",
-        "vite": "^7.0.0"
+        "vite": "^7.3.7",
+        "vitest": "^4.0.0",
+        "vue-template-compiler": "^2.7.16"
     },
     "engines": {
         "node": ">=22.12"

@@ -1,5 +1,28 @@
 const { test, expect } = require('@playwright/test');
 
+test('completion preserves Unicode and whitespace before executing with rich output', async ({
+    page,
+}) => {
+    await page.goto('/tinker');
+    const code = '  $label = "é😀"; $date = new DateTime("2026-03-17"); $date->for';
+    await page.locator('.CodeMirror').click();
+    await page.keyboard.insertText(code);
+    await page.keyboard.press('Control+Space');
+    const suggestion = page.locator('.CodeMirror-hint').filter({ hasText: 'format' });
+    await expect(suggestion).toBeVisible();
+    await page.keyboard.press('Enter');
+    await page.keyboard.insertText('"Y-m-d"');
+    const request = page.waitForRequest(
+        (request) => request.method() === 'POST' && new URL(request.url()).pathname === '/tinker'
+    );
+    await page.keyboard.press('ControlOrMeta+Enter');
+    expect((await request).postDataJSON()).toEqual({
+        code: '$label = "é😀"; $date = new DateTime("2026-03-17"); $date->format("Y-m-d")',
+        format: 'html',
+    });
+    await expect(page.locator('.output .sf-dump')).toContainText('2026-03-17');
+});
+
 async function execute(page, code) {
     await page.locator('.CodeMirror').click();
     await page.keyboard.press('ControlOrMeta+a');

@@ -3,6 +3,8 @@
         <tinker-input
             v-model="input"
             :path="path"
+            :completion-path="completionPath"
+            :completion-enabled="completionEnabled"
             :output-format="outputFormat"
             @execute="handleExecute"
         ></tinker-input>
@@ -25,6 +27,8 @@ export default {
 
     props: {
         path: { type: String, required: true },
+        completionPath: { type: String, default: '' },
+        completionEnabled: { type: [Boolean, String], default: false },
         outputFormat: { type: String, default: 'text' },
     },
 

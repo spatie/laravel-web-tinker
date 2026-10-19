@@ -5,6 +5,7 @@ namespace Spatie\WebTinker\Tests;
 use PHPUnit\Framework\Attributes\Test;
 use Psy\Configuration;
 use Psy\Shell;
+use ReflectionProperty;
 use Spatie\WebTinker\Tinker;
 
 class ExecutionTest extends TestCase
@@ -38,10 +39,10 @@ class ExecutionTest extends TestCase
     #[Test]
     public function it_runs_psysh_in_non_interactive_mode()
     {
-        $shellProperty = new \ReflectionProperty(Tinker::class, 'shell');
+        $shellProperty = new ReflectionProperty(Tinker::class, 'shell');
         $shell = $shellProperty->getValue($this->tinker);
 
-        $configProperty = new \ReflectionProperty(Shell::class, 'config');
+        $configProperty = new ReflectionProperty(Shell::class, 'config');
         $config = $configProperty->getValue($shell);
 
         $this->assertSame(Configuration::INTERACTIVE_MODE_DISABLED, $config->interactiveMode());

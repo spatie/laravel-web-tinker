@@ -2,6 +2,7 @@
 
 @import './bootstrap.css';
 @import './components/codemirror.css';
+@import './components/completion.css';
 @import './components/layout.css';
 @import './components/output.css';
 

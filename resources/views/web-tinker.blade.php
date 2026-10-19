@@ -16,6 +16,8 @@
 <div id="web-tinker" v-cloak>
     <tinker
         path="{{ $path }}"
+        completion-path="{{ $completionPath }}"
+        :completion-enabled="{{ $completionEnabled ? 'true' : 'false' }}"
         output-format="{{ $outputFormat }}"
     ></tinker>
 </div>

@@ -5,4 +5,9 @@
       <directory>tests</directory>
     </testsuite>
   </testsuites>
+  <php>
+    <env name="APP_ENV" value="testing"/>
+    <env name="CACHE_STORE" value="array"/>
+    <env name="SESSION_DRIVER" value="array"/>
+  </php>
 </phpunit>

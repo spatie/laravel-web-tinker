@@ -12,10 +12,13 @@ class WebTinkerController
 {
     public function index(DumpRenderer $dumpRenderer)
     {
+        $path = app(UrlGenerator::class)->to(config('web-tinker.path'));
         $richOutput = $this->richOutputEnabled();
 
         return view('web-tinker::web-tinker', [
-            'path' => app(UrlGenerator::class)->to(config('web-tinker.path')),
+            'path' => $path,
+            'completionPath' => rtrim($path, '/').'/completions',
+            'completionEnabled' => (bool) config('web-tinker.completion.enabled', true),
             // The page asks for the format it is allowed to have, so the
             // toggle needs to be read in one place only.
             'outputFormat' => $richOutput ? OutputFormat::Html->value : OutputFormat::Text->value,

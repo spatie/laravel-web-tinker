@@ -6,6 +6,7 @@ module.exports = {
             content: ['resources/**/*.{vue,js,blade.php}'],
             safelist: {
                 standard: [/CodeMirror/, /cm/, /^theme-/, /^wt-/, /^sf-dump/, 'error', 'warning'],
+                greedy: [/CodeMirror/, /cm-/],
             },
         }),
     ],
