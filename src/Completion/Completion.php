@@ -14,8 +14,7 @@ class Completion
         public readonly string $meta,
         /** What the list displays; defaults to the inserted value. */
         public readonly ?string $label = null
-    ) {
-    }
+    ) {}
 
     public function toArray(): array
     {

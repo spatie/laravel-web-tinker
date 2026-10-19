@@ -16,8 +16,7 @@ class ResolvedType
     public function __construct(
         public readonly array $classes = [],
         public readonly ?string $element = null
-    ) {
-    }
+    ) {}
 
     public static function none(): self
     {

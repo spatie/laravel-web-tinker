@@ -8,8 +8,9 @@ use PhpParser\Node;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
-use PhpParser\Parser;
 use PhpParser\NodeFinder;
+use PhpParser\Parser;
+use Psy\Completion\TypeResolver;
 use Psy\ParserFactory;
 use ReflectionMethod;
 use ReflectionNamedType;
@@ -22,7 +23,7 @@ use Traversable;
  * Works out what an expression evaluates to by reading the code, never by
  * running it.
  *
- * PsySH's own {@see \Psy\Completion\TypeResolver} answers this from the shell's
+ * PsySH's own {@see TypeResolver} answers this from the shell's
  * runtime context — it looks the variable up and reflects on the object it
  * finds. That is the better answer when there is one, but a web tinker request
  * builds a fresh shell with an empty scope, so there never is: nothing has been
@@ -35,6 +36,7 @@ use Traversable;
  *     $user = User::first();            // Eloquent's static forwards
  *     $user = app(User::class);         // the container
  *     $user = $repository->findUser();  // native and @return types
+ *
  *     /** @var User $user *\/            // an annotation, when all else fails
  *
  * Only the AST is consulted, so a nested call in the arguments or a chain of
@@ -79,8 +81,8 @@ class StaticTypeResolver
     /**
      * The type of an expression node, resolved against the surrounding code.
      *
-     * @param string $buffer everything the editor holds, needed to find the
-     *                       assignment a variable came from
+     * @param  string  $buffer  everything the editor holds, needed to find the
+     *                          assignment a variable came from
      */
     public function resolveNode(Node $node, string $buffer): ResolvedType
     {

@@ -14,9 +14,7 @@ class EnvKeysSource extends StringArgumentSource
     /** Files scanned for key names, relative to the application root. */
     protected const ENV_FILES = ['.env', '.env.example'];
 
-    public function __construct(protected string $basePath)
-    {
-    }
+    public function __construct(protected string $basePath) {}
 
     public function meta(): string
     {

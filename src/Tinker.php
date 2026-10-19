@@ -13,18 +13,18 @@ use Symfony\Component\Console\Output\BufferedOutput;
 
 class Tinker
 {
-    /** @var \Symfony\Component\Console\Output\BufferedOutput */
+    /** @var BufferedOutput */
     protected $output;
 
-    /** @var \Psy\Shell */
+    /** @var Shell */
     protected $shell;
 
-    /** @var \Spatie\WebTinker\OutputModifiers\OutputModifier */
+    /** @var OutputModifier */
     protected $outputModifier;
 
     public function __construct(OutputModifier $outputModifier)
     {
-        $this->output = new BufferedOutput;
+        $this->output = new BufferedOutput();
 
         $this->shell = $this->createShell($this->output);
 

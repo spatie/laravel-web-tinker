@@ -16,8 +16,7 @@ class CompletionResult
     public function __construct(
         public readonly int $from,
         public readonly array $completions
-    ) {
-    }
+    ) {}
 
     public static function empty(int $from = 0): self
     {

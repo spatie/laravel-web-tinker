@@ -19,7 +19,7 @@ class EngineIntegrationTest extends TestCase
 {
     private Completer $completer;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -45,7 +45,7 @@ class EngineIntegrationTest extends TestCase
         return '\\'.DocumentedModel::class;
     }
 
-        #[Test]
+    #[Test]
     public function it_resolves_a_receiver_holding_a_nested_call()
     {
         // The parser handles this for free. The regex grammar this replaced
@@ -55,7 +55,7 @@ class EngineIntegrationTest extends TestCase
         $this->assertContains('email', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_resolves_through_the_nullsafe_operator()
     {
         $values = $this->values('$moment = new \DateTime(); $moment?->for');
@@ -63,7 +63,7 @@ class EngineIntegrationTest extends TestCase
         $this->assertContains('format', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_resolves_a_variable_assigned_on_an_earlier_line()
     {
         $values = $this->values("\$moment = new \\DateTime();\n\$other = 1;\n\$moment->for");
@@ -71,7 +71,7 @@ class EngineIntegrationTest extends TestCase
         $this->assertContains('format', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_resolves_a_receiver_built_by_a_ternary()
     {
         $values = $this->values('$moment = true ? new \DateTime() : null; $moment->for');
@@ -79,7 +79,7 @@ class EngineIntegrationTest extends TestCase
         $this->assertContains('format', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_leaves_a_type_the_shell_already_knows_alone()
     {
         $analysis = new AnalysisResult(
@@ -94,7 +94,7 @@ class EngineIntegrationTest extends TestCase
         $this->assertSame(['DateTime'], $analysis->leftSideTypes);
     }
 
-        #[Test]
+    #[Test]
     public function it_replaces_a_type_that_names_nothing_loadable()
     {
         // PsySH mis-reads a generic annotation such as `Collection<int, Widget>`
@@ -115,7 +115,7 @@ class EngineIntegrationTest extends TestCase
         $this->assertSame(['DateTime'], $analysis->leftSideTypes);
     }
 
-        #[Test]
+    #[Test]
     public function the_static_type_source_contributes_no_completions_of_its_own()
     {
         $analysis = new AnalysisResult(
@@ -131,7 +131,7 @@ class EngineIntegrationTest extends TestCase
         $this->assertSame([], app(StaticTypeSource::class)->getCompletions($analysis));
     }
 
-        #[Test]
+    #[Test]
     public function it_offers_documented_members_before_inherited_ones()
     {
         // A model documents a couple of dozen columns and inherits hundreds of
@@ -144,7 +144,7 @@ class EngineIntegrationTest extends TestCase
         $this->assertContains('widgets', $documented);
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_a_chain_that_ends_in_a_collection_element()
     {
         $values = $this->values($this->model().'::getById(1)->gadgets()->first()->sp');

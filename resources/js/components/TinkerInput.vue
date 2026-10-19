@@ -55,6 +55,7 @@ export default {
                 hint: this.hint,
                 completeSingle: false,
                 closeOnUnfocus: true,
+                paddingForScrollbar: false,
             },
         };
 
@@ -78,6 +79,8 @@ export default {
 
     beforeDestroy() {
         clearTimeout(this.hintTimeout);
+        this.codeEditor.closeHint();
+        this.codeEditor.toTextArea();
     },
 
     methods: {
@@ -101,6 +104,8 @@ export default {
          * anywhere inside the string argument of env() and config().
          */
         maybeHint(editor, change) {
+            clearTimeout(this.hintTimeout);
+
             if (change.origin === 'paste' || change.origin === 'setValue') {
                 return;
             }
@@ -116,8 +121,6 @@ export default {
                 return;
             }
 
-            clearTimeout(this.hintTimeout);
-
             this.hintTimeout = setTimeout(() => {
                 editor.showHint({ hint: this.hint, completeSingle: false });
             }, DEBOUNCE_MS);
@@ -132,12 +135,32 @@ export default {
          * up disagreeing about what gets replaced.
          */
         hint(editor, callback) {
+            if (!this.completionEnabled || !this.completionPath) {
+                callback(null);
+
+                return;
+            }
+
             const code = editor.getValue();
-            const cursor = editor.indexFromPos(editor.getCursor());
+            const position = editor.getCursor();
+            const cursor = Array.from(code.slice(0, editor.indexFromPos(position))).length;
 
             axios
                 .post(this.completionPath, { code, cursor })
                 .then(({ data }) => {
+                    const current = editor.getCursor();
+
+                    if (
+                        this._isDestroyed ||
+                        editor.getValue() !== code ||
+                        current.line !== position.line ||
+                        current.ch !== position.ch
+                    ) {
+                        callback(null);
+
+                        return;
+                    }
+
                     const list = (data.completions || []).map(completion => {
                         const item = {
                             text: completion.value,
@@ -155,8 +178,12 @@ export default {
 
                     callback({
                         list,
-                        from: editor.posFromIndex(data.from),
-                        to: editor.getCursor(),
+                        from: editor.posFromIndex(
+                            Array.from(code)
+                                .slice(0, data.from)
+                                .join('').length
+                        ),
+                        to: position,
                     });
                 })
                 .catch(() => callback(null));
@@ -196,6 +223,3 @@ export default {
     },
 };
 </script>
-
-<style src="codemirror/lib/codemirror.css" /> <style src="codemirror/theme/idea.css" />
-<style src="codemirror/addon/hint/show-hint.css" />

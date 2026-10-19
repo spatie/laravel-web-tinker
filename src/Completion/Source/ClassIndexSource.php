@@ -29,8 +29,7 @@ class ClassIndexSource implements SourceInterface
     public function __construct(
         protected ClassIndex $index,
         protected int $limit = 100
-    ) {
-    }
+    ) {}
 
     public function appliesToKind(int $kinds): bool
     {

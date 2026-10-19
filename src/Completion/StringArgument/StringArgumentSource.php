@@ -43,7 +43,7 @@ abstract class StringArgumentSource
 
         $pattern = '/(?:^|[^\w\\\\])(?:'.$functions.')\s*\(\s*[\'"]('.$this->keyPattern().'*)$/i';
 
-        if (! preg_match($pattern, substr($code, 0, $cursor), $matches)) {
+        if (! preg_match($pattern, mb_substr($code, 0, $cursor), $matches)) {
             return null;
         }
 

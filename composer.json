@@ -21,15 +21,16 @@
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
-        "illuminate/cookie": "^10.0|^11.0|^12.0|^13.0",
-        "illuminate/session": "^10.0|^11.0|^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0",
+        "illuminate/cookie": "^12.0|^13.0",
+        "illuminate/session": "^12.0|^13.0",
         "laravel/tinker": "^2.0|^3.0",
         "psy/psysh": "^0.12.21"
     },
     "require-dev": {
-        "orchestra/testbench": "^8.22|^9.6|^10.0|^11.0",
-        "phpunit/phpunit": "^9.0|^10.5|^11.5.3|^12.5.12"
+        "laravel/pint": "^1.27",
+        "orchestra/testbench": "^10.0|^11.0",
+        "phpunit/phpunit": "^11.5.3|^12.5.12"
     },
     "autoload": {
         "psr-4": {
@@ -42,6 +43,8 @@
         }
     },
     "scripts": {
+        "format": "pint",
+        "format-test": "pint --test",
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },

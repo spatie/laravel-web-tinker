@@ -21,9 +21,7 @@ use Spatie\WebTinker\Completion\TypeInference\DocBlockReader;
  */
 class CompletionLabeler
 {
-    public function __construct(protected DocBlockReader $docBlocks)
-    {
-    }
+    public function __construct(protected DocBlockReader $docBlocks) {}
 
     /**
      * Label each suggestion, and put the documented ones first.
@@ -34,8 +32,7 @@ class CompletionLabeler
      * hundred methods and a handful of framework properties that reflection
      * reports first. Left in that order the columns never appear.
      *
-     * @param string[] $completions
-     *
+     * @param  string[]  $completions
      * @return Completion[]
      */
     public function describe(array $completions, AnalysisResult $analysis): array
@@ -74,8 +71,7 @@ class CompletionLabeler
     /**
      * Names a class describes in its docblock rather than declares in code.
      *
-     * @param ReflectionClass[] $reflections
-     *
+     * @param  ReflectionClass[]  $reflections
      * @return array<string, true>
      */
     protected function documentedMembers(array $reflections): array
@@ -153,8 +149,7 @@ class CompletionLabeler
     }
 
     /**
-     * @param string[] $types
-     *
+     * @param  string[]  $types
      * @return ReflectionClass[]
      */
     protected function reflect(array $types): array

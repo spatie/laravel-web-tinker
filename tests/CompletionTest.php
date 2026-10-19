@@ -11,7 +11,7 @@ class CompletionTest extends TestCase
 {
     private Completer $completer;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -39,7 +39,7 @@ class CompletionTest extends TestCase
         return array_map(fn ($completion) => $completion->value, $result->completions);
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_a_class_by_its_short_name()
     {
         $values = $this->values($this->complete('$tinker = new Tinke'));
@@ -47,7 +47,7 @@ class CompletionTest extends TestCase
         $this->assertContains('Spatie\WebTinker\Tinker', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_a_class_by_its_fully_qualified_name()
     {
         $values = $this->values($this->complete('Spatie\WebTinker\Completion\Comp'));
@@ -55,7 +55,7 @@ class CompletionTest extends TestCase
         $this->assertContains('Spatie\WebTinker\Completion\Completer', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_labels_class_completions()
     {
         $result = $this->complete('new Tinke');
@@ -65,7 +65,7 @@ class CompletionTest extends TestCase
         $this->assertSame(['class'], $metas);
     }
 
-        #[Test]
+    #[Test]
     public function it_reports_where_the_replacement_starts()
     {
         $result = $this->complete('$foo = new Tinke');
@@ -73,7 +73,7 @@ class CompletionTest extends TestCase
         $this->assertSame(strlen('$foo = new '), $result->from);
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_environment_variable_names()
     {
         $_ENV['WEB_TINKER_TEST_KEY'] = 'secret-value';
@@ -86,7 +86,7 @@ class CompletionTest extends TestCase
         unset($_ENV['WEB_TINKER_TEST_KEY']);
     }
 
-        #[Test]
+    #[Test]
     public function it_never_exposes_environment_values()
     {
         $_ENV['WEB_TINKER_TEST_KEY'] = 'secret-value';
@@ -98,7 +98,7 @@ class CompletionTest extends TestCase
         unset($_ENV['WEB_TINKER_TEST_KEY']);
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_configuration_keys()
     {
         config()->set('web-tinker.completion.enabled', true);
@@ -108,7 +108,7 @@ class CompletionTest extends TestCase
         $this->assertContains('web-tinker.completion.enabled', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_offers_configuration_groups_as_well_as_leaves()
     {
         $values = $this->values($this->complete("config('web-tinker.comple"));
@@ -116,7 +116,7 @@ class CompletionTest extends TestCase
         $this->assertContains('web-tinker.completion', $values);
     }
 
-        #[Test]
+    #[Test]
     public function a_string_argument_matcher_suppresses_the_token_based_matchers()
     {
         $_ENV['APP_WEB_TINKER_MARKER'] = '1';
@@ -131,7 +131,7 @@ class CompletionTest extends TestCase
         unset($_ENV['APP_WEB_TINKER_MARKER']);
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_static_members()
     {
         $values = $this->values($this->complete('Spatie\WebTinker\Completion\CompletionResult::em'));
@@ -139,7 +139,7 @@ class CompletionTest extends TestCase
         $this->assertContains('empty', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_ranks_an_exactly_typed_class_name_first()
     {
         $values = $this->values($this->complete('new Completer'));
@@ -147,7 +147,7 @@ class CompletionTest extends TestCase
         $this->assertSame('Spatie\WebTinker\Completion\Completer', $values[0]);
     }
 
-        #[Test]
+    #[Test]
     public function it_does_not_offer_functions_after_a_static_call()
     {
         $metas = array_map(
@@ -159,13 +159,13 @@ class CompletionTest extends TestCase
         $this->assertNotContains('keyword', $metas);
     }
 
-        #[Test]
+    #[Test]
     public function it_returns_nothing_when_there_is_nothing_to_complete()
     {
         $this->assertSame([], $this->complete('   ')->completions);
     }
 
-        #[Test]
+    #[Test]
     public function it_respects_the_configured_limit()
     {
         config()->set('web-tinker.completion.limit', 3);
@@ -175,5 +175,18 @@ class CompletionTest extends TestCase
         $result = app(Completer::class)->complete('S', 1);
 
         $this->assertLessThanOrEqual(3, count($result->completions));
+    }
+
+    #[Test]
+    public function it_completes_keys_after_unicode_text_without_replacing_surrounding_code(): void
+    {
+        $prefix = '$label = "é😀"; config("';
+        $code = $prefix.'web-tinker.compl'.'"); echo "suffix";';
+        $cursor = mb_strlen($prefix.'web-tinker.compl');
+
+        $result = $this->completer->complete($code, $cursor);
+
+        $this->assertContains('web-tinker.completion.enabled', $this->values($result));
+        $this->assertSame(mb_strlen($prefix), $result->from);
     }
 }

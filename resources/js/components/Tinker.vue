@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import TinkerInput from './TinkerInput';
-import TinkerOutput from './TinkerOutput';
+import TinkerInput from './TinkerInput.vue';
+import TinkerOutput from './TinkerOutput.vue';
 import Split from 'split-grid';
 import DOMPurify from 'dompurify';
 

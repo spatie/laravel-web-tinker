@@ -12,15 +12,15 @@ class CompletionController
     public function __invoke(Request $request, Completer $completer): JsonResponse
     {
         $validated = $request->validate([
-            'code' => 'present|string',
-            'cursor' => 'required|integer|min:0',
+            'code' => ['present', 'nullable', 'string', 'max:100000'],
+            'cursor' => ['required', 'integer', 'min:0'],
         ]);
 
         if (! config('web-tinker.completion.enabled', true)) {
             return response()->json(CompletionResult::empty()->toArray());
         }
 
-        $result = $completer->complete($validated['code'], (int) $validated['cursor']);
+        $result = $completer->complete($validated['code'] ?? '', (int) $validated['cursor']);
 
         return response()->json($result->toArray());
     }

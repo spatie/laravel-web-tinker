@@ -1,0 +1,7 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "concat_space": { "spacing": "none" },
+        "new_with_parentheses": { "anonymous_class": true, "named_class": true }
+    }
+}

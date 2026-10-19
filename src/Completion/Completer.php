@@ -29,8 +29,7 @@ class Completer
         protected AnalysisCapture $capture,
         protected array $stringArgumentSources = [],
         protected int $limit = 100
-    ) {
-    }
+    ) {}
 
     public function complete(string $code, int $cursor): CompletionResult
     {

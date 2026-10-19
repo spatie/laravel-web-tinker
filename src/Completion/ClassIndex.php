@@ -26,37 +26,28 @@ class ClassIndex
     /** Upper bound on files visited per PSR-4 root, so a stray huge tree can't stall a keystroke. */
     protected const MAX_FILES_PER_ROOT = 15000;
 
-    protected static ?array $memoized = null;
-
     public function __construct(
         protected string $basePath,
         protected int $cacheTtl
-    ) {
-    }
+    ) {}
 
     /** @return string[] Fully qualified class names, without a leading backslash. */
     public function all(): array
     {
-        if (static::$memoized !== null) {
-            return static::$memoized;
-        }
-
         if ($this->cacheTtl <= 0) {
-            return static::$memoized = $this->build();
+            return $this->build();
         }
 
-        return static::$memoized = Cache::remember(
+        return Cache::remember(
             $this->cacheKey(),
             $this->cacheTtl,
             fn () => $this->build()
         );
     }
 
-    /** Drop both cache layers. Exposed for tests and for `web-tinker:clear-completions`. */
+    /** Clear the cached class index. */
     public function flush(): void
     {
-        static::$memoized = null;
-
         Cache::forget($this->cacheKey());
     }
 

@@ -2,8 +2,8 @@
 
 namespace Spatie\WebTinker;
 
-use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Foundation\Http\Middleware\TrimStrings;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -22,7 +22,6 @@ use Spatie\WebTinker\Completion\TypeInference\StaticTypeResolver;
 use Spatie\WebTinker\Console\InstallCommand;
 use Spatie\WebTinker\Http\Controllers\CompletionController;
 use Spatie\WebTinker\Http\Controllers\WebTinkerController;
-use Spatie\WebTinker\Http\Middleware\Authorize;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 
 class WebTinkerServiceProvider extends ServiceProvider
@@ -48,6 +47,10 @@ class WebTinkerServiceProvider extends ServiceProvider
         $this->app->bind(OutputModifier::class, config('web-tinker.output_modifier'));
 
         Route::middlewareGroup('web-tinker', config('web-tinker.middleware', []));
+
+        TrimStrings::skipWhen(fn (Request $request) => $request->is(
+            trim(config('web-tinker.path'), '/').'/completions'
+        ));
 
         $this
             ->registerRoutes()
@@ -119,7 +122,7 @@ class WebTinkerServiceProvider extends ServiceProvider
     {
         return [
             'prefix' => config('web-tinker.path'),
-            'middleware' => 'web-tinker'
+            'middleware' => 'web-tinker',
         ];
     }
 

@@ -11,7 +11,7 @@ class ObjectCompletionTest extends TestCase
 {
     private Completer $completer;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ class ObjectCompletionTest extends TestCase
         return array_map(fn ($completion) => $completion->value, $result->completions);
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_members_of_a_constructed_object()
     {
         $values = $this->values('$date = new \DateTime(); $date->for');
@@ -40,7 +40,7 @@ class ObjectCompletionTest extends TestCase
         $this->assertContains('format', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_members_of_a_model_returned_by_a_static_factory()
     {
         // The shape from the README: assign from a query, complete on the result.
@@ -49,7 +49,7 @@ class ObjectCompletionTest extends TestCase
         $this->assertContains('save', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_resolves_a_class_written_by_its_short_name()
     {
         $values = $this->values('$tinker = new Tinker(); $tinker->exec');
@@ -57,7 +57,7 @@ class ObjectCompletionTest extends TestCase
         $this->assertContains('execute', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_honours_a_var_annotation()
     {
         $values = $this->values('/** @var \DateTime $moment */'."\n".'$moment->for');
@@ -65,7 +65,7 @@ class ObjectCompletionTest extends TestCase
         $this->assertContains('format', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_resolves_a_class_pulled_from_the_container()
     {
         $values = $this->values('$tinker = app(\Spatie\WebTinker\Tinker::class); $tinker->exec');
@@ -73,7 +73,7 @@ class ObjectCompletionTest extends TestCase
         $this->assertContains('execute', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_follows_a_method_chain()
     {
         // Collection::filter() is typed `@return static` and nothing else,
@@ -83,7 +83,7 @@ class ObjectCompletionTest extends TestCase
         $this->assertContains('first', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_uses_the_last_assignment_to_a_variable()
     {
         $values = $this->values('$thing = new \DateTime(); $thing = new \ArrayObject(); $thing->');
@@ -92,7 +92,7 @@ class ObjectCompletionTest extends TestCase
         $this->assertNotContains('format', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_lists_every_member_when_nothing_has_been_typed_after_the_arrow()
     {
         $values = $this->values('$date = new \DateTime(); $date->');
@@ -101,7 +101,7 @@ class ObjectCompletionTest extends TestCase
         $this->assertContains('modify', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_labels_members_by_kind()
     {
         $result = $this->completer->complete(
@@ -114,13 +114,13 @@ class ObjectCompletionTest extends TestCase
         $this->assertSame(['method'], $metas);
     }
 
-        #[Test]
+    #[Test]
     public function it_stays_quiet_when_the_type_cannot_be_established()
     {
         $this->assertSame([], $this->values('$mystery->doSomething'));
     }
 
-        #[Test]
+    #[Test]
     public function it_replaces_only_the_member_being_typed()
     {
         $code = '$date = new \DateTime(); $date->for';
@@ -130,12 +130,12 @@ class ObjectCompletionTest extends TestCase
         $this->assertSame(strlen($code) - strlen('for'), $result->from);
     }
 
-        #[Test]
+    #[Test]
     public function it_does_not_execute_the_snippet_while_resolving_a_type()
     {
         $code = '$boom = '.ExplodingFactory::class.'::make(); $boom->any';
 
-        $this->values($code);
+        $this->assertContains('anything', $this->values($code));
 
         $this->assertFalse(ExplodingFactory::$wasCalled);
     }
@@ -152,7 +152,5 @@ class ExplodingFactory
         return new self();
     }
 
-    public function anything(): void
-    {
-    }
+    public function anything(): void {}
 }

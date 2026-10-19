@@ -13,8 +13,8 @@ use ReflectionMethod;
  * `__get`, and no amount of reflection will find it. What does describe them
  * is the `@property` block above the class:
  *
- *     @property Individual[]|Collection $individuals
- *     @property string                  $site_description
+ * @property Individual[]|Collection $individuals
+ * @property string $site_description
  *
  * A short name in a docblock means whatever the `use` statements at the top of
  * that file say it means, so those are parsed too — otherwise `Collection`

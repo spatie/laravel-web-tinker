@@ -11,7 +11,7 @@ class DocBlockCompletionTest extends TestCase
 {
     private Completer $completer;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -37,19 +37,19 @@ class DocBlockCompletionTest extends TestCase
         return '$model = new \\'.DocumentedModel::class.'(); $model->'.$tail;
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_a_property_that_only_exists_in_the_docblock()
     {
         $this->assertContains('email', $this->values($this->model('ema')));
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_a_property_read_annotation()
     {
         $this->assertContains('widget_count', $this->values($this->model('widget_c')));
     }
 
-        #[Test]
+    #[Test]
     public function a_documented_property_outranks_a_method_of_the_same_name()
     {
         // On a model a relation is declared as `widgets()` and documented as
@@ -66,13 +66,13 @@ class DocBlockCompletionTest extends TestCase
         $this->assertSame('property', $widgets[0]->meta);
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_a_method_that_only_exists_in_the_docblock()
     {
         $this->assertContains('findByEmail', $this->values($this->model('findByE')));
     }
 
-        #[Test]
+    #[Test]
     public function it_labels_a_documented_property_as_a_property()
     {
         $result = $this->completer->complete($code = $this->model('ema'), strlen($code));
@@ -82,7 +82,7 @@ class DocBlockCompletionTest extends TestCase
         $this->assertSame(['property'], $metas);
     }
 
-        #[Test]
+    #[Test]
     public function it_resolves_a_documented_type_through_the_use_statements_of_its_file()
     {
         // `Widget[]|Collection` has to become Eloquent's Collection — the one
@@ -90,7 +90,7 @@ class DocBlockCompletionTest extends TestCase
         $this->assertContains('first', $this->values($this->model('widgets->fir')));
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_straight_off_a_static_call()
     {
         $values = $this->values('\\'.DocumentedModel::class.'::getById(1)->ema');
@@ -98,7 +98,7 @@ class DocBlockCompletionTest extends TestCase
         $this->assertContains('email', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_completes_a_chain_that_starts_from_a_static_call()
     {
         $values = $this->values('\\'.DocumentedModel::class.'::getById(1)->widgets->fir');
@@ -106,13 +106,13 @@ class DocBlockCompletionTest extends TestCase
         $this->assertContains('first', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_stays_quiet_for_a_static_method_with_no_declared_or_annotated_type()
     {
         $this->assertSame([], $this->values('\\'.DocumentedModel::class.'::mystery(1)->ema'));
     }
 
-        #[Test]
+    #[Test]
     public function it_follows_an_element_out_of_a_documented_collection()
     {
         // The full shape from a real snippet: a relation, one item out of it,
@@ -122,7 +122,7 @@ class DocBlockCompletionTest extends TestCase
         $this->assertContains('spin', $this->values($code));
     }
 
-        #[Test]
+    #[Test]
     public function it_reads_the_element_type_out_of_a_generic_annotation()
     {
         $values = $this->values($this->model('gadgets()->first()->sp'));
@@ -130,7 +130,7 @@ class DocBlockCompletionTest extends TestCase
         $this->assertContains('spin', $values);
     }
 
-        #[Test]
+    #[Test]
     public function it_lists_reflected_and_documented_members_together_without_duplicates()
     {
         $values = $this->values($this->model(''));

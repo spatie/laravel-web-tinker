@@ -123,6 +123,10 @@ The editor completes as you type, and on <kbd>Ctrl</kbd>+<kbd>Space</kbd>. Every
 suggestion is produced by inspecting your code — nothing in the snippet is
 executed to work out what fits.
 
+Reflection can still invoke registered autoloaders to load class definitions.
+Completion is not a sandbox for untrusted PHP or autoloaders, and uses the same
+authorization as code execution.
+
 Parsing, context detection and candidate collection are PsySH's own
 [`CompletionEngine`](https://github.com/bobthecow/psysh/blob/main/src/Completion/CompletionEngine.php),
 so the browser and the CLI shell agree about what belongs where. What is added
@@ -230,6 +234,28 @@ The scan is cached for `completion.cache_ttl` seconds and re-keyed on every
 
 Set `WEB_TINKER_COMPLETION_ENABLED=false` to turn the whole feature off: the
 endpoint then returns nothing and the editor stops asking.
+
+### Updating an existing installation
+
+This feature requires PHP 8.2+, Laravel 12 or 13, and PsySH 0.12.21+.
+Laravel 13 requires PHP 8.3+. Older Laravel applications can continue using 1.10.x.
+
+Republish the assets after updating:
+
+```bash
+php artisan vendor:publish --tag=web-tinker-assets --force
+```
+
+If you have published or customized the Blade view, add the completion props
+from `resources/views/web-tinker.blade.php` to enable suggestions. Old views
+continue to support execution without autocompletion.
+
+### Developing the frontend
+
+Use Node.js 24 and npm. Run `npm ci`, `npm test`, and `npm run production`.
+Commit the generated files in `public/` alongside frontend changes. Vite keeps
+the existing `app.js`, `app.css`, and `mix-manifest.json` contract so Laravel
+applications do not need Vite installed.
 
 ## Modifying the output
 

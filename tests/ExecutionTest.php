@@ -5,21 +5,22 @@ namespace Spatie\WebTinker\Tests;
 use PHPUnit\Framework\Attributes\Test;
 use Psy\Configuration;
 use Psy\Shell;
+use ReflectionProperty;
 use Spatie\WebTinker\Tinker;
 
 class ExecutionTest extends TestCase
 {
-    /** @var \Spatie\WebTinker\Tinker */
+    /** @var Tinker */
     private $tinker;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->tinker = app(Tinker::class);
     }
 
-        #[Test]
+    #[Test]
     public function it_can_execute_php_code()
     {
         $output = $this->tinker->execute('echo "hello world";');
@@ -27,7 +28,7 @@ class ExecutionTest extends TestCase
         $this->assertStringContainsString('hello world', $output);
     }
 
-        #[Test]
+    #[Test]
     public function it_can_return_a_value()
     {
         $output = $this->tinker->execute('return 1 + 1;');
@@ -35,15 +36,13 @@ class ExecutionTest extends TestCase
         $this->assertStringContainsString('2', $output);
     }
 
-        #[Test]
+    #[Test]
     public function it_runs_psysh_in_non_interactive_mode()
     {
-        $shellProperty = new \ReflectionProperty(Tinker::class, 'shell');
-        $shellProperty->setAccessible(true);
+        $shellProperty = new ReflectionProperty(Tinker::class, 'shell');
         $shell = $shellProperty->getValue($this->tinker);
 
-        $configProperty = new \ReflectionProperty(Shell::class, 'config');
-        $configProperty->setAccessible(true);
+        $configProperty = new ReflectionProperty(Shell::class, 'config');
         $config = $configProperty->getValue($shell);
 
         $this->assertSame(Configuration::INTERACTIVE_MODE_DISABLED, $config->interactiveMode());

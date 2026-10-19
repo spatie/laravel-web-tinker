@@ -3,6 +3,7 @@
 namespace Spatie\WebTinker\Completion\Source;
 
 use Psy\Completion\AnalysisResult;
+use Psy\Completion\CompletionEngine;
 use Psy\Completion\CompletionKind;
 use Psy\Completion\Source\SourceInterface;
 use Spatie\WebTinker\Completion\TypeInference\StaticTypeResolver;
@@ -25,7 +26,7 @@ use Spatie\WebTinker\Completion\TypeInference\StaticTypeResolver;
  * A type the shell *does* know is always left alone: a real object beats
  * anything inferred from the source.
  *
- * @see \Psy\Completion\CompletionEngine::collectFromSources()
+ * @see CompletionEngine::collectFromSources()
  */
 class StaticTypeSource implements SourceInterface
 {
@@ -36,9 +37,7 @@ class StaticTypeSource implements SourceInterface
         | CompletionKind::STATIC_PROPERTY
         | CompletionKind::CLASS_CONSTANT;
 
-    public function __construct(protected StaticTypeResolver $resolver)
-    {
-    }
+    public function __construct(protected StaticTypeResolver $resolver) {}
 
     public function appliesToKind(int $kinds): bool
     {
