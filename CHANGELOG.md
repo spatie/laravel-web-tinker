@@ -2,6 +2,37 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.12.0 - 2026-10-19
+
+### Editor autocompletion
+
+- Suggest classes, functions, constants, static members, and inferred object members while typing or with Ctrl+Space.
+- Complete environment variable names and configuration keys without returning their values.
+- Insert method calls with the caret inside the parentheses.
+- Preserve Unicode and leading whitespace when replacing text, ignore stale responses, and respect class-index cache settings.
+- Prevent Ctrl+Space from submitting snippets for execution when older published views do not provide a completion URL.
+- Add backend, component, and real-browser regression coverage, including completion followed by execution with rich output.
+
+Completion inspects snippets without evaluating them. Reflection can invoke application autoloaders, so it is not a sandbox and uses the same authorization as execution.
+
+### Requirements and upgrading
+
+- Requires PsySH 0.12.24 or newer in the 0.12 series. Earlier versions do not satisfy the completion contract.
+- PHP 8.2+ and Laravel 12 or 13 remain supported, as in 1.11.0. Laravel 13 requires PHP 8.3+.
+- Run `php artisan web-tinker:install` to refresh published assets. Update any published package Blade view to enable completion; old views continue to execute code without completion.
+- Set `WEB_TINKER_COMPLETION_ENABLED=false` to disable suggestions.
+- Existing text-response behavior and the rich output introduced in 1.11.0 are preserved.
+
+### Verification
+
+86 PHP tests (154 assertions), six component tests, four real-browser tests, Pint, and reproducible Node.js 24 production builds passed locally. The minimum PsySH version was tested. Light, dark, and narrow layouts and the completion-to-execution interaction were inspected.
+
+GitHub Actions was still queued during a GitHub service incident at merge time. Remote CI was not confirmed green; the maintainer explicitly authorized proceeding.
+
+Thanks to @o-kima for the original contribution in #125.
+
+**Full changelog:** https://github.com/spatie/laravel-web-tinker/compare/1.11.0...1.12.0
+
 ## 1.11.0 - 2026-10-19
 
 ### Rich, collapsible Tinker output
