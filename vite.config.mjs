@@ -4,7 +4,9 @@ import vue from '@vitejs/plugin-vue2';
 
 export default defineConfig({
     publicDir: false,
-    define: { 'process.env.NODE_ENV': JSON.stringify('production') },
+    resolve: {
+        alias: { vue: 'vue/dist/vue.esm.js' },
+    },
     plugins: [
         vue(),
         {
@@ -13,11 +15,11 @@ export default defineConfig({
             generateBundle(options, bundle) {
                 const manifest = {};
 
-                for (const [file, output] of Object.entries(bundle)) {
+                for (const [fileName, asset] of Object.entries(bundle)) {
                     const hash = createHash('md5')
-                        .update(output.code ?? output.source)
+                        .update(asset.type === 'chunk' ? asset.code : asset.source)
                         .digest('hex');
-                    manifest[`/${file}`] = `/${file}?id=${hash}`;
+                    manifest[`/${fileName}`] = `/${fileName}?id=${hash}`;
                 }
 
                 this.emitFile({
@@ -28,7 +30,7 @@ export default defineConfig({
             },
         },
     ],
-    resolve: { alias: { vue: 'vue/dist/vue.esm.js' } },
+    define: { 'process.env.NODE_ENV': JSON.stringify('production') },
     build: {
         outDir: 'public',
         emptyOutDir: false,

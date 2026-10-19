@@ -149,7 +149,7 @@ class ExplodingFactory
     {
         static::$wasCalled = true;
 
-        return new self();
+        return new self;
     }
 
     public function anything(): void {}

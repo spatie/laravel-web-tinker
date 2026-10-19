@@ -75,7 +75,7 @@ class StaticTypeResolver
         protected ClassIndex $classIndex,
         protected DocBlockReader $docBlocks
     ) {
-        $this->parser = (new ParserFactory())->createParser();
+        $this->parser = (new ParserFactory)->createParser();
     }
 
     /**
@@ -151,7 +151,7 @@ class StaticTypeResolver
             return ResolvedType::of($this->qualifyString($annotated));
         }
 
-        $assignments = (new NodeFinder())->find(
+        $assignments = (new NodeFinder)->find(
             $this->parse($buffer),
             fn (Node $node) => $node instanceof Expr\Assign
                 && $node->var instanceof Expr\Variable
@@ -360,6 +360,6 @@ class StaticTypeResolver
      */
     protected function parse(string $code): array
     {
-        return $this->parser->parse('<?php '.$code, new ErrorHandler\Collecting()) ?? [];
+        return $this->parser->parse('<?php '.$code, new ErrorHandler\Collecting) ?? [];
     }
 }

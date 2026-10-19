@@ -23,18 +23,18 @@ class DocumentedModel extends Model
      */
     public static function getById(int $id)
     {
-        return new self();
+        return new self;
     }
 
     public static function mystery($id)
     {
-        return new self();
+        return new self;
     }
 
     /** Declared as a method and documented as a property, the way a relation is. */
     public function widgets()
     {
-        return new Collection();
+        return new Collection;
     }
 
     /**
@@ -42,6 +42,6 @@ class DocumentedModel extends Model
      */
     public function gadgets()
     {
-        return new Collection();
+        return new Collection;
     }
 }

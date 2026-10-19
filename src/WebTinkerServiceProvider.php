@@ -22,6 +22,7 @@ use Spatie\WebTinker\Completion\TypeInference\StaticTypeResolver;
 use Spatie\WebTinker\Console\InstallCommand;
 use Spatie\WebTinker\Http\Controllers\CompletionController;
 use Spatie\WebTinker\Http\Controllers\WebTinkerController;
+use Spatie\WebTinker\Output\DumpRenderer;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 
 class WebTinkerServiceProvider extends ServiceProvider
@@ -64,6 +65,7 @@ class WebTinkerServiceProvider extends ServiceProvider
         $this->commands(InstallCommand::class);
 
         $this->registerCompleter();
+        $this->registerDumpRenderer();
     }
 
     protected function registerCompleter(): self
@@ -88,7 +90,7 @@ class WebTinkerServiceProvider extends ServiceProvider
             // gets a fresh shell that has evaluated nothing. StaticTypeSource
             // is what stands in for the runtime types the shell would
             // otherwise supply.
-            $engine = new CompletionEngine(new Context());
+            $engine = new CompletionEngine(new Context);
 
             $engine->addSource($app->make(StaticTypeSource::class));
 
@@ -110,8 +112,21 @@ class WebTinkerServiceProvider extends ServiceProvider
                 $app->make(CompletionEngine::class),
                 $app->make(CompletionLabeler::class),
                 $app->make(AnalysisCapture::class),
-                [new EnvKeysSource(base_path()), new ConfigKeysSource()],
+                [new EnvKeysSource(base_path()), new ConfigKeysSource],
                 (int) config('web-tinker.completion.limit', 100)
+            );
+        });
+
+        return $this;
+    }
+
+    protected function registerDumpRenderer(): self
+    {
+        $this->app->singleton(DumpRenderer::class, function () {
+            return new DumpRenderer(
+                (int) config('web-tinker.dump.max_depth', 6),
+                (int) config('web-tinker.dump.max_items', 250),
+                (int) config('web-tinker.dump.max_string_length', 2500)
             );
         });
 

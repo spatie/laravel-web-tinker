@@ -20,7 +20,7 @@ class ResolvedType
 
     public static function none(): self
     {
-        return new self();
+        return new self;
     }
 
     public static function of(?string $class, ?string $element = null): self

@@ -28,6 +28,8 @@ This package can run arbitrary code. Unless you know what you are doing, you sho
 
 ## Installation
 
+This package requires PHP 8.2+ and Laravel 12 or 13 (Laravel 13 requires PHP 8.3+).
+
 You can install the package via composer:
 
 ```bash
@@ -250,12 +252,36 @@ If you have published or customized the Blade view, add the completion props
 from `resources/views/web-tinker.blade.php` to enable suggestions. Old views
 continue to support execution without autocompletion.
 
-### Developing the frontend
+## Rich output
 
-Use Node.js 24 and npm. Run `npm ci`, `npm test`, and `npm run production`.
-Commit the generated files in `public/` alongside frontend changes. Vite keeps
-the existing `app.js`, `app.css`, and `mix-manifest.json` contract so Laravel
-applications do not need Vite installed.
+After upgrading, run `php artisan web-tinker:install` to refresh the published
+assets. If you have published the Blade view, update it from the package too.
+
+Results render as [VarDumper](https://symfony.com/doc/current/components/var_dumper.html)
+markup: real types, collapsible nodes, and Laravel's own casters for models and
+collections. Anything the snippet echoed is shown above the value it returned,
+and a thrown exception is rendered rather than swallowed.
+
+Depth and size limits keep a dump of something enormous from reaching the
+browser:
+
+```php
+// config/web-tinker.php
+'dump' => [
+    'enabled' => env('WEB_TINKER_RICH_OUTPUT_ENABLED', true),
+    'max_depth' => 6,
+    'max_items' => 250,
+    'max_string_length' => 2500,
+],
+```
+
+Set `WEB_TINKER_RICH_OUTPUT_ENABLED=false` and every result comes back as
+PsySH's plain text, whatever a request asks for.
+
+The browser asks for this format explicitly. A request that does not — a script
+or test suite posting to the endpoint — gets the plain text it always got, so
+nothing built against the response format breaks. Change the default with
+`output_format` if you want HTML everywhere.
 
 ## Modifying the output
 
@@ -279,6 +305,20 @@ The default install of this package will use the `PrefixDataTime` output modifie
 ``` bash
 composer test
 ```
+
+For frontend development, use Node.js 22.12+ and npm:
+
+```bash
+npm ci
+npm run production
+npx playwright install chromium
+npm test
+```
+
+The browser tests run the built assets against a disposable Testbench application.
+`npm run watch` rebuilds the assets on changes. Vite produces the same `public/app.js`,
+`public/app.css`, and `public/mix-manifest.json` consumed by the package's Blade view;
+your application does not need a Vite integration.
 
 ## Changelog
 

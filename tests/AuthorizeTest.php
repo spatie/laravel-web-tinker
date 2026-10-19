@@ -14,7 +14,7 @@ class AuthorizeTest extends TestCase
     {
         parent::setUp();
 
-        $this->actingAs(new User());
+        $this->actingAs(new User);
 
         config()->set('web-tinker.enabled', true);
 

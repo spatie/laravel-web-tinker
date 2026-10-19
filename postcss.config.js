@@ -1,12 +1,11 @@
 module.exports = {
     plugins: [
-        require('postcss-easy-import')(),
         require('tailwindcss')('./tailwind.js'),
-        require('postcss-nesting'),
-        require('@fullhuman/postcss-purgecss').default({
-            content: ['resources/**/*.{js,vue,php}', 'src/**/*.php'],
+        require('postcss-nesting')(),
+        require('@fullhuman/postcss-purgecss')({
+            content: ['resources/**/*.{vue,js,blade.php}'],
             safelist: {
-                standard: [/CodeMirror/, /cm/, /^theme-/, /^wt-/],
+                standard: [/CodeMirror/, /cm/, /^theme-/, /^wt-/, /^sf-dump/, 'error', 'warning'],
                 greedy: [/CodeMirror/, /cm-/],
             },
         }),

@@ -25,7 +25,8 @@
         "illuminate/cookie": "^12.0|^13.0",
         "illuminate/session": "^12.0|^13.0",
         "laravel/tinker": "^2.0|^3.0",
-        "psy/psysh": "^0.12.24"
+        "psy/psysh": "^0.12.24",
+        "symfony/var-dumper": "^7.2|^8.0"
     },
     "require-dev": {
         "laravel/pint": "^1.27",

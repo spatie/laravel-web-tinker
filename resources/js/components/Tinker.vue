@@ -5,6 +5,7 @@
             :path="path"
             :completion-path="completionPath"
             :completion-enabled="completionEnabled"
+            :output-format="outputFormat"
             @execute="handleExecute"
         ></tinker-input>
         <hr ref="gutter" class="layout-gutter" />
@@ -28,6 +29,7 @@ export default {
         path: { type: String, required: true },
         completionPath: { type: String, default: '' },
         completionEnabled: { type: [Boolean, String], default: false },
+        outputFormat: { type: String, default: 'text' },
     },
 
     data: () => ({
@@ -67,7 +69,20 @@ export default {
 
     methods: {
         handleExecute(output) {
-            this.output = DOMPurify.sanitize(output);
+            // Scripts still go — the page never executes what the snippet
+            // produced — but VarDumper's markup and PsySH's own <error> and
+            // <warning> tags have to survive, or the output loses both its
+            // structure and its styling.
+            this.output = DOMPurify.sanitize(output, {
+                ADD_TAGS: ['samp', 'error', 'warning', 'aside', 'whisper'],
+                ADD_ATTR: [
+                    'data-depth',
+                    'data-indent-pad',
+                    'data-index',
+                    'data-refid',
+                    'data-depth-count',
+                ],
+            });
         },
 
         initSplit() {

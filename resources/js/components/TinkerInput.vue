@@ -26,6 +26,7 @@ export default {
         path: { type: String, required: true },
         completionPath: { type: String, default: '' },
         completionEnabled: { type: Boolean, default: false },
+        outputFormat: { type: String, default: 'text' },
     },
 
     mounted() {
@@ -61,7 +62,7 @@ export default {
 
         this.codeEditor = CodeMirror.fromTextArea(this.$refs.codeEditor, config);
 
-        this.codeEditor.on('change', editor => {
+        this.codeEditor.on('change', (editor) => {
             localStorage.setItem('tinker-tool', editor.getValue());
         });
 
@@ -93,7 +94,7 @@ export default {
                 return;
             }
 
-            axios.post(this.path, { code }).then(({ data }) => {
+            axios.post(this.path, { code, format: this.outputFormat }).then(({ data }) => {
                 this.$emit('execute', data);
             });
         },
@@ -114,7 +115,7 @@ export default {
 
             const wantsHint =
                 /[A-Za-z_][A-Za-z0-9_]$/.test(line) ||
-                TRIGGER_SEQUENCES.some(sequence => line.endsWith(sequence)) ||
+                TRIGGER_SEQUENCES.some((sequence) => line.endsWith(sequence)) ||
                 /\b(?:env|config)\s*\(\s*['"][\w.\-]*$/i.test(line);
 
             if (!wantsHint) {
@@ -161,7 +162,7 @@ export default {
                         return;
                     }
 
-                    const list = (data.completions || []).map(completion => {
+                    const list = (data.completions || []).map((completion) => {
                         const item = {
                             text: completion.value,
                             displayText: completion.label,
@@ -179,9 +180,7 @@ export default {
                     callback({
                         list,
                         from: editor.posFromIndex(
-                            Array.from(code)
-                                .slice(0, data.from)
-                                .join('').length
+                            Array.from(code).slice(0, data.from).join('').length
                         ),
                         to: position,
                     });
