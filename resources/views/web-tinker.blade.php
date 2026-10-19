@@ -14,8 +14,14 @@
 <body>
 
 <div id="web-tinker" v-cloak>
-    <tinker path="{{ $path }}"></tinker>
+    <tinker
+        path="{{ $path }}"
+        output-format="{{ $outputFormat }}"
+    ></tinker>
 </div>
+
+{{-- VarDumper's stylesheet and toggle script, emitted once for the page. --}}
+{!! $dumpAssets !!}
 
 <script src="{{ asset(mix('app.js', 'vendor/web-tinker')) }}"></script>
 </body>

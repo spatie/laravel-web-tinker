@@ -14,7 +14,10 @@ export default {
         codeEditor: null,
     }),
 
-    props: ['path'],
+    props: {
+        path: { type: String, required: true },
+        outputFormat: { type: String, default: 'text' },
+    },
 
     mounted() {
         const config = {
@@ -37,7 +40,7 @@ export default {
 
         this.codeEditor = CodeMirror.fromTextArea(this.$refs.codeEditor, config);
 
-        this.codeEditor.on('change', editor => {
+        this.codeEditor.on('change', (editor) => {
             localStorage.setItem('tinker-tool', editor.getValue());
         });
 
@@ -59,7 +62,7 @@ export default {
                 return;
             }
 
-            axios.post(this.path, { code }).then(({ data }) => {
+            axios.post(this.path, { code, format: this.outputFormat }).then(({ data }) => {
                 this.$emit('execute', data);
             });
         },
@@ -67,4 +70,5 @@ export default {
 };
 </script>
 
-<style src="codemirror/lib/codemirror.css" /> <style src="codemirror/theme/idea.css" />
+<style src="codemirror/lib/codemirror.css" />
+<style src="codemirror/theme/idea.css" />
