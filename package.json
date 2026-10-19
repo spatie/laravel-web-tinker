@@ -2,29 +2,30 @@
     "private": true,
     "scripts": {
         "dev": "npm run development",
-        "development": "cross-env NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "hot": "cross-env NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "development": "vite build --mode development",
+        "watch": "vite build --watch --mode development",
         "prod": "npm run production",
-        "production": "cross-env NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "production": "vite build",
+        "test": "playwright test",
         "format": "prettier --write 'resources/**/*.{css,js,vue}'"
     },
     "dependencies": {
-        "axios": "^0.21",
-        "bootstrap": "^4.0.0",
+        "axios": "^1.12.0",
         "codemirror": "^5.42.0",
-        "cross-env": "^5.1",
-        "jquery": "^3.2",
-        "laravel-mix": "^2.0",
-        "laravel-mix-purgecss": "^3.0.0",
-        "lodash": "^4.17.19",
-        "postcss-easy-import": "^2.1.0",
-        "postcss-nesting": "^7.0.0",
-        "prettier": "^1.15.3",
+        "dompurify": "^3.2.3",
         "split-grid": "^1.0.9",
+        "vue": "^2.7.16"
+    },
+    "devDependencies": {
+        "@fullhuman/postcss-purgecss": "^8.0.0",
+        "@playwright/test": "^1.56.0",
+        "@vitejs/plugin-vue2": "^2.3.4",
+        "postcss-nesting": "^14.0.0",
+        "prettier": "^3.0.0",
         "tailwindcss": "^0.7.2",
-        "vue": "^2.5.7",
-        "dompurify": "^3.2.3"
+        "vite": "^7.0.0"
+    },
+    "engines": {
+        "node": ">=22.12"
     }
 }

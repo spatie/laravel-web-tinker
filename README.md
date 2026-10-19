@@ -28,6 +28,8 @@ This package can run arbitrary code. Unless you know what you are doing, you sho
 
 ## Installation
 
+This package requires PHP 8.2+ and Laravel 12 or 13 (Laravel 13 requires PHP 8.3+).
+
 You can install the package via composer:
 
 ```bash
@@ -119,6 +121,9 @@ public function boot()
 
 ## Rich output
 
+After upgrading, run `php artisan web-tinker:install` to refresh the published
+assets. If you have published the Blade view, update it from the package too.
+
 Results render as [VarDumper](https://symfony.com/doc/current/components/var_dumper.html)
 markup: real types, collapsible nodes, and Laravel's own casters for models and
 collections. Anything the snippet echoed is shown above the value it returned,
@@ -167,6 +172,20 @@ The default install of this package will use the `PrefixDataTime` output modifie
 ``` bash
 composer test
 ```
+
+For frontend development, use Node.js 22.12+ and npm:
+
+```bash
+npm ci
+npm run production
+npx playwright install chromium
+npm test
+```
+
+The browser tests run the built assets against a disposable Testbench application.
+`npm run watch` rebuilds the assets on changes. Vite produces the same `public/app.js`,
+`public/app.css`, and `public/mix-manifest.json` consumed by the package's Blade view;
+your application does not need a Vite integration.
 
 ## Changelog
 

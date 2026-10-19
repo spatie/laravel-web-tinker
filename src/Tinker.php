@@ -15,16 +15,16 @@ use Symfony\Component\Console\Output\BufferedOutput;
 
 class Tinker
 {
-    /** @var \Symfony\Component\Console\Output\BufferedOutput */
+    /** @var BufferedOutput */
     protected $output;
 
-    /** @var \Psy\Shell */
+    /** @var Shell */
     protected $shell;
 
-    /** @var \Spatie\WebTinker\OutputModifiers\OutputModifier */
+    /** @var OutputModifier */
     protected $outputModifier;
 
-    /** @var \Spatie\WebTinker\Output\DumpRenderer */
+    /** @var DumpRenderer */
     protected $dumpRenderer;
 
     public function __construct(OutputModifier $outputModifier, ?DumpRenderer $dumpRenderer = null)
@@ -83,7 +83,7 @@ class Tinker
     /** Whatever the snippet echoed, drained from the shell's buffer. */
     protected function flushStdout(): string
     {
-        return $this->cleanOutput($this->output->fetch());
+        return preg_replace('/<whisper>(?:⏎|\\\\n)<\/whisper>\r?\n$/', '', $this->output->fetch());
     }
 
     protected function createShell(BufferedOutput $output): Shell

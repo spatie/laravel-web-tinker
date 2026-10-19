@@ -32,8 +32,9 @@ class DumpRenderer
         protected int $maxItems = 250,
         protected int $maxStringLength = 2500
     ) {
-        $this->cloner = new VarCloner();
+        $this->cloner = new VarCloner;
 
+        $this->cloner->setMinDepth(0);
         $this->cloner->setMaxItems($this->maxItems);
         $this->cloner->setMaxString($this->maxStringLength);
 
@@ -45,8 +46,9 @@ class DumpRenderer
             Application::class => 'Laravel\Tinker\TinkerCaster::castApplication',
         ]);
 
-        $this->dumper = new HtmlDumper();
+        $this->dumper = new HtmlDumper;
         $this->dumper->setDumpHeader('');
+        $this->dumper->setDumpBoundaries('<pre class=sf-dump id=%s data-indent-pad="%s">', '</pre>');
     }
 
     /** Output written by the snippet, followed by the value it returned. */
@@ -72,10 +74,9 @@ class DumpRenderer
      */
     public function pageAssets(): string
     {
-        $dumper = new HtmlDumper();
+        $dumper = new HtmlDumper;
 
         $getDumpHeader = new ReflectionMethod($dumper, 'getDumpHeader');
-        $getDumpHeader->setAccessible(true);
 
         return (string) $getDumpHeader->invoke($dumper);
     }
@@ -89,7 +90,7 @@ class DumpRenderer
 
     protected function stdoutBlock(string $stdout): string
     {
-        if (trim($stdout) === '') {
+        if ($stdout === '') {
             return '';
         }
 

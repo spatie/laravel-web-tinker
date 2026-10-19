@@ -31,7 +31,7 @@ export default {
                 return;
             }
 
-            this.$el.querySelectorAll('pre.sf-dump[id]').forEach(dump => {
+            this.$el.querySelectorAll('pre.sf-dump[id]').forEach((dump) => {
                 if (dump.dataset.wtActivated) {
                     return;
                 }
@@ -47,7 +47,7 @@ export default {
 
 <style>
 pre {
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
 }
 </style>

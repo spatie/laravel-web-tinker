@@ -2,14 +2,11 @@
 
 namespace Spatie\WebTinker;
 
-use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Spatie\WebTinker\Console\InstallCommand;
 use Spatie\WebTinker\Http\Controllers\WebTinkerController;
-use Spatie\WebTinker\Http\Middleware\Authorize;
 use Spatie\WebTinker\Output\DumpRenderer;
 use Spatie\WebTinker\OutputModifiers\OutputModifier;
 
@@ -68,7 +65,7 @@ class WebTinkerServiceProvider extends ServiceProvider
     {
         return [
             'prefix' => config('web-tinker.path'),
-            'middleware' => 'web-tinker'
+            'middleware' => 'web-tinker',
         ];
     }
 

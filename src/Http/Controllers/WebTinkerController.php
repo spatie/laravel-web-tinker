@@ -28,8 +28,8 @@ class WebTinkerController
     public function execute(Request $request, Tinker $tinker)
     {
         $validated = $request->validate([
-            'code' => 'required',
-            'format' => 'nullable|string|in:text,html',
+            'code' => ['required', 'string'],
+            'format' => ['nullable', 'string', 'in:text,html'],
         ]);
 
         return $tinker->execute($validated['code'], $this->format($request));

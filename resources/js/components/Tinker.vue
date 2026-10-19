@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import TinkerInput from './TinkerInput';
-import TinkerOutput from './TinkerOutput';
+import TinkerInput from './TinkerInput.vue';
+import TinkerOutput from './TinkerOutput.vue';
 import Split from 'split-grid';
 import DOMPurify from 'dompurify';
 
@@ -71,7 +71,13 @@ export default {
             // structure and its styling.
             this.output = DOMPurify.sanitize(output, {
                 ADD_TAGS: ['samp', 'error', 'warning', 'aside', 'whisper'],
-                ADD_ATTR: ['data-depth', 'data-indent-pad', 'data-index', 'data-refid', 'data-depth-count'],
+                ADD_ATTR: [
+                    'data-depth',
+                    'data-indent-pad',
+                    'data-index',
+                    'data-refid',
+                    'data-depth-count',
+                ],
             });
         },
 

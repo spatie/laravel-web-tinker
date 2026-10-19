@@ -9,11 +9,11 @@ use Spatie\WebTinker\Output\DumpRenderer;
 
 class OutputFormatEndpointTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
-        $this->actingAs(new User());
+        $this->actingAs(new User);
 
         config()->set('web-tinker.enabled', true);
 
@@ -26,7 +26,7 @@ class OutputFormatEndpointTest extends TestCase
         $app['config']->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
     }
 
-        #[Test]
+    #[Test]
     public function it_executes_code_as_text_by_default()
     {
         $response = $this->post('/tinker', ['code' => 'return 1 + 1;']);
@@ -36,7 +36,7 @@ class OutputFormatEndpointTest extends TestCase
         $this->assertStringNotContainsString('sf-dump', $response->getContent());
     }
 
-        #[Test]
+    #[Test]
     public function it_executes_code_as_html_when_asked_to()
     {
         $response = $this->post('/tinker', ['code' => 'return 1 + 1;', 'format' => 'html']);
@@ -46,7 +46,7 @@ class OutputFormatEndpointTest extends TestCase
         $this->assertStringContainsString('sf-dump', $response->getContent());
     }
 
-        #[Test]
+    #[Test]
     public function it_rejects_an_unknown_format()
     {
         $this
@@ -54,7 +54,27 @@ class OutputFormatEndpointTest extends TestCase
             ->assertStatus(422);
     }
 
-        #[Test]
+    public function test_it_rejects_non_string_code_and_formats(): void
+    {
+        $this->postJson('/tinker', ['code' => ['return 1;'], 'format' => 'html'])
+            ->assertUnprocessable()->assertJsonValidationErrors('code');
+
+        $this->postJson('/tinker', ['code' => 'return 1;', 'format' => ['html']])
+            ->assertUnprocessable()->assertJsonValidationErrors('format');
+    }
+
+    public function test_explicit_text_overrides_the_html_default_and_null_uses_it(): void
+    {
+        config()->set('web-tinker.output_format', 'html');
+
+        $this->postJson('/tinker', ['code' => 'return 42;', 'format' => null])
+            ->assertOk()->assertSee('sf-dump', false);
+
+        $this->postJson('/tinker', ['code' => 'return 42;', 'format' => 'text'])
+            ->assertOk()->assertDontSee('sf-dump', false)->assertSee('42');
+    }
+
+    #[Test]
     public function it_falls_back_to_text_when_rich_output_is_switched_off()
     {
         config()->set('web-tinker.dump.enabled', false);
@@ -67,7 +87,7 @@ class OutputFormatEndpointTest extends TestCase
         $this->assertStringContainsString('2', $response->getContent());
     }
 
-        #[Test]
+    #[Test]
     public function it_asks_the_page_for_rich_output_when_it_is_switched_on()
     {
         $data = $this->page();
@@ -76,7 +96,7 @@ class OutputFormatEndpointTest extends TestCase
         $this->assertStringContainsString('Sfdump', $data['dumpAssets']);
     }
 
-        #[Test]
+    #[Test]
     public function it_leaves_the_dumper_assets_out_of_the_page_when_rich_output_is_switched_off()
     {
         config()->set('web-tinker.dump.enabled', false);

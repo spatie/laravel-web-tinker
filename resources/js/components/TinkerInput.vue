@@ -40,7 +40,7 @@ export default {
 
         this.codeEditor = CodeMirror.fromTextArea(this.$refs.codeEditor, config);
 
-        this.codeEditor.on('change', editor => {
+        this.codeEditor.on('change', (editor) => {
             localStorage.setItem('tinker-tool', editor.getValue());
         });
 
@@ -70,4 +70,5 @@ export default {
 };
 </script>
 
-<style src="codemirror/lib/codemirror.css" /> <style src="codemirror/theme/idea.css" />
+<style src="codemirror/lib/codemirror.css" />
+<style src="codemirror/theme/idea.css" />
