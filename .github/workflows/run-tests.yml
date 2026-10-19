@@ -14,16 +14,21 @@ jobs:
       matrix:
         php: [8.5, 8.4, 8.3, 8.2]
         laravel: ['13.*', '12.*']
+        psysh: ['^0.12.24']
         include:
           - laravel: 13.*
             testbench: 11.*
           - laravel: 12.*
             testbench: 10.*
+          - php: 8.2
+            laravel: 12.*
+            testbench: 10.*
+            psysh: '0.12.24'
         exclude:
           - laravel: 13.*
             php: 8.2
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - PsySH ${{ matrix.psysh }}
 
     steps:
       - name: Checkout code
@@ -39,7 +44,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --prefer-stable --prefer-dist --no-interaction
+          composer update --with "psy/psysh:${{ matrix.psysh }}" --prefer-stable --prefer-dist --no-interaction
 
       - name: Execute tests
         run: vendor/bin/phpunit

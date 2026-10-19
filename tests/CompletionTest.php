@@ -15,8 +15,6 @@ class CompletionTest extends TestCase
     {
         parent::setUp();
 
-        // The class index memoizes across instances; a stale one would make
-        // these assertions depend on test order.
         app(ClassIndex::class)->flush();
 
         $this->completer = app(Completer::class);

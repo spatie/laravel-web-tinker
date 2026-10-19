@@ -237,7 +237,7 @@ endpoint then returns nothing and the editor stops asking.
 
 ### Updating an existing installation
 
-This feature requires PHP 8.2+, Laravel 12 or 13, and PsySH 0.12.21+.
+This feature requires PHP 8.2+, Laravel 12 or 13, and PsySH 0.12.24+.
 Laravel 13 requires PHP 8.3+. Older Laravel applications can continue using 1.10.x.
 
 Republish the assets after updating:
