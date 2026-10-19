@@ -2,6 +2,31 @@
 
 All notable changes to `laravel-web-tinker` will be documented in this file
 
+## 1.11.0 - 2026-10-19
+
+### Rich, collapsible Tinker output
+
+- Render browser results with Symfony VarDumper, including Laravel model and collection casters.
+- Show escaped stdout before returned values or exceptions, preserving literal markup and whitespace.
+- Apply configurable depth, item, and string limits, including limits for flat arrays.
+- Keep plain-text responses as the endpoint default. Disable rich browser output with `WEB_TINKER_RICH_OUTPUT_ENABLED=false`.
+- Validate code and format inputs, and keep scripts out of dump response fragments.
+- Add browser regression coverage and modernize frontend builds and PHP style checks while retaining the existing published asset paths and Mix manifest.
+
+### Requirements and upgrading
+
+- PHP 8.2+ and Laravel 12 or 13. Laravel 13 requires PHP 8.3+; unsupported Laravel 10/11 support has been removed.
+- Run `php artisan web-tinker:install` after upgrading to refresh published assets. Update any published package Blade view as well.
+- Frontend contributors should use Node.js 22.12+ and `npm ci`.
+
+### Verification
+
+29 PHP tests (73 assertions), three real-browser tests, Pint, Composer validation, and reproducible production builds passed locally. GitHub Actions was still queued during a GitHub service incident when this release was published; CI was not confirmed green.
+
+Thanks to @o-kima for the original contribution in #126.
+
+**Full changelog:** https://github.com/spatie/laravel-web-tinker/compare/1.10.6...1.11.0
+
 ## 1.10.6 - 2026-04-27
 
 ### What's Changed
