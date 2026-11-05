@@ -27,6 +27,9 @@ jobs:
         exclude:
           - laravel: 13.*
             php: '8.2'
+          # Laravel 12's session handlers do not support PHP 8.6 yet.
+          - laravel: 12.*
+            php: '8.6'
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - PsySH ${{ matrix.psysh }}
 
