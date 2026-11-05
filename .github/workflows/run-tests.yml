@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['8.5', '8.4', '8.3', '8.2']
+        php: ['8.6', '8.5', '8.4', '8.3', '8.2']
         laravel: ['13.*', '12.*']
         psysh: ['^0.12.24']
         include:
@@ -27,6 +27,9 @@ jobs:
         exclude:
           - laravel: 13.*
             php: '8.2'
+          # Laravel 12's session handlers do not support PHP 8.6 yet.
+          - laravel: 12.*
+            php: '8.6'
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - PsySH ${{ matrix.psysh }}
 
